@@ -57,7 +57,7 @@
         "semi": false,
         "singleQuote": true,
         "trailingComma": "all",
-        "tabWidt": 4,
+        "tabWidth": 4,
         "jsxSingleQuote": true
     }
 }

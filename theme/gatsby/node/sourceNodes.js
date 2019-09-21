@@ -1,5 +1,5 @@
 module.exports = ({ actions }) => {
-  actions.createTypes(`
+    actions.createTypes(`
     type Article implements Node {
       id: ID!
       slug: String!
@@ -11,5 +11,5 @@ module.exports = ({ actions }) => {
       hero: File @fileByRelativePath
       timeToRead: Int
     }
-  `);
-};
+  `)
+}

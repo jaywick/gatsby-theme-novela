@@ -1,31 +1,31 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
-import mediaqueries from "@styles/media";
+import mediaqueries from '@styles/media'
 
 const Section = styled.section<{ narrow?: boolean }>`
-  width: 100%;
-  max-width: 1220px;
-  margin: 0 auto;
-  padding: 0 4rem;
+    width: 100%;
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0 4rem;
 
-  ${mediaqueries.desktop`
+    ${mediaqueries.desktop`
     max-width: 850px;
   `};
 
-  ${p =>
-    p.narrow
-      ? mediaqueries.tablet`
+    ${p =>
+        p.narrow
+            ? mediaqueries.tablet`
           padding: 0 2rem;
           max-width: 527px;
         `
-      : mediaqueries.tablet`
+            : mediaqueries.tablet`
           padding: 0 4rem;
           max-width: 567px;
         `}
 
-  ${mediaqueries.phablet`
+    ${mediaqueries.phablet`
     max-width: 100%;
   `};
-`;
+`
 
-export default Section;
+export default Section
