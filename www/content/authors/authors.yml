@@ -1,10 +1,10 @@
 - name: Jay Wick
   bio: |
-    Designing software and experimenting with its engineering is my passion.
-  avatar: ./avatars/jay-wick.jpg
+      Designing software and experimenting with its engineering is my passion.
+  avatar: ./avatars/jay-wick.png
   featured: true
   social:
-    - url: https://twitter.com/jay_wick
-    - url: https://github.com/jaywick
-    - url: https://dev.to/jay_wick
-    - url: https://stackoverflow.com/users/80428/jay
+      - url: https://twitter.com/jay_wick
+      - url: https://github.com/jaywick
+      - url: https://dev.to/jay_wick
+      - url: https://stackoverflow.com/users/80428/jay
