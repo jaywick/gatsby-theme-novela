@@ -1,35 +1,32 @@
 require('dotenv').config()
 
 const siteMetadata = {
-    title: `Novela by Narative`,
-    name: `Narative`,
-    siteUrl: `https://novela.narative.co`,
-    description: `This is my description that will be used in the meta tags and important for search results`,
+    title: `Jay Wick`,
+    name: `Jay Wick`,
+    siteUrl: `https://jaywick.xyz`,
+    description: `This is where I experiment with things`,
     hero: {
-        heading: `Welcome to Novela, the simplest way to start publishing with Gatsby.`,
+        heading: `Hey there, I'm Jay! I design and develop stuff for fun!`,
         maxWidth: 652,
     },
     social: [
         {
-            url: `https://twitter.com/narative`,
+            url: `https://twitter.com/jay_wick`,
         },
         {
-            url: `https://behance.com/narative`,
+            url: `https://github.com/jaywick`,
         },
         {
-            url: `https://github.com/narative`,
+            url: `https://instagram.com/jaywick_`,
         },
         {
-            url: `https://instagram.com/narative.co`,
+            url: `https://www.linkedin.com/in/jaywick/`,
         },
         {
-            url: `https://www.linkedin.com/company/narative/`,
+            url: `https://dribbble.com/jaywick`,
         },
         {
-            url: `https://dribbble.com/narativestudio`,
-        },
-        {
-            url: `https://youtube.com`,
+            url: `https://www.youtube.com/user/jaywickvideos`,
         },
     ],
 }
@@ -42,7 +39,7 @@ const plugins = [
             contentAuthors: 'content/authors',
             basePath: '/',
             authorsPage: true,
-            mailchimp: true,
+            mailchimp: false,
             sources: {
                 local: true,
                 contentful: false,
@@ -52,8 +49,8 @@ const plugins = [
     {
         resolve: `gatsby-plugin-manifest`,
         options: {
-            name: `Novela by Narative`,
-            short_name: `Novela`,
+            name: `Jay Wick`,
+            short_name: `Jay Wick`,
             start_url: `/`,
             background_color: `#fff`,
             theme_color: `#fff`,
@@ -64,7 +61,7 @@ const plugins = [
     {
         resolve: `gatsby-plugin-google-analytics`,
         options: {
-            trackingId: 'UA-118232427-3',
+            // trackingId: '//TODO',
         },
     },
     {
