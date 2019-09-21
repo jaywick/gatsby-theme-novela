@@ -1,48 +1,10 @@
-- name: Dennis Brotzky
+- name: Jay Wick
   bio: |
-    Written by You. This is where your author bio lives. Share your work, your
-    joys and of course, your Twitter handle.
-  avatar: ./avatars/dennis-brotzky.jpg
+    Designing software and experimenting with its engineering is my passion.
+  avatar: ./avatars/jay-wick.jpg
   featured: true
   social:
-    - url: https://unsplash.com
-    - url: https://github.com
-    - url: https://github.com
-    - url: https://github.com
-    - url: https://github.com
-
-- name: Thiago Costa
-  bio: |
-    Written by You. This is where your author bio lives. Share your work, your
-    joys and of course, your Twitter handle.
-  avatar: ./avatars/thiago-costa.jpg
-  social:
-    - url: https://github.com
-    - url: https://github.com
-    - url: https://github.com
-    - url: https://github.com
-    - url: https://github.com
-
-- name: Brad Tiller
-  bio: |
-    Written by You. This is where your author bio lives. Share your work, your
-    joys and of course, your Twitter handle.
-  avatar: ./avatars/brad-tiller.jpg
-  social:
-    - url: https://github.com
-    - url: https://github.com
-    - url: https://github.com
-    - url: https://github.com
-    - url: https://github.com
-
-- name: Mack Mansouri
-  bio: |
-    Written by You. This is where your author bio lives. Share your work, your
-    joys and of course, your Twitter handle.
-  avatar: ./avatars/mack-mansouri.jpg
-  social:
-    - url: https://github.com
-    - url: https://github.com
-    - url: https://github.com
-    - url: https://github.com
-    - url: https://github.com
+    - url: https://twitter.com/jay_wick
+    - url: https://github.com/jaywick
+    - url: https://dev.to/jay_wick
+    - url: https://stackoverflow.com/users/80428/jay
