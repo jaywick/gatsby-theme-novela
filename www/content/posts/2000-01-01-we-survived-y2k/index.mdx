@@ -1,9 +1,9 @@
 ---
-title: Why Narative loves Gatsby and Next.js
-author: Dennis Brotzky
-date: 2017-04-31
-hero: ./images/hero-4.jpg
-excerpt: To understand why Figma is the best design tool for our company, you have to understand what we do. As a designer.
+title: We survived Y2K!
+author: Jay Wick
+date: 2000-01-01
+hero: ./images/hero-3.jpg
+excerpt: Can you believe we survived this thing!
 ---
 
 To understand why Figma is the best design tool for our company, you have to understand what we do. As a designer, I’ve been crafting digital experiences for the past ten years, having contributed to the growth of companies such as Hopper, Lightspeed, and Breather, among others. Throughout this journey, I’ve had the opportunity to meet the most talented designers, engineers, growth marketers, and build a world-class team to develop startups worldwide. We call this team Narative.
@@ -79,63 +79,63 @@ Witnessing forward-thinking products is not only refreshing but extremely inspir
 If you're still not sure, you should definitely try it out. It's free.
 
 ```js
-import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
-import styled from "@emotion/styled";
+import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import styled from '@emotion/styled'
 
-import * as SocialIcons from "../../icons/social";
-import mediaqueries from "@styles/media";
+import * as SocialIcons from '../../icons/social'
+import mediaqueries from '@styles/media'
 
 const icons = {
-  dribbble: SocialIcons.DribbbleIcon,
-  linkedin: SocialIcons.LinkedinIcon,
-  twitter: SocialIcons.TwitterIcon,
-  facebook: SocialIcons.FacebookIcon,
-  instagram: SocialIcons.InstagramIcon,
-  github: SocialIcons.GithubIcon,
-};
+    dribbble: SocialIcons.DribbbleIcon,
+    linkedin: SocialIcons.LinkedinIcon,
+    twitter: SocialIcons.TwitterIcon,
+    facebook: SocialIcons.FacebookIcon,
+    instagram: SocialIcons.InstagramIcon,
+    github: SocialIcons.GithubIcon,
+}
 
 const socialQuery = graphql`
-  {
-    allSite {
-      edges {
-        node {
-          siteMetadata {
-            social {
-              name
-              url
+    {
+        allSite {
+            edges {
+                node {
+                    siteMetadata {
+                        social {
+                            name
+                            url
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
-`;
+`
 
-function SocialLinks({ fill = "#73737D" }: { fill: string }) {
-  const result = useStaticQuery(socialQuery);
-  const socialOptions = result.allSite.edges[0].node.siteMetadata.social;
+function SocialLinks({ fill = '#73737D' }: { fill: string }) {
+    const result = useStaticQuery(socialQuery)
+    const socialOptions = result.allSite.edges[0].node.siteMetadata.social
 
-  return (
-    <>
-      {socialOptions.map(option => {
-        const Icon = icons[option.name];
+    return (
+        <>
+            {socialOptions.map(option => {
+                const Icon = icons[option.name]
 
-        return (
-          <SocialIconContainer
-            key={option.name}
-            target="_blank"
-            rel="noopener"
-            data-a11y="false"
-            aria-label={`Link to ${option.name}`}
-            href={option.url}
-          >
-            <Icon fill={fill} />
-          </SocialIconContainer>
-        );
-      })}
-    </>
-  );
+                return (
+                    <SocialIconContainer
+                        key={option.name}
+                        target='_blank'
+                        rel='noopener'
+                        data-a11y='false'
+                        aria-label={`Link to ${option.name}`}
+                        href={option.url}
+                    >
+                        <Icon fill={fill} />
+                    </SocialIconContainer>
+                )
+            })}
+        </>
+    )
 }
 ```
 
@@ -144,13 +144,13 @@ This is another paragraph after the code block.
 ## This is a secondary heading
 
 ```jsx
-import React from "react";
-import { ThemeProvider } from "theme-ui";
-import theme from "./theme";
+import React from 'react'
+import { ThemeProvider } from 'theme-ui'
+import theme from './theme'
 
 export default props => (
-  <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
-);
+    <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
+)
 ```
 
 At Narative, we’ve been fans of Gatsby from day one, using it to build performant and flexible products for both clients and ourselves. With the growing community interest in Gatsby, we hope to create more resources that make it easier for anyone to grasp the power of this incredible tool.
@@ -181,10 +181,10 @@ And finally, once the generated files are deployed, Gatsby lives in the browser.
 
 What’s important to remember is that Gatsby’s lifecycle can be aggregated into 3 main sequences:
 
-- Bootstrap
-- Build
-- Browser
-- These three sequences makeup the Gatsby lifecycle.
+-   Bootstrap
+-   Build
+-   Browser
+-   These three sequences makeup the Gatsby lifecycle.
 
 Parts of the lifecycle are visible when running $ gatsby develop
 A peak into the Gatsby lifecycle when running $ gatsby develop
@@ -208,11 +208,11 @@ From experience, most of my time has revolved around handling data and building 
 
 ## Examples of gatsby-node.js hooks:
 
-- createPages
-- onCreateBabelConfig
-- onCreateWebpackConfig
-- onPostBuild
-- gatsby-ssr.js
+-   createPages
+-   onCreateBabelConfig
+-   onCreateWebpackConfig
+-   onPostBuild
+-   gatsby-ssr.js
 
 When you think Server Side Rendering you think of a server that takes in requests and dynamically builds pages and sends it to the client. Gatsby doesn’t do that, but it does server side render — it generates all the pages during build time.
 
@@ -220,10 +220,10 @@ Naturally, gatsby-ssr.js allows developers to hook into that lifecycle. In my ex
 
 ## Examples of gatsby-ssr.js hooks:
 
-- onPreRenderHTML
-- onRenderBody
-- replaceRenderer
-- gatsby-browser.js
+-   onPreRenderHTML
+-   onRenderBody
+-   replaceRenderer
+-   gatsby-browser.js
 
 Gatsby is a static site that loads a dynamic application after initial load, which means you get the benefits of a static site in a web application. gatsby-browser.js provides convenient hooks to deal with app loading, route updates, service worker updates, scroll positioning, and more.
 
@@ -231,11 +231,11 @@ Everything that occurs after your static site has loaded can be hooked in gatsby
 
 ## Examples of gatsby-browser.js hooks:
 
-- onClientEntry
-- onRouteUpdate
-- onServiceWorkerInstalled
-- registerServiceWorker
-- shouldUpdateScroll
+-   onClientEntry
+-   onRouteUpdate
+-   onServiceWorkerInstalled
+-   registerServiceWorker
+-   shouldUpdateScroll
 
 ## Conclusion
 
