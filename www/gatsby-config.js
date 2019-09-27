@@ -6,7 +6,7 @@ const siteMetadata = {
     siteUrl: `https://jaywick.xyz`,
     description: `This is where I experiment with things`,
     hero: {
-        heading: `A journey of design, engineering, and unsorted rambling.`,
+        heading: `A journey of design, engineering, and unstructured rambling.`,
         maxWidth: 652,
     },
     social: [
