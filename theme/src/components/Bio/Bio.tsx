@@ -18,7 +18,18 @@ function Bio({ author }: IAuthor) {
                     <Image src={author.avatar.medium} />
                 </BioAvatarInner>
             </BioAvatar>
-            <BioText dangerouslySetInnerHTML={{ __html: author.bio }} />
+            <BioTextContainer>
+                <BioText
+                    dangerouslySetInnerHTML={{
+                        __html: author.bio.split('<br/>')[0],
+                    }}
+                />
+                <BioSubtitle
+                    dangerouslySetInnerHTML={{
+                        __html: author.bio.split('<br/>')[1],
+                    }}
+                />
+            </BioTextContainer>
         </BioContainer>
     )
 }
@@ -73,14 +84,31 @@ const BioAvatarInner = styled.div`
     overflow: hidden;
 `
 
-const BioText = styled.p`
+const BioText = styled.div`
     max-width: 430px;
-    font-size: 14px;
-    line-height: 1.45;
+    font-weight: bold;
+    line-height: 1.15;
+    color: ${p => p.theme.colors.primary};
+    margin-bottom: 2px;
+
+    a {
+        color: ${p => p.theme.colors.primary};
+        text-decoration: underline;
+    }
+`
+
+const BioSubtitle = styled.div`
+    margin-top: 2px;
+    line-height: 1.15;
     color: ${p => p.theme.colors.grey};
 
     a {
         color: ${p => p.theme.colors.grey};
         text-decoration: underline;
     }
+`
+
+const BioTextContainer = styled.div`
+    display: flex;
+    flex-direction: column;
 `

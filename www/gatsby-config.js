@@ -6,7 +6,7 @@ const siteMetadata = {
     siteUrl: `https://jaywick.xyz`,
     description: `This is where I experiment with things`,
     hero: {
-        heading: `Hey there, I'm Jay! I design and develop stuff for fun!`,
+        heading: `A journey of design, engineering, and unsorted rambling.`,
         maxWidth: 652,
     },
     social: [
@@ -64,13 +64,13 @@ const plugins = [
             // trackingId: '//TODO',
         },
     },
-    {
-        resolve: 'gatsby-plugin-mailchimp',
-        options: {
-            endpoint:
-                'https://narative.us19.list-manage.com/subscribe/post?u=65ef169332a03669b9538f6ef&amp;id=c55c426282',
-        },
-    },
+    // {
+    //     resolve: 'gatsby-plugin-mailchimp',
+    //     options: {
+    //         endpoint:
+    //             'https://narative.us19.list-manage.com/subscribe/post?u=65ef169332a03669b9538f6ef&amp;id=c55c426282',
+    //     },
+    // },
 ]
 
 /**
