@@ -7,10 +7,11 @@ const Blockquote = styled.blockquote`
     color: ${p => p.theme.colors.articleText};
     font-family: ${p => p.theme.fonts.serif};
     font-style: italic;
+    padding: 50px 0;
 
     ${mediaqueries.tablet`
-    margin: 10px auto 35px;
-  `};
+      margin: 10px auto 35px;
+    `};
 
     & > p {
         font-family: ${p => p.theme.fonts.serif};
@@ -24,14 +25,14 @@ const Blockquote = styled.blockquote`
         font-weight: bold;
 
         ${mediaqueries.tablet`
-      font-size: 26px;
-      padding: 0 180px;
-    `};
+          font-size: 26px;
+          padding: 0 180px;
+        `};
 
         ${mediaqueries.phablet`
-      font-size: 36px;
-      padding: 0 20px 0 40px;
-    `};
+          font-size: 36px;
+          padding: 0 20px 0 40px;
+        `};
     }
 `
 

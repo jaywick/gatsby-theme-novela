@@ -16,17 +16,17 @@ const Paragraph = styled.p`
     }
 
     ${mediaqueries.desktop`
-    max-width: 507px;
-  `}
+      max-width: 507px;
+    `}
 
     ${mediaqueries.tablet`
-    max-width: 486px;
-    margin: 0 auto 25px;
-  `};
+      max-width: 486px;
+      margin: 0 auto 25px;
+    `};
 
     ${mediaqueries.phablet`
-    padding: 0 20px;
-  `};
+      padding: 0 20px;
+    `};
 `
 
 export default Paragraph
