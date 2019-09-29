@@ -2,6 +2,8 @@ import React from 'react'
 
 const DevToIcon = ({ fill = 'white', ...props }) => (
     <svg
+        width='16'
+        height='13'
         role='img'
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 448 512'

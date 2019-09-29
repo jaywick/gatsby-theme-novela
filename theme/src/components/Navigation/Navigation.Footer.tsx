@@ -57,13 +57,13 @@ const FooterContainer = styled.div`
     color: ${p => p.theme.colors.grey};
 
     ${mediaqueries.tablet`
-    flex-direction: column;
-    padding-bottom: 100px;
-  `}
+        flex-direction: column;
+        padding-bottom: 100px;
+    `}
 
     ${mediaqueries.phablet`
-    padding-bottom: 50px;
-  `}
+        padding-bottom: 50px;
+    `}
 `
 
 const HoritzontalRule = styled.div`
@@ -72,22 +72,22 @@ const HoritzontalRule = styled.div`
     border-bottom: 1px solid ${p => p.theme.colors.horizontalRule};
 
     ${mediaqueries.tablet`
-    margin: 60px auto;
-  `}
+        margin: 60px auto;
+    `}
 
     ${mediaqueries.phablet`
-    display: none;
-  `}
+        display: none;
+    `}
 `
 
 const FooterText = styled.div`
     ${mediaqueries.tablet`
-    margin-bottom: 80px;
-  `}
+        margin-bottom: 80px;
+    `}
 
     ${mediaqueries.phablet`
-    margin: 120px auto 100px;
-  `}
+        margin: 120px auto 100px;
+    `}
 `
 
 const FooterGradient = styled.div`

@@ -11,6 +11,9 @@ const siteMetadata = {
     },
     social: [
         {
+            url: `https://dev.to/jay_wick`,
+        },
+        {
             url: `https://twitter.com/jay_wick`,
         },
         {

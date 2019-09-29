@@ -25,6 +25,7 @@ const icons = {
     unsplash: Icons.Unsplash,
     patreon: Icons.Patreon,
     paypal: Icons.Paypal,
+    dev: Icons.DevTo,
 }
 
 const getHostname = url => {
