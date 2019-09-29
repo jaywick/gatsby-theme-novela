@@ -16,6 +16,7 @@ import Lists from '@components/Lists'
 import Paragraph from '@components/Paragraph'
 import Tables from '@components/Tables'
 import { ImageZoom } from '@components/Image'
+import Note from '@components/Note'
 
 import mediaqueries from '@styles/media'
 import { toKebabCase } from '@utils'
@@ -40,6 +41,7 @@ const components = {
     thead: Tables.Head,
     th: Tables.HeadCell,
     td: Tables.Cell,
+    Note,
 }
 
 function MDX({ content, children, ...props }) {
