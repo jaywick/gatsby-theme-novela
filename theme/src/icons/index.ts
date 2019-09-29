@@ -11,6 +11,7 @@ import Unsplash from './social/Unsplash.Icon'
 import YouTube from './social/YouTube.Icon'
 import Patreon from './social/Patreon.Icon'
 import Paypal from './social/Paypal.Icon'
+import DevTo from './social/DevTo.Icon'
 
 // UI
 import ChevronLeft from './ui/ChevronLeft.Icon'
@@ -36,6 +37,7 @@ export default {
     YouTube,
     Patreon,
     Paypal,
+    DevTo,
 
     ChevronLeft,
     Copied,

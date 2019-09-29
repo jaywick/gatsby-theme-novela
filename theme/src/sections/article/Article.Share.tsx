@@ -169,26 +169,36 @@ function ArticelShare() {
             isDark={isDark}
         >
             <MenuText>Share: </MenuText>
-            <ReferralLink disabled={!canTweet} share={share.twitter}>
-                <Icons.Twitter width='18px' height='15px' />
-            </ReferralLink>
-            <ReferralLink disabled={false} share={share.linkedin}>
-                <Icons.LinkedIn width='16px' height='16px' />
-            </ReferralLink>
-            <MenuDivider />
             <MenuButton
                 onClick={handleCopyClick}
+                title='Copy selected text'
                 aria-label='Copy selected text'
             >
                 <Icons.Copy />
             </MenuButton>
+            <ReferralLink
+                disabled={false}
+                share={share.devto}
+                title='Share on dev.to'
+                aria-label='Share on dev.to'
+            >
+                <Icons.DevTo width='18px' height='18px' />
+            </ReferralLink>
+            <ReferralLink
+                disabled={!canTweet}
+                share={share.twitter}
+                title='Share on Twitter'
+                aria-label='Share on Twitter'
+            >
+                <Icons.Twitter width='18px' height='18px' />
+            </ReferralLink>
         </MenuFloat>
     )
 }
 
 export default ArticelShare
 
-function ReferralLink({ disabled, share, children }) {
+function ReferralLink({ disabled, share, title, children }) {
     function handleClick(event) {
         event.preventDefault()
         if (disabled) return
@@ -205,6 +215,7 @@ function ReferralLink({ disabled, share, children }) {
             href={disabled ? '' : share}
             onClick={handleClick}
             disabled={disabled}
+            title={title}
         >
             <Hidden>Share the selected text</Hidden>
             {children}
@@ -218,7 +229,7 @@ function generateShare(shareText: string) {
 
     return {
         twitter: `https://twitter.com/intent/tweet?text="${shareText}" — ${url}`,
-        linkedin: `http://www.linkedin.com/shareArticle?mini=true&url=${url}&summary=${shareText}&title=${shareText}`,
+        devto: `https://dev.to/new?prefill=---%0Atitle%3A%20${shareText}%0A---%0A%0A%7B%25%20${url}%20%25%7D`,
     }
 }
 
