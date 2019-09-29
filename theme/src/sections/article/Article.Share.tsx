@@ -223,13 +223,33 @@ function ReferralLink({ disabled, share, title, children }) {
     )
 }
 
+function truncate(text: string) {
+    if (text.length <= 100) {
+        return text
+    }
+
+    return text.slice(0, 100).toString() + '…'
+}
+
 function generateShare(shareText: string) {
     if (!shareText) return {}
     const url = window.location.href
 
     return {
         twitter: `https://twitter.com/intent/tweet?text="${shareText}" — ${url}`,
-        devto: `https://dev.to/new?prefill=---%0Atitle%3A%20${shareText}%0A---%0A%0A%7B%25%20${url}%20%25%7D`,
+        devto:
+            `https://dev.to/new?prefill=` +
+            [
+                `---`,
+                `title: ` + truncate(shareText),
+                `---`,
+                '',
+                '> ' + shareText.split('\n').join('\n> '),
+                '',
+                ' — ' + url,
+            ]
+                .map(encodeURI)
+                .join(encodeURI('\n')),
     }
 }
 
