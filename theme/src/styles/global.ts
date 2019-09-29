@@ -96,10 +96,32 @@ export const globalStyles = css`
     }
 
     code,
-    kbd,
     pre,
     samp {
         font-family: monospace;
+    }
+
+    sub,
+    sup {
+        font-size: 14px;
+    }
+
+    code {
+        background: #282a36;
+        color: hsl(290, 100%, 80%);
+        padding: 1px 4px;
+        border-radius: 5px;
+    }
+
+    kbd {
+        background: #c4c4c4;
+        padding: 3px 7px;
+        border-radius: 3px;
+        font-weight: bold;
+        font-family: sans-serif;
+        font-size: 15px;
+        box-shadow: #737373 0px 2px 0px;
+        color: black;
     }
 
     fieldset,
