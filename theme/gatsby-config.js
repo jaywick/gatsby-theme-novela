@@ -23,10 +23,11 @@ module.exports = ({
             options: feedOptions,
         },
         {
-            resolve: `gatsby-source-filesystem`,
+            resolve: `gatsby-source-git`,
             options: {
-                path: contentPosts,
                 name: contentPosts,
+                remote: `https://github.com/jaywick/test-blog-content.git`,
+                patterns: `posts/**`,
             },
         },
         {
