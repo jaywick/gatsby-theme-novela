@@ -126,18 +126,4 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
 
         createParentChildLink({ parent: fileNode, child: node })
     }
-
-    if (node.internal.type === `ContentfulAuthor`) {
-        createNodeField({
-            node,
-            name: `slug`,
-            value: generateSlug(basePath, 'authors', slugify(node.name)),
-        })
-
-        createNodeField({
-            node,
-            name: `authorsPage`,
-            value: themeOptions.authorsPage || false,
-        })
-    }
 }

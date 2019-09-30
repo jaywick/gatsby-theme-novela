@@ -54,86 +54,51 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
         authorsPath = '/authors',
         authorsPage = true,
         pageLength = 6,
-        sources = {},
         mailchimp = '',
     } = themeOptions
 
     // Defaulting to look at the local MDX files as sources.
-    const { local = true, contentful = false } = sources
 
     let authors
     let articles
 
     const dataSources = {
         local: { authors: [], articles: [] },
-        contentful: { authors: [], articles: [] },
-        netlify: { authors: [], articles: [] },
     }
 
     log('Config basePath', basePath)
     if (authorsPage) log('Config authorsPath', authorsPath)
 
-    if (local) {
-        try {
-            log('Querying Authors & Aritcles source:', 'Local')
-            const localAuthors = await graphql(query.local.authors)
-            const localArticles = await graphql(query.local.articles)
+    try {
+        log('Querying Authors & Aritcles source:', 'Local')
+        const localAuthors = await graphql(query.local.authors)
+        const localArticles = await graphql(query.local.articles)
 
-            dataSources.local.authors = localAuthors.data.authors.edges.map(
-                normalize.local.authors,
-            )
+        dataSources.local.authors = localAuthors.data.authors.edges.map(
+            normalize.local.authors,
+        )
 
-            dataSources.local.articles = localArticles.data.articles.edges.map(
-                normalize.local.articles,
-            )
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
-    if (contentful) {
-        try {
-            log('Querying Authors & Aritcles source:', 'Contentful')
-            const contentfulAuthors = await graphql(query.contentful.authors)
-            const contentfulArticles = await graphql(query.contentful.articles)
-
-            dataSources.contentful.authors = contentfulAuthors.data.authors.edges.map(
-                normalize.contentful.authors,
-            )
-
-            dataSources.contentful.articles = contentfulArticles.data.articles.edges.map(
-                normalize.contentful.articles,
-            )
-        } catch (error) {
-            console.error(error)
-        }
+        dataSources.local.articles = localArticles.data.articles.edges.map(
+            normalize.local.articles,
+        )
+    } catch (error) {
+        console.error(error)
     }
 
     // Combining together all the articles from different sources
-    articles = [
-        ...dataSources.local.articles,
-        ...dataSources.contentful.articles,
-        ...dataSources.netlify.articles,
-    ].sort(byDate)
+    articles = [...dataSources.local.articles].sort(byDate)
 
     const articlesThatArentSecret = articles.filter(article => !article.secret)
 
     // Combining together all the authors from different sources
-    authors = getUniqueListBy(
-        [
-            ...dataSources.local.authors,
-            ...dataSources.contentful.authors,
-            ...dataSources.netlify.authors,
-        ],
-        'name',
-    )
+    authors = getUniqueListBy([...dataSources.local.authors], 'name')
 
     if (articles.length === 0 || authors.length === 0) {
         throw new Error(`
-    You must have at least one Author and Post. As reference you can view the
-    example repository. Look at the content folder in the example repo.
-    https://github.com/narative/gatsby-theme-novela-example
-  `)
+            You must have at least one Author and Post. As reference you can view the
+            example repository. Look at the content folder in the example repo.
+            https://github.com/narative/gatsby-theme-novela-example
+        `)
     }
 
     /**

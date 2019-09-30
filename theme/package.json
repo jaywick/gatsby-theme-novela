@@ -19,9 +19,6 @@
     "scripts": {
         "build": "gatsby build",
         "clean": "gatsby clean",
-        "contentful:export": "contentful space export --config contentful.json --skip-content --skip-roles --skip-webhooks",
-        "contentful:export:model": "contentful space export --config contentful.json",
-        "contentful:import": "contentful space import --config contentful.json",
         "develop": "gatsby develop",
         "publish": "npm publish --access public"
     },
@@ -42,7 +39,6 @@
         "@mdx-js/react": "^1.0.27",
         "adm-zip": "^0.4.13",
         "babel-plugin-emotion": "^10.0.14",
-        "contentful-cli": "^0.36.0",
         "gatsby": "^2.15.7",
         "gatsby-image": "^2.2.7",
         "gatsby-paginate": "^1.1.0",
@@ -64,6 +60,7 @@
         "gatsby-remark-smartypants": "^2.1.2",
         "gatsby-remark-typescript": "^0.0.12",
         "gatsby-source-filesystem": "^2.1.6",
+        "gatsby-source-git": "^1.0.2",
         "gatsby-transformer-remark": "^2.6.9",
         "gatsby-transformer-sharp": "^2.2.4",
         "gatsby-transformer-yaml": "^2.2.4",
