@@ -41,9 +41,13 @@ const plugins = [
         resolve: 'xyz-theme',
         options: {
             remotePosts: {
-                path: `posts/**`,
-                url: `https://${process.env.GATSBY_GITHUB_USER}:${process.env.GATSBY_GITHUB_TOKEN}@github.com/jaywick/test-blog-content.git`,
+                remote:
+                    `https://${process.env.GATSBY_GITHUB_USER}:${process.env.GATSBY_GITHUB_TOKEN}` +
+                    `@github.com/jaywick/jaywick-xyz-content.git`,
+                // `@github.com/jaywick/test-xyz-content.git`,
+                patterns: `doc/blog/**`,
             },
+            contentPath: 'doc/blog',
             contentAuthors: 'content/authors',
             basePath: '/',
             authorsPage: true,

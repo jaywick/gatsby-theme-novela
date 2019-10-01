@@ -8,6 +8,12 @@
             "type": "shell",
             "command": "yarn start",
             "problemMatcher": []
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "yarn clean",
+            "problemMatcher": []
         }
     ]
 }

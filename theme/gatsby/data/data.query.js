@@ -22,14 +22,12 @@ module.exports.local = {
                     node {
                         id
                         slug
-                        secret
                         title
                         author
                         date(formatString: "MMMM Do, YYYY")
                         dateForSEO: date
                         timeToRead
                         excerpt
-                        subscription
                         body
                         hero {
                             full: childImageSharp {

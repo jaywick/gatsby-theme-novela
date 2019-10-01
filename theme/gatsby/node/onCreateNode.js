@@ -90,7 +90,7 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
         return
     }
 
-    if (node.internal.type === `Mdx` && source === contentPath) {
+    if (node.internal.type === `Mdx`) {
         const fieldData = {
             author: node.frontmatter.author,
             date: node.frontmatter.date,
