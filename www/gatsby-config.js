@@ -1,4 +1,6 @@
-require('dotenv').config()
+require('dotenv').config({
+    path: `../.env.${process.env.NODE_ENV}`,
+})
 
 const siteMetadata = {
     title: `Jay Wick`,
@@ -38,7 +40,10 @@ const plugins = [
     {
         resolve: 'xyz-theme',
         options: {
-            contentPosts: 'content/posts',
+            remotePosts: {
+                path: `posts/**`,
+                url: `https://${process.env.GATSBY_GITHUB_USER}:${process.env.GATSBY_GITHUB_TOKEN}@github.com/jaywick/test-blog-content.git`,
+            },
             contentAuthors: 'content/authors',
             basePath: '/',
             authorsPage: true,
