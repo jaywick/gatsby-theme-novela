@@ -1,6 +1,13 @@
 /* eslint-disable */
 const feedOptions = require('./config/gatsby-plugin-feed')
 const mdxOptions = require('./config/gatsby-plugin-mdx')
+const dotenv = require('dotenv')
+
+dotenv.config({
+    path: `../.env.${process.env.NODE_ENV}`,
+})
+
+const GITHUB_CREDS = `${process.env.GATSBY_GITHUB_USER}:${process.env.GATSBY_GITHUB_TOKEN}`
 
 module.exports = ({
     contentAuthors = 'content/authors',
@@ -26,7 +33,7 @@ module.exports = ({
             resolve: `gatsby-source-git`,
             options: {
                 name: contentPosts,
-                remote: `https://github.com/jaywick/test-blog-content.git`,
+                remote: `https://${GITHUB_CREDS}@github.com/jaywick/test-blog-content.git`,
                 patterns: `posts/**`,
             },
         },
