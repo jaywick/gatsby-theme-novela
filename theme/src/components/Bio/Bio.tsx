@@ -19,16 +19,8 @@ function Bio({ author }: IAuthor) {
                 </BioAvatarInner>
             </BioAvatar>
             <BioTextContainer>
-                <BioText
-                    dangerouslySetInnerHTML={{
-                        __html: author.bio.split('<br/>')[0],
-                    }}
-                />
-                <BioSubtitle
-                    dangerouslySetInnerHTML={{
-                        __html: author.bio.split('<br/>')[1],
-                    }}
-                />
+                <BioText dangerouslySetInnerHTML={{ __html: author.name }} />
+                <BioSubtitle dangerouslySetInnerHTML={{ __html: author.bio }} />
             </BioTextContainer>
         </BioContainer>
     )

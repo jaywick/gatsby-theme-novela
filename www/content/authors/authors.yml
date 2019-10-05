@@ -1,7 +1,5 @@
 - name: Jay Wick
-  bio: |
-      Jay Wick<br/>
-      UX developer, amateur designer, technology apologist.
+  bio: UX developer, amateur designer, technology apologist.
   avatar: ./avatars/jay-wick.png
   featured: true
   social:
