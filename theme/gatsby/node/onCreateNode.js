@@ -13,7 +13,6 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
 
     // Create source field (according to contentPath)
     const fileNode = getNode(node.parent)
-    const source = fileNode && fileNode.sourceInstanceName
 
     // ///////////////// Utility functions ///////////////////
 
@@ -43,10 +42,10 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
                     return permalinkData[key]
                 }
                 throw new Error(`
-          We could not find the value for: "${key}".
-          Please verify the articlePermalinkFormat format in theme options.
-          https://github.com/narative/gatsby-theme-novela#theme-options
-        `)
+                    We could not find the value for: "${key}".
+                    Please verify the articlePermalinkFormat format in theme options.
+                    https://github.com/narative/gatsby-theme-novela#theme-options
+                `)
             },
         )
 
@@ -91,6 +90,10 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
     }
 
     if (node.internal.type === `Mdx`) {
+        const permaId = fileNode
+            ? fileNode.relativeDirectory.split(/\//g).slice(-1)
+            : undefined
+
         const fieldData = {
             author: node.frontmatter.author,
             date: node.frontmatter.date,
@@ -98,10 +101,9 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
             secret: node.frontmatter.secret || false,
             slug: generateSlug(
                 basePath,
-                generateArticlePermalink(
-                    slugify(node.frontmatter.slug || node.frontmatter.title),
-                    node.frontmatter.date,
-                ),
+                'blog',
+                permaId,
+                slugify(node.frontmatter.slug || node.frontmatter.title),
             ),
             title: node.frontmatter.title,
             subscription: node.frontmatter.subscription !== false,

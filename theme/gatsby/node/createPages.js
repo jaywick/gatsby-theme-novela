@@ -143,12 +143,12 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
             })
         } catch (error) {
             throw new Error(`
-        We could not find the Author for: "${article.title}".
-        Double check the author field is specified in your post and the name
-        matches a specified author.
-        Provided author: ${article.author}
-        ${error}
-      `)
+                We could not find the Author for: "${article.title}".
+                Double check the author field is specified in your post and the name
+                matches a specified author.
+                Provided author: ${article.author}
+                ${error}
+            `)
         }
 
         /**
