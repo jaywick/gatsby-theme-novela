@@ -2,6 +2,14 @@ require('dotenv').config({
     path: `../.env.${process.env.NODE_ENV}`,
 })
 
+const gitCreds = `${process.env.GATSBY_GITHUB_USER}:${process.env.GATSBY_GITHUB_TOKEN}`
+const gitProject =
+    process.env.NODE_ENV === 'development'
+        ? 'jaywick/test-xyz-content.git'
+        : 'jaywick/jaywick-xyz-content.git'
+
+const gitRepo = `https://${gitCreds}@github.com/${gitProject}`
+
 const siteMetadata = {
     title: `Jay Wick`,
     name: `Jay Wick`,
@@ -41,10 +49,7 @@ const plugins = [
         resolve: 'xyz-theme',
         options: {
             remotePosts: {
-                remote:
-                    `https://${process.env.GATSBY_GITHUB_USER}:${process.env.GATSBY_GITHUB_TOKEN}` +
-                    `@github.com/jaywick/jaywick-xyz-content.git`,
-                // `@github.com/jaywick/test-xyz-content.git`,
+                remote: gitRepo,
                 patterns: `doc/blog/**`,
             },
             contentPath: 'doc/blog',
