@@ -38,8 +38,7 @@ module.exports.default = {
                             ...edge.node,
                             description: edge.node.excerpt,
                             date: edge.node.date,
-                            url:
-                                site.siteMetadata.siteUrl + edge.node.permaLink,
+                            url: site.siteMetadata.siteUrl + edge.node.link,
                             guid:
                                 site.siteMetadata.siteUrl + edge.node.permaLink,
                             // custom_elements: [{ "content:encoded": edge.node.body }],

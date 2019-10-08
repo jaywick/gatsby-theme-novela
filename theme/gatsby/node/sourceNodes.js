@@ -3,6 +3,8 @@ module.exports = ({ actions }) => {
         type Article implements Node {
             id: ID!
             permaLink: String!
+            link: String!
+            slug: String!
             title: String!
             date: Date! @dateformat
             author: String!

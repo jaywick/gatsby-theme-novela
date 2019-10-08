@@ -96,17 +96,18 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
             ? fileNode.relativeDirectory.split(/\//g).slice(-1)
             : undefined
 
+        const slug = slugify(
+            node.frontmatter.permaLink || node.frontmatter.title,
+        )
+
         const fieldData = {
             author: node.frontmatter.author,
             date: node.frontmatter.date,
             hero: node.frontmatter.hero,
             secret: node.frontmatter.secret || false,
-            permaLink: generateSlug(
-                basePath,
-                'blog',
-                permaId,
-                slugify(node.frontmatter.permaLink || node.frontmatter.title),
-            ),
+            slug,
+            permaLink: generateSlug(basePath, 'blog', permaId),
+            link: generateSlug(basePath, 'blog', permaId, slug),
             title: node.frontmatter.title,
             subscription: node.frontmatter.subscription !== false,
         }

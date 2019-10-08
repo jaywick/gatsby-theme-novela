@@ -10,7 +10,7 @@ function Bio({ author }: IAuthor) {
         <BioContainer>
             <BioAvatar
                 as={author.authorsPage ? Link : 'div'}
-                to={author.permaLink}
+                to={author.link}
                 data-a11y='false'
                 aria-label="Author's bio"
             >

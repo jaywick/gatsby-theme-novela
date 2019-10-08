@@ -164,13 +164,14 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
         if (articlesThatArentSecret.length === 1) next = []
 
         createPage({
-            path: article.permaLink,
+            path: article.link,
             component: templates.article,
             context: {
                 article,
                 authors: authorsThatWroteTheArticle,
                 basePath,
                 permaLink: article.permaLink,
+                link: article.link,
                 id: article.id,
                 title: article.title,
                 mailchimp,

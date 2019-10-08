@@ -22,6 +22,7 @@ module.exports.local = {
                     node {
                         id
                         permaLink
+                        link
                         title
                         author
                         date(formatString: "MMMM Do, YYYY")

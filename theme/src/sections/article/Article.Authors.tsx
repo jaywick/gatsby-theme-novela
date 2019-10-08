@@ -23,7 +23,7 @@ function ArticleAuthors({ authors }: { authors: IAuthor[] }) {
         return (
             <AuthorLink
                 as={authors[0].authorsPage ? Link : 'div'}
-                to={authors[0].permaLink}
+                to={authors[0].link}
             >
                 <AuthorAvatar>
                     <Image src={authors[0].avatar.small} />
@@ -72,7 +72,7 @@ function CoAuthors({ authors }: { authors: IAuthor[] }) {
                             <CoAuthorsListItemOpen key={author.name}>
                                 <AuthorLink
                                     as={author.authorsPage ? Link : 'div'}
-                                    to={author.permaLink}
+                                    to={author.link}
                                 >
                                     <CoAuthorAvatarOpen>
                                         <Image src={author.avatar.small} />
