@@ -15,6 +15,10 @@ const templates = {
     articles: path.resolve(templatesDirectory, 'articles.template.tsx'),
     article: path.resolve(templatesDirectory, 'article.template.tsx'),
     author: path.resolve(templatesDirectory, 'author.template.tsx'),
+    articleRedirect: path.resolve(
+        templatesDirectory,
+        'article-redirect.template.tsx',
+    ),
 }
 
 const query = require('../data/data.query')
@@ -162,6 +166,16 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
         if (next.length === 1 && articlesThatArentSecret.length !== 2)
             next = [...next, articlesThatArentSecret[0]]
         if (articlesThatArentSecret.length === 1) next = []
+
+        createPage({
+            path: article.permaLink,
+            component: templates.articleRedirect,
+            context: {
+                redirect: article.link,
+            },
+        })
+
+        console.log(`${article.permaLink} -> ${article.link}`)
 
         createPage({
             path: article.link,
