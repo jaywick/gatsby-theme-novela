@@ -97,7 +97,7 @@ const ListItem = ({ article, narrow }: ArticlesListItemProps) => {
         imageSource.constructor === Object
 
     return (
-        <ArticleLink to={article.slug} data-a11y='false'>
+        <ArticleLink to={article.permaLink} data-a11y='false'>
             <Item gridLayout={gridLayout}>
                 <ImageContainer narrow={narrow} gridLayout={gridLayout}>
                     {hasHeroImage ? (

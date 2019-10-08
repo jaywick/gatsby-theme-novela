@@ -29,7 +29,7 @@ export interface IAuthor {
     authorsPage?: boolean
     featured?: boolean
     name: string
-    slug: string
+    permaLink: string
     bio: string
     avatar: {
         image: IGatsbyImageFluid
@@ -38,7 +38,7 @@ export interface IAuthor {
 }
 
 export interface IArticle {
-    slug: string
+    permaLink: string
     authors: IAuthor[]
     excerpt: string
     body: string

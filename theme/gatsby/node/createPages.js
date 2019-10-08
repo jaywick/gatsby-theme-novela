@@ -30,14 +30,14 @@ function buildPaginatedPath(index, basePath) {
 }
 
 function slugify(string, base) {
-    const slug = string
+    const permaLink = string
         .toLowerCase()
         .normalize('NFD')
         .replace(/[\u0300-\u036F]/g, '')
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/(^-|-$)+/g, '')
 
-    return `${base}/${slug}`.replace(/\/\/+/g, '/')
+    return `${base}/${permaLink}`.replace(/\/\/+/g, '/')
 }
 
 function getUniqueListBy(array, key) {
@@ -164,13 +164,13 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
         if (articlesThatArentSecret.length === 1) next = []
 
         createPage({
-            path: article.slug,
+            path: article.permaLink,
             component: templates.article,
             context: {
                 article,
                 authors: authorsThatWroteTheArticle,
                 basePath,
-                slug: article.slug,
+                permaLink: article.permaLink,
                 id: article.id,
                 title: article.title,
                 mailchimp,
@@ -193,11 +193,11 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
                         .toLowerCase()
                         .includes(author.name.toLowerCase()),
             )
-            const path = slugify(author.slug, authorsPath)
+            const path = slugify(author.permaLink, authorsPath)
 
             createPaginatedPages({
                 edges: articlesTheAuthorHasWritten,
-                pathPrefix: author.slug,
+                pathPrefix: author.permaLink,
                 createPage,
                 pageLength,
                 pageTemplate: templates.author,

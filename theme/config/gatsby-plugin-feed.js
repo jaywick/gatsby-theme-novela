@@ -38,8 +38,10 @@ module.exports.default = {
                             ...edge.node,
                             description: edge.node.excerpt,
                             date: edge.node.date,
-                            url: site.siteMetadata.siteUrl + edge.node.slug,
-                            guid: site.siteMetadata.siteUrl + edge.node.slug,
+                            url:
+                                site.siteMetadata.siteUrl + edge.node.permaLink,
+                            guid:
+                                site.siteMetadata.siteUrl + edge.node.permaLink,
                             // custom_elements: [{ "content:encoded": edge.node.body }],
                             author: edge.node.author,
                         }
@@ -52,7 +54,7 @@ module.exports.default = {
                             node {
                                 excerpt
                                 date
-                                slug
+                                permaLink
                                 title
                                 author
                                 secret

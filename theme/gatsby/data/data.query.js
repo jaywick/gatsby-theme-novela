@@ -21,7 +21,7 @@ module.exports.local = {
                 edges {
                     node {
                         id
-                        slug
+                        permaLink
                         title
                         author
                         date(formatString: "MMMM Do, YYYY")
@@ -67,7 +67,7 @@ module.exports.local = {
                         social {
                             url
                         }
-                        slug
+                        permaLink
                         avatar {
                             small: childImageSharp {
                                 fluid(maxWidth: 50, quality: 100) {

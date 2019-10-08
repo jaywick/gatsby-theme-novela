@@ -49,7 +49,7 @@ const GridItem = ({
 
     return (
         <ArticleLink
-            to={article.slug}
+            to={article.permaLink}
             data-a11y='false'
             narrow={narrow ? 'true' : 'false'}
         >

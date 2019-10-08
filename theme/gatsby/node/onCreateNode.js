@@ -9,7 +9,7 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
     const contentPath = themeOptions.contentPath || 'content/posts'
     const basePath = themeOptions.basePath || '/'
     const articlePermalinkFormat =
-        themeOptions.articlePermalinkFormat || ':slug'
+        themeOptions.articlePermalinkFormat || ':permaLink'
 
     // Create source field (according to contentPath)
     const fileNode = getNode(node.parent)
@@ -25,13 +25,13 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
             .replace(/(^-|-$)+/g, '')
     }
 
-    function generateArticlePermalink(slug, date) {
+    function generateArticlePermalink(permaLink, date) {
         const [year, month, day] = date.match(/\d{4}-\d{2}-\d{2}/)[0].split('-')
         const permalinkData = {
             year,
             month,
             day,
-            slug,
+            permaLink,
         }
 
         const permalink = articlePermalinkFormat.replace(
@@ -59,12 +59,14 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
     // ///////////////////////////////////////////////////////
 
     if (node.internal.type === `AuthorsYaml`) {
-        const slug = node.slug ? `/${node.slug}` : slugify(node.name)
+        const permaLink = node.permaLink
+            ? `/${node.permaLink}`
+            : slugify(node.name)
 
         const fieldData = {
             ...node,
             authorsPage: themeOptions.authorsPage || false,
-            slug: generateSlug(basePath, 'authors', slug),
+            permaLink: generateSlug(basePath, 'authors', permaLink),
         }
 
         createNode({
@@ -99,11 +101,11 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
             date: node.frontmatter.date,
             hero: node.frontmatter.hero,
             secret: node.frontmatter.secret || false,
-            slug: generateSlug(
+            permaLink: generateSlug(
                 basePath,
                 'blog',
                 permaId,
-                slugify(node.frontmatter.slug || node.frontmatter.title),
+                slugify(node.frontmatter.permaLink || node.frontmatter.title),
             ),
             title: node.frontmatter.title,
             subscription: node.frontmatter.subscription !== false,
