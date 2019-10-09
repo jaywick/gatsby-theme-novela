@@ -51,15 +51,15 @@ const HeroImage = styled.div`
     box-shadow: 0px 15.619px 31.2381px rgba(0, 0, 0, 0.15);
 
     ${mediaqueries.tablet`
-    width: 146px;
-    height: 146px;
-  `}
+      width: 146px;
+      height: 146px;
+    `}
 
     ${mediaqueries.phablet`
-    width: 136px;
-    height: 136px;
-    margin-bottom: 25px;
-  `}
+      width: 136px;
+      height: 136px;
+      margin-bottom: 25px;
+    `}
 `
 
 const Heading = styled.h1`
@@ -86,8 +86,8 @@ const Subheading = styled.p`
     text-align: center;
 
     ${mediaqueries.phablet`
-    font-size: 14px;
-  `}
+      font-size: 14px;
+    `}
 `
 
 const Social = styled.div`
@@ -96,6 +96,6 @@ const Social = styled.div`
     margin-top: 35px;
 
     ${mediaqueries.phablet`
-    font-size: 14px;
-  `}
+      font-size: 14px;
+    `}
 `

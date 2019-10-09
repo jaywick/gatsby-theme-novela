@@ -6,21 +6,21 @@ import { IArticle } from '@types'
 
 import ArticlesList from '../articles/Articles.List'
 
-interface AuthorArticlesProps {
+interface FilteredArticlesProps {
     articles: IArticle[]
 }
 
-const AuthorArticles = ({ articles }: AuthorArticlesProps) => {
+const FilteredArticles = ({ articles }: FilteredArticlesProps) => {
     return (
-        <AuthorArticlesContainer>
+        <FilteredArticlesContainer>
             <ArticlesList articles={articles} alwaysShowAllDetails />
-        </AuthorArticlesContainer>
+        </FilteredArticlesContainer>
     )
 }
 
-export default AuthorArticles
+export default FilteredArticles
 
-const AuthorArticlesContainer = styled.div`
+const FilteredArticlesContainer = styled.div`
     background: linear-gradient(
         180deg,
         ${p => p.theme.colors.card} 0%,
@@ -32,11 +32,11 @@ const AuthorArticlesContainer = styled.div`
     z-index: 1;
 
     ${mediaqueries.desktop_medium`
-    padding: 80px;
-  `}
+        padding: 80px;
+    `}
 
     ${mediaqueries.desktop`
-    padding: 0;
-    background: transparent;
-  `}
+        padding: 0;
+        background: transparent;
+    `}
 `

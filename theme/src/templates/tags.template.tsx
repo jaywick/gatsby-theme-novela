@@ -6,8 +6,8 @@ import SEO from '@components/SEO'
 import Layout from '@components/Layout'
 import Paginator from '@components/Navigation/Navigation.Paginator'
 
-// import TagHero from '../sections/author/Author.Hero'
-import AuthorArticles from '../sections/author/Author.Articles'
+import TagHero from '../sections/filtered/Tag.Hero'
+import FilteredArticles from '../sections/filtered/Filtered.Articles'
 
 function TagsPage({ location, pageContext }) {
     const tag = pageContext.additionalContext.tag
@@ -15,15 +15,9 @@ function TagsPage({ location, pageContext }) {
 
     return (
         <Layout>
-            {/* <SEO
-                pathname={location.pathname}
-                title={author.name}
-                description={author.bio}
-            /> */}
             <Section narrow>
-                {/* <AuthorHero author={tag} /> */}
-                <h2>{tag}</h2>
-                <AuthorArticles articles={articles} />
+                <TagHero tag={tag} />
+                <FilteredArticles articles={articles} />
                 <AuthorPaginator>
                     <Paginator {...pageContext} />
                 </AuthorPaginator>
