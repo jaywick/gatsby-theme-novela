@@ -201,7 +201,6 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     log('Creating', 'tag pages')
     articlesByTag.forEach(([tag, taggedArticles]) => {
         const path = slugify(tag, '/tags')
-        console.log('1', path)
 
         createPaginatedPages({
             edges: taggedArticles,
@@ -217,8 +216,6 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
                 limit: pageLength,
             },
         })
-
-        console.log('2', path)
     })
 
     /**
@@ -235,7 +232,6 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
                         .toLowerCase()
                         .includes(author.name.toLowerCase()),
             )
-            const path = slugify(author.permaLink, authorsPath)
 
             createPaginatedPages({
                 edges: articlesTheAuthorHasWritten,
