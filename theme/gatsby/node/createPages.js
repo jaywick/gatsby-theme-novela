@@ -19,6 +19,7 @@ const templates = {
         templatesDirectory,
         'article-redirect.template.tsx',
     ),
+    tags: path.resolve(templatesDirectory, 'tags.template.tsx'),
 }
 
 const query = require('../data/data.query')
@@ -195,6 +196,29 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
                 next,
             },
         })
+    })
+
+    log('Creating', 'tag pages')
+    articlesByTag.forEach(([tag, taggedArticles]) => {
+        const path = slugify(tag, '/tags')
+        console.log('1', path)
+
+        createPaginatedPages({
+            edges: taggedArticles,
+            pathPrefix: `/tags/${tag}`,
+            createPage,
+            pageLength,
+            pageTemplate: templates.tags,
+            buildPath: buildPaginatedPath,
+            context: {
+                tag,
+                originalPath: path,
+                skip: pageLength,
+                limit: pageLength,
+            },
+        })
+
+        console.log('2', path)
     })
 
     /**
