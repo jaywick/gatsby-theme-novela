@@ -40,6 +40,7 @@ export interface IAuthor {
 export interface IArticle {
     permaLink: string
     link: string
+    tags: string[]
     authors: IAuthor[]
     excerpt: string
     body: string

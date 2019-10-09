@@ -30,6 +30,7 @@ module.exports.local = {
                         timeToRead
                         excerpt
                         body
+                        tags
                         hero {
                             full: childImageSharp {
                                 fluid(maxWidth: 944, quality: 100) {

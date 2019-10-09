@@ -106,6 +106,7 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
             hero: node.frontmatter.hero,
             secret: node.frontmatter.secret || false,
             slug,
+            tags: node.frontmatter.tags,
             permaLink: generateSlug(basePath, 'blog', permaId),
             link: generateSlug(basePath, 'blog', permaId, slug),
             title: node.frontmatter.title,

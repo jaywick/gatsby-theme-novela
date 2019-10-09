@@ -1,5 +1,5 @@
 /* eslint-disable no-console, import/no-extraneous-dependencies, prefer-const, no-shadow */
-
+const { union, flatMap } = require('lodash')
 require('dotenv').config()
 
 const log = (message, section) =>
@@ -96,6 +96,11 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
 
     // Combining together all the authors from different sources
     authors = getUniqueListBy([...dataSources.local.authors], 'name')
+    const allTags = union(flatMap(articles.map(x => x.tags)))
+    const articlesByTag = allTags.map(tag => [
+        tag,
+        articles.filter(article => article.tags.includes(tag)),
+    ])
 
     if (articles.length === 0 || authors.length === 0) {
         throw new Error(`
@@ -174,8 +179,6 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
                 redirect: article.link,
             },
         })
-
-        console.log(`${article.permaLink} -> ${article.link}`)
 
         createPage({
             path: article.link,
