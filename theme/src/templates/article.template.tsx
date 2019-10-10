@@ -18,6 +18,7 @@ import ArticleControls from '../sections/article/Article.Controls'
 import ArticlesNext from '../sections/article/Article.Next'
 import ArticleSEO from '../sections/article/Article.SEO'
 import ArticleShare from '../sections/article/Article.Share'
+import { IWithTheme } from '@types'
 
 const siteQuery = graphql`
     {
@@ -145,7 +146,7 @@ const NextArticle = styled(Section)`
     display: block;
 `
 
-const FooterNext = styled.h3`
+const FooterNext = styled.h3<IWithTheme>`
   position: relative;
   opacity: 0.25;
   margin-bottom: 100px;

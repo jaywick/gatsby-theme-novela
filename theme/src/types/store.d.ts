@@ -7,19 +7,20 @@
 type ExtractAction<A, T> = Extract<A, { type: T }>
 
 // Exclude the "type" field from an object
-type ExcludeTypeField = { [K in Exclude<keyof A, 'type'>]: A[K] }
+type ExcludeTypeField<A> = { [K in Exclude<keyof A, 'type'>]: A[K] }
 
 // If there are no params left after you exclude the "type" key,
 // then don't force the user to provide a payload (since {type: 'SOMETHING'} without payload works)
-type ExtractSimpleAction<A> = A extends any
+type ExtractSimpleAction<A> = A extends any // @ts-ignore
     ? {} extends ExcludeTypeField<A>
         ? A
         : never
     : never
 
+// @ts-ignore
 namespace Store {
     // Type and payloads for all actions in the Redux framework
-    // type Actions =
+    type Actions = any
     // | import('../store/authentication/actions').Actions
 
     // List of all types strings
@@ -37,6 +38,7 @@ namespace Store {
 
     // Global is just the entire state.
     type Global = NonNullable<
+        // @ts-ignore
         Parameters<typeof import('../store/reducers').default>[0]
     >
 

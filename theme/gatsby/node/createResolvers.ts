@@ -17,8 +17,8 @@ const mdxResolverPassthrough = fieldName => async (
 }
 
 // Define resolvers for custom fields
-export default ({ createResolvers }) => {
-    createResolvers({
+export const createResolvers = ({ createResolvers: createResolversAction }) => {
+    createResolversAction({
         Article: {
             excerpt: {
                 resolve: mdxResolverPassthrough(`excerpt`),

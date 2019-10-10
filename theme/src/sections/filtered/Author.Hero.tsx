@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import Image from '@components/Image'
 
 import mediaqueries from '@styles/media'
-import { IAuthor } from '@types'
+import { IAuthor, IWithTheme } from '@types'
 
 import SocialLinks from '@components/SocialLinks'
 
@@ -39,7 +39,7 @@ const Hero = styled.div`
     margin: 35px auto 110px;
 `
 
-const HeroImage = styled.div`
+const HeroImage = styled.div<IWithTheme>`
     position: relative;
     z-index: 1;
     height: 164px;
@@ -62,7 +62,7 @@ const HeroImage = styled.div`
     `}
 `
 
-const Heading = styled.h1`
+const Heading = styled.h1<IWithTheme>`
     font-size: 38px;
     font-family: ${p => p.theme.fonts.sansSerif};
     color: ${p => p.theme.colors.primary};
@@ -76,7 +76,7 @@ const Heading = styled.h1`
   `}
 `
 
-const Subheading = styled.p`
+const Subheading = styled.p<IWithTheme>`
     margin: 0 auto;
     max-width: 450px;
     color: ${p => p.theme.colors.grey};

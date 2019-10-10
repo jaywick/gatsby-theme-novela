@@ -29,7 +29,7 @@ function TagsPage({ location, pageContext }) {
 
 export default TagsPage
 
-const AuthorsGradient = styled.div`
+const AuthorsGradient = styled.div<any>`
     position: absolute;
     bottom: 0;
     left: 0;

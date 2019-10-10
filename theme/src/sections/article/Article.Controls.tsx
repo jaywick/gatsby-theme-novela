@@ -4,6 +4,7 @@ import { useColorMode } from 'theme-ui'
 
 import mediaqueries from '@styles/media'
 import { copyToClipboard } from '@utils'
+import { IWithTheme } from '@types'
 
 function ArticleControls() {
     return (
@@ -165,7 +166,7 @@ const IconWrapper = styled.button`
 `
 
 // This is based off a codepen! Much appreciated to: https://codepen.io/aaroniker/pen/KGpXZo
-const MoonOrSun = styled.div<{ isDark: boolean }>`
+const MoonOrSun = styled.div<IWithTheme>`
     position: relative;
     width: 24px;
     height: 24px;
@@ -217,7 +218,7 @@ const MoonOrSun = styled.div<{ isDark: boolean }>`
     }
 `
 
-const MoonMask = styled.div<{ isDark: boolean }>`
+const MoonMask = styled.div<IWithTheme>`
     position: absolute;
     right: -1px;
     top: -8px;

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
+import { IWithTheme } from '@types'
 
-const Note = styled.p`
+const Note = styled.p<IWithTheme>`
     line-height: 1.756;
     font-size: 18px;
     color: ${p => p.theme.colors.articleText};

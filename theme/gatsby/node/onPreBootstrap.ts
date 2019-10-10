@@ -1,6 +1,6 @@
-import * as fs from 'fs-extra' // eslint-disable-line import/no-extraneous-dependencies
+import * as fs from 'fs-extra'
 
-export default async ({ reporter }, themeOptions) => {
+export const onPreBootstrap = ({ reporter }, themeOptions) => {
     const authorsPath = themeOptions.contentAuthors || 'content/authors'
     const postsPath = themeOptions.contentPosts || 'content/posts'
 

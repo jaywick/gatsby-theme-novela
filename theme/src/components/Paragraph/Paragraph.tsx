@@ -1,7 +1,8 @@
 import styled from '@emotion/styled'
 import mediaqueries from '@styles/media'
+import { IWithTheme } from '@types'
 
-const Paragraph = styled.p`
+const Paragraph = styled.p<IWithTheme>`
     line-height: 1.756;
     font-size: 18px;
     color: ${p => p.theme.colors.articleText};

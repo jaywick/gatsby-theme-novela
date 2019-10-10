@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-const Head = styled.thead`
+const Head = styled.thead<{ theme: any }>`
     text-align: left;
     border-collapse: collapse;
     position: relative;

@@ -9,7 +9,7 @@ interface Props {
 }
 
 const ArticleRedirect = (props: Props) => {
-    useEffect(() => navigate(props.pageContext.redirect), [])
+    useEffect(() => void navigate(props.pageContext.redirect), [])
 
     return null
 }

@@ -8,9 +8,10 @@ import NavigationHeader from '@components/Navigation/Navigation.Header'
 import ArticlesContextProvider from '../../sections/articles/Articles.List.Context'
 
 import { globalStyles } from '@styles'
+import { IWithTheme } from '@types'
 
 interface LayoutProps {
-    children: React.ReactChild
+    children: React.ReactChild | React.ReactChild[]
 }
 
 /**
@@ -39,7 +40,7 @@ function Layout({ children }: LayoutProps) {
 
 export default Layout
 
-const Container = styled.div`
+const Container = styled.div<IWithTheme>`
     position: relative;
     background: ${p => p.theme.colors.background};
     transition: ${p => p.theme.colorModeTransition};

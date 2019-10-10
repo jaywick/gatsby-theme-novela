@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import mediaqueries from '@styles/media'
-import { IArticle } from '@types'
+import { IArticle, IWithTheme } from '@types'
 
 import ArticlesList from '../articles/Articles.List'
 
@@ -20,7 +20,7 @@ const FilteredArticles = ({ articles }: FilteredArticlesProps) => {
 
 export default FilteredArticles
 
-const FilteredArticlesContainer = styled.div`
+const FilteredArticlesContainer = styled.div<IWithTheme>`
     background: linear-gradient(
         180deg,
         ${p => p.theme.colors.card} 0%,

@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import throttle from 'lodash/throttle'
 
 import { clamp } from '@utils'
+import { IWithTheme } from '@types'
 
 export interface IProgress {
     contentHeight: number
@@ -47,7 +48,7 @@ const ProgressContainer = styled.div`
     user-select: none;
 `
 
-const Trackline = styled.div`
+const Trackline = styled.div<IWithTheme>`
     position: relative;
     display: flex;
     flex-direction: column;
@@ -59,7 +60,7 @@ const Trackline = styled.div`
     overflow: hidden;
 `
 
-const ProgressLine = styled.div`
+const ProgressLine = styled.div<IWithTheme>`
     position: absolute;
     height: 100%;
     top: -100%;

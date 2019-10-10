@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TilesIcon = ({ fill }) => (
+const TilesIcon = ({ fill }: { fill?: any }) => (
     <svg
         width='26'
         height='26'

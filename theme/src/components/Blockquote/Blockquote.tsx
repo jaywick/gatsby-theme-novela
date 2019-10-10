@@ -1,7 +1,8 @@
 import styled from '@emotion/styled'
 import mediaqueries from '@styles/media'
+import { IWithTheme } from '@types'
 
-const Blockquote = styled.blockquote`
+const Blockquote = styled.blockquote<IWithTheme>`
     transition: ${p => p.theme.colorModeTransition};
     margin: 15px auto 50px;
     color: ${p => p.theme.colors.articleText};

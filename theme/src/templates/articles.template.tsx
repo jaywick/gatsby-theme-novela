@@ -8,6 +8,7 @@ import Paginator from '@components/Navigation/Navigation.Paginator'
 
 import ArticlesHero from '../sections/articles/Articles.Hero'
 import ArticlesList from '../sections/articles/Articles.List'
+import { IWithTheme } from '@types'
 
 function ArticlesPage({ location, pageContext }) {
     const articles = pageContext.group
@@ -30,7 +31,7 @@ function ArticlesPage({ location, pageContext }) {
 
 export default ArticlesPage
 
-const ArticlesGradient = styled.div`
+const ArticlesGradient = styled.div<IWithTheme>`
     position: absolute;
     bottom: 0;
     left: 0;

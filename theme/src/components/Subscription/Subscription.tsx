@@ -6,6 +6,7 @@ import Headings from '@components/Headings'
 
 import styled from '@emotion/styled'
 import mediaqueries from '@styles/media'
+import { IWithTheme } from '@types'
 
 const Subscription: React.FunctionComponent<{}> = () => {
     const [email, setEmail] = useState('')
@@ -81,7 +82,7 @@ const Subscription: React.FunctionComponent<{}> = () => {
 
 export default Subscription
 
-const SubscriptionContainer = styled.div`
+const SubscriptionContainer = styled.div<{ theme?: any }>`
     position: relative;
     display: flex;
     flex-direction: column;
@@ -127,7 +128,7 @@ const Heading = styled(Headings.h3)`
   `}
 `
 
-const Text = styled.p`
+const Text = styled.p<{ theme?: any }>`
     margin: 0 auto 30px;
     color: ${p => p.theme.colors.grey};
     line-height: 1.75;
@@ -138,7 +139,7 @@ const Text = styled.p`
   `}
 `
 
-const Form = styled.form<{ hasError: string }>`
+const Form = styled.form<{ hasError: string } & IWithTheme>`
     position: relative;
 
     &::after {
@@ -156,7 +157,7 @@ const Form = styled.form<{ hasError: string }>`
     }
 `
 
-const Input = styled.input<{ hasError: string }>`
+const Input = styled.input<{ hasError: string } & IWithTheme>`
     position: relative;
     background: ${p =>
         p.hasError
@@ -189,7 +190,12 @@ const Input = styled.input<{ hasError: string }>`
   `}
 `
 
-const Button = styled.button<{ hasError: string; subscribed: boolean }>`
+const Button = styled.button<
+    {
+        hasError: string
+        subscribed: boolean
+    } & IWithTheme
+>`
     position: absolute;
     left: 306px;
     top: 3px;
@@ -240,7 +246,7 @@ const Button = styled.button<{ hasError: string; subscribed: boolean }>`
   `}
 `
 
-const Error = styled.div`
+const Error = styled.div<IWithTheme>`
     position: absolute;
     left: 35px;
     bottom: -20px;

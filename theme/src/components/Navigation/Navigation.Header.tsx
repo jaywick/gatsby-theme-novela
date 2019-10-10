@@ -13,6 +13,7 @@ import {
     getWindowDimensions,
     getBreakpointFromTheme,
 } from '@utils'
+import { IWithTheme } from '@types'
 
 function NavigationHeader() {
     const [showBackArrow, setShowBackArrow] = useState<boolean>(false)
@@ -132,15 +133,15 @@ const NavContainer = styled.div`
     }
 `
 
-const LogoLink = styled(Link)<{ back: string }>`
+const LogoLink = styled(Link)<{ back: string } & IWithTheme>`
     position: relative;
     display: flex;
     align-items: center;
     left: ${p => (p.back === 'true' ? '-54px' : 0)};
 
     ${mediaqueries.desktop_medium`
-    left: 0
-  `}
+        left: 0
+    `}
 
     &[data-a11y="true"]:focus::after {
         content: '';
@@ -198,7 +199,7 @@ const ToolTip = styled.div<{ isDark: boolean; hasCopied: boolean }>`
     }
 `
 
-const IconWrapper = styled.button<{ isDark: boolean }>`
+const IconWrapper = styled.button<IWithTheme>`
     opacity: 0.5;
     position: relative;
     border-radius: 5px;
@@ -239,7 +240,7 @@ const IconWrapper = styled.button<{ isDark: boolean }>`
 `
 
 // This is based off a codepen! Much appreciated to: https://codepen.io/aaroniker/pen/KGpXZo
-const MoonOrSun = styled.div<{ isDark: boolean }>`
+const MoonOrSun = styled.div<{ isDark: boolean } & IWithTheme>`
     position: relative;
     width: 24px;
     height: 24px;
@@ -291,7 +292,7 @@ const MoonOrSun = styled.div<{ isDark: boolean }>`
     }
 `
 
-const MoonMask = styled.div<{ isDark: boolean }>`
+const MoonMask = styled.div<IWithTheme>`
     position: absolute;
     right: -1px;
     top: -8px;

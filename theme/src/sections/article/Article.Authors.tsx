@@ -7,7 +7,7 @@ import { Link } from 'gatsby'
 import Image from '@components/Image'
 import Icons from '@icons'
 import mediaqueries from '@styles/media'
-import { IAuthor } from '@types'
+import { IAuthor, IWithTheme } from '@types'
 
 /**
  * Novela supports multiple authors and therefore we need to ensure
@@ -107,7 +107,7 @@ function generateAuthorNames(authors: IAuthor[]) {
         .join(', ')
 }
 
-const AuthorAvatar = styled.div`
+const AuthorAvatar = styled.div<IWithTheme>`
     height: 25px;
     width: 25px;
     border-radius: 50%;
@@ -124,7 +124,7 @@ const AuthorAvatar = styled.div`
   `}
 `
 
-const AuthorLink = styled.div`
+const AuthorLink = styled.div<IWithTheme & { as?: any; to?: any }>`
     display: flex;
     align-items: center;
     color: inherit;
@@ -148,7 +148,7 @@ const CoAuthorsList = styled.div`
   `}
 `
 
-const CoAuthorsListOpen = styled.ul`
+const CoAuthorsListOpen = styled.ul<IWithTheme>`
     position: absolute;
     z-index: 2;
     left: -21px;
@@ -173,7 +173,7 @@ const CoAuthorsListItemOpen = styled.li`
     }
 `
 
-const CoAuthorAvatarOpen = styled.div`
+const CoAuthorAvatarOpen = styled.div<IWithTheme>`
     height: 25px;
     width: 25px;
     border-radius: 50%;
@@ -188,7 +188,7 @@ const CoAuthorAvatarOpen = styled.div`
     }
 `
 
-const CoAuthorAvatar = styled.div`
+const CoAuthorAvatar = styled.div<IWithTheme>`
     position: absolute;
     height: 25px;
     width: 25px;
@@ -228,7 +228,7 @@ const NameContainer = styled.strong`
   `}
 `
 
-const AuthorNameOpen = styled.strong`
+const AuthorNameOpen = styled.strong<IWithTheme>`
     position: relative;
     cursor: pointer;
     color: ${p => p.theme.colors.secondary};
@@ -256,7 +256,7 @@ const IconOpenContainer = styled.div`
     right: 21px;
 `
 
-const CoAuthorsContainer = styled.div<{ isOpen: boolean }>`
+const CoAuthorsContainer = styled.div<{ isOpen: boolean } & IWithTheme>`
     position: relative;
     display: flex;
     align-items: center;

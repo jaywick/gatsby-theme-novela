@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
+import { IWithTheme } from '@types'
 
-const Anchor = styled.a`
+const Anchor = styled.a<IWithTheme>`
     transition: ${p => p.theme.colorModeTransition};
     color: ${p => p.theme.colors.accent};
 

@@ -1,9 +1,9 @@
 import { union, flatMap } from 'lodash'
 import * as dotenv from 'dotenv'
 import * as path from 'path'
-import * as createPaginatedPages from 'gatsby-paginate'
-import query from '../data/data.query'
-import normalize from '../data/data.normalize'
+import createPaginatedPages from 'gatsby-paginate'
+import * as query from '../data/data.query'
+import * as normalize from '../data/data.normalize'
 
 dotenv.config()
 
@@ -49,11 +49,11 @@ const getUniqueListBy = (array, key) => {
 }
 
 const byDate = (a, b) =>
-    new Date(b.dateForSEO).getTime() - new Date(a.dateForSEO).getTime()
+    Number(new Date(b.dateForSEO)) - Number(new Date(a.dateForSEO))
 
 // ///////////////////////////////////////////////////////
 
-const createPages = async (
+export const createPages = async (
     { actions: { createPage }, graphql },
     themeOptions,
 ) => {

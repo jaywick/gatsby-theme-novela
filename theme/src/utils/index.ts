@@ -240,7 +240,7 @@ function elementContainsSelection(el) {
             }
             return true
         }
-    } else if ((sel = document.selection) && sel.type != 'Control') {
+    } else if ((sel = (document as any).selection) && sel.type != 'Control') {
         return isOrContains(sel.createRange().parentElement(), el)
     }
     return false
@@ -302,8 +302,11 @@ export function getSelectionText() {
     let text = ''
     if (window.getSelection) {
         text = window.getSelection().toString()
-    } else if (document.selection && document.selection.type != 'Control') {
-        text = document.selection.createRange().text
+    } else if (
+        (document as any).selection &&
+        (document as any).selection.type != 'Control'
+    ) {
+        text = (document as any).selection.createRange().text
     }
     return text
 }

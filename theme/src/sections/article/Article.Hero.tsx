@@ -5,7 +5,7 @@ import Headings from '@components/Headings'
 import Image, { ImagePlaceholder } from '@components/Image'
 
 import mediaqueries from '@styles/media'
-import { IArticle, IAuthor } from '@types'
+import { IArticle, IAuthor, IWithTheme } from '@types'
 
 import ArticleAuthors from './Article.Authors'
 
@@ -44,7 +44,7 @@ const ArticleHero = ({ article, authors }: ArticleHeroProps) => {
 
 export default ArticleHero
 
-const Hero = styled.div`
+const Hero = styled.div<IWithTheme>`
     ${p => mediaqueries.phablet`
     &::before {
       content: "";
@@ -111,7 +111,7 @@ const Header = styled.header`
 
 const HeroHeading = styled(Headings.h1)`
     font-size: 48px;
-    font-family: ${p => p.theme.fonts.serif};
+    font-family: ${p => (p.theme as any).fonts.serif};
     margin-bottom: 25px;
     font-weight: bold;
     line-height: 1.32;
@@ -126,7 +126,7 @@ const HeroHeading = styled(Headings.h1)`
   `}
 `
 
-const HeroSubtitle = styled.div<{ hasCoAUthors: boolean }>`
+const HeroSubtitle = styled.div<{ hasCoAUthors: boolean } & IWithTheme>`
     position: relative;
     display: flex;
     font-size: 18px;
