@@ -8,6 +8,7 @@ import Paginator from '@components/Navigation/Navigation.Paginator'
 
 import AuthorHero from '../sections/filtered/Author.Hero'
 import FilteredArticles from '../sections/filtered/Filtered.Articles'
+import { IWithTheme } from '@types'
 
 function ArticlesPage({ location, pageContext }) {
     const author = pageContext.additionalContext.author
@@ -34,7 +35,7 @@ function ArticlesPage({ location, pageContext }) {
 
 export default ArticlesPage
 
-const AuthorsGradient = styled.div`
+const AuthorsGradient = styled.div<IWithTheme>`
     position: absolute;
     bottom: 0;
     left: 0;

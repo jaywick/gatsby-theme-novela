@@ -1,14 +1,16 @@
-/* eslint-disable no-console, import/no-extraneous-dependencies, prefer-const, no-shadow */
-const { union, flatMap } = require('lodash')
-require('dotenv').config()
+import { union, flatMap } from 'lodash'
+import * as dotenv from 'dotenv'
+import * as path from 'path'
+import createPaginatedPages from 'gatsby-paginate'
+import * as query from '../data/data.query'
+import * as normalize from '../data/data.normalize'
 
-const log = (message, section) =>
+dotenv.config()
+
+const log = (message: string, section: string) =>
     console.log(
         `\n\u001B[36m${message} \u001B[4m${section}\u001B[0m\u001B[0m\n`,
     )
-
-const path = require('path')
-const createPaginatedPages = require('gatsby-paginate')
 
 const templatesDirectory = path.resolve(__dirname, '../../src/templates')
 const templates = {
@@ -22,19 +24,16 @@ const templates = {
     tags: path.resolve(templatesDirectory, 'tags.template.tsx'),
 }
 
-const query = require('../data/data.query')
-const normalize = require('../data/data.normalize')
-
 // ///////////////// Utility functions ///////////////////
 
-function buildPaginatedPath(index, basePath) {
+const buildPaginatedPath = (index, basePath) => {
     if (basePath === '/') {
         return index > 1 ? `${basePath}page/${index}` : basePath
     }
     return index > 1 ? `${basePath}/page/${index}` : basePath
 }
 
-function slugify(string, base) {
+const slugify = (string, base) => {
     const permaLink = string
         .toLowerCase()
         .normalize('NFD')
@@ -45,15 +44,19 @@ function slugify(string, base) {
     return `${base}/${permaLink}`.replace(/\/\/+/g, '/')
 }
 
-function getUniqueListBy(array, key) {
+const getUniqueListBy = (array, key) => {
     return [...new Map(array.map(item => [item[key], item])).values()]
 }
 
-const byDate = (a, b) => new Date(b.dateForSEO) - new Date(a.dateForSEO)
+const byDate = (a, b) =>
+    Number(new Date(b.dateForSEO)) - Number(new Date(a.dateForSEO))
 
 // ///////////////////////////////////////////////////////
 
-module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
+export const createPages = async (
+    { actions: { createPage }, graphql },
+    themeOptions,
+) => {
     const {
         basePath = '/',
         authorsPath = '/authors',

@@ -27,18 +27,24 @@ interface IGatsbyImageFixed extends IGatsbyImage {
 
 export interface IAuthor {
     authorsPage?: boolean
+    link?: string
     featured?: boolean
     name: string
     permaLink: string
     bio: string
+    social: { name: string; url: string }[]
     avatar: {
         image: IGatsbyImageFluid
+        small: IGatsbyImageFluid
+        large: IGatsbyImageFluid
+        medium: IGatsbyImageFluid
         full: IGatsbyImageFluid
     }
 }
 
 export interface IArticle {
     permaLink: string
+    title: string
     link: string
     tags: string[]
     authors: IAuthor[]
@@ -49,10 +55,12 @@ export interface IArticle {
         full: IGatsbyImageFluid
         preview: IGatsbyImageFluid
         regular: IGatsbyImageFluid
-        seo: string
+        narrow: IGatsbyImageFluid
+        seo: any
     }
     timeToRead: number
     date: string
+    dateForSEO: string
 }
 
 interface IArticleQuery {
@@ -67,4 +75,9 @@ export interface IProgress {
     title: string
     mode: string
     onClose?: () => void
+}
+
+export interface IWithTheme {
+    theme?: any
+    isDark?: boolean
 }

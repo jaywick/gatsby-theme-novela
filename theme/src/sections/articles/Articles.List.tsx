@@ -7,7 +7,7 @@ import Headings from '@components/Headings'
 import Image, { ImagePlaceholder } from '@components/Image'
 
 import mediaqueries from '@styles/media'
-import { IArticle } from '@types'
+import { IArticle, IWithTheme } from '@types'
 
 import { GridLayoutContext } from './Articles.List.Context'
 
@@ -284,7 +284,7 @@ const ImageContainer = styled.div<{ narrow: boolean; gridLayout: string }>`
 
 const Title = styled(Headings.h2)`
   font-size: 21px;
-  font-family: ${p => p.theme.fonts.serif};
+  font-family: ${p => (p.theme as any).fonts.serif};
   margin-bottom: ${p =>
       p.hasOverflow && p.gridLayout === 'tiles' ? '35px' : '10px'};
   transition: color 0.3s ease-in-out;
@@ -306,11 +306,13 @@ const Title = styled(Headings.h2)`
   `}
 `
 
-const Excerpt = styled.p<{
-    hasOverflow: boolean
-    narrow: boolean
-    gridLayout: string
-}>`
+const Excerpt = styled.p<
+    {
+        hasOverflow: boolean
+        narrow: boolean
+        gridLayout: string
+    } & IWithTheme
+>`
   ${limitToTwoLines};
   font-size: 16px;
   margin-bottom: 10px;
@@ -334,7 +336,7 @@ const Excerpt = styled.p<{
   `}
 `
 
-const MetaData = styled.div`
+const MetaData = styled.div<IWithTheme>`
     font-weight: 600;
     font-size: 16px;
     color: ${p => p.theme.colors.grey};
@@ -346,7 +348,7 @@ const MetaData = styled.div`
   `}
 `
 
-const ArticleLink = styled(Link)`
+const ArticleLink = styled<any>(Link)`
     position: relative;
     display: block;
     width: 100%;
@@ -366,7 +368,7 @@ const ArticleLink = styled(Link)`
 
     &:hover h2,
     &:focus h2 {
-        color: ${p => p.theme.colors.accent};
+        color: ${p => (p.theme as any).colors.accent};
     }
 
     &[data-a11y='true']:focus::after {
@@ -376,7 +378,7 @@ const ArticleLink = styled(Link)`
         top: -2%;
         width: 103%;
         height: 104%;
-        border: 3px solid ${p => p.theme.colors.accent};
+        border: 3px solid ${p => (p.theme as any).colors.accent};
         background: rgba(255, 255, 255, 0.01);
         border-radius: 5px;
     }

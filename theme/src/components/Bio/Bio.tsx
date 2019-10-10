@@ -3,9 +3,9 @@ import { Link } from 'gatsby'
 import styled from '@emotion/styled'
 
 import Image from '@components/Image'
-import { IAuthor } from '@types'
+import { IAuthor, IWithTheme } from '@types'
 
-function Bio({ author }: IAuthor) {
+function Bio({ author }: { author: IAuthor }) {
     return (
         <BioContainer>
             <BioAvatar
@@ -35,7 +35,7 @@ const BioContainer = styled.div`
     left: -10px;
 `
 
-const BioAvatar = styled.div`
+const BioAvatar = styled.div<IWithTheme & { as?: any; to?: any }>`
     display: block;
     position: relative;
     height: 40px;
@@ -76,7 +76,7 @@ const BioAvatarInner = styled.div`
     overflow: hidden;
 `
 
-const BioText = styled.div`
+const BioText = styled.div<IWithTheme>`
     max-width: 430px;
     font-weight: bold;
     line-height: 1.15;
@@ -89,7 +89,7 @@ const BioText = styled.div`
     }
 `
 
-const BioSubtitle = styled.div`
+const BioSubtitle = styled.div<IWithTheme>`
     margin-top: 2px;
     line-height: 1.15;
     color: ${p => p.theme.colors.grey};

@@ -22,7 +22,7 @@ import Helmet from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 
 interface HelmetProps {
-    children?: React.ReactChildren
+    children?: React.ReactChildren | React.ReactNode
     title: string
     description?: string
     pathname: string
@@ -30,7 +30,7 @@ interface HelmetProps {
     url?: string
     canonical?: string
     published?: string
-    timeToRead?: string
+    timeToRead?: string | number
 }
 
 const seoQuery = graphql`
@@ -77,7 +77,7 @@ function SEO({
     published,
     pathname,
     timeToRead,
-}: HelmetProps) {
+}: Partial<HelmetProps>) {
     const results = useStaticQuery(seoQuery)
     const site = results.allSite.edges[0].node.siteMetadata
     const twitter = site.social.find(option => option.name === 'twitter') || {}
@@ -88,7 +88,7 @@ function SEO({
     // If no image is provided lets looks for a default novela static image
     image = image ? image : '/preview.jpg'
 
-    const metaTags = [
+    const metaTags: { [key: string]: string }[] = [
         { charset: 'utf-8' },
         {
             'http-equiv': 'X-UA-Compatible',

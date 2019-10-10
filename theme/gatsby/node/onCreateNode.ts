@@ -1,10 +1,13 @@
 /* eslint-disable no-prototype-builtins */
 
-const crypto = require(`crypto`)
+import * as crypto from 'crypto'
 
 // Create fields for post slugs and source
 // This will change with schema customization with work
-module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
+export const onCreateNode = (
+    { node, actions, getNode, createNodeId },
+    themeOptions,
+) => {
     const { createNode, createNodeField, createParentChildLink } = actions
     const contentPath = themeOptions.contentPath || 'content/posts'
     const basePath = themeOptions.basePath || '/'

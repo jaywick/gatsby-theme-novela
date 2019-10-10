@@ -8,7 +8,7 @@ import Image from '@components/Image'
 
 import mediaqueries from '@styles/media'
 
-import { IArticle } from '@types'
+import { IArticle, IWithTheme } from '@types'
 
 /**
  * Sits at the bottom of our Article page. Shows the next 2 on desktop and the
@@ -114,7 +114,7 @@ const Grid = styled.div<{ numberOfArticles: number }>`
   `}
 `
 
-const ImageContainer = styled.div`
+const ImageContainer = styled.div<{ narrow?: string }>`
     position: relative;
     height: 280px;
     box-shadow: 0 30px 60px -10px rgba(0, 0, 0, ${p => (p.narrow ? 0.22 : 0.3)}),
@@ -142,7 +142,7 @@ const ImageContainer = styled.div`
   `}
 `
 
-const Item = styled.div`
+const Item = styled.div<IWithTheme>`
     position: relative;
 
     @media (max-width: 540px) {
@@ -157,8 +157,8 @@ const Title = styled(Headings.h3)`
     font-size: 22px;
     line-height: 1.4;
     margin-bottom: ${p => (p.hasOverflow ? '45px' : '10px')};
-    color: ${p => p.theme.colors.primary};
-    font-family: ${p => p.theme.fonts.serif};
+    color: ${p => (p.theme as any).colors.primary};
+    font-family: ${p => (p.theme as any).fonts.serif};
     transition: color 0.3s ease-in-out;
     ${limitToTwoLines};
 
@@ -172,7 +172,9 @@ const Title = styled(Headings.h3)`
   `}
 `
 
-const Excerpt = styled.p<{ narrow: boolean; hasOverflow: boolean }>`
+const Excerpt = styled.p<
+    { narrow?: boolean; hasOverflow?: boolean } & IWithTheme
+>`
   ${limitToTwoLines};
   font-size: 16px;
   margin-bottom: 10px;
@@ -196,7 +198,7 @@ const Excerpt = styled.p<{ narrow: boolean; hasOverflow: boolean }>`
   `}
 `
 
-const MetaData = styled.div`
+const MetaData = styled.div<IWithTheme>`
     font-weight: 600;
     font-size: 16px;
     color: ${p => p.theme.colors.grey};
@@ -208,7 +210,7 @@ const MetaData = styled.div`
   `}
 `
 
-const ArticleLink = styled(Link)<{ narrow: string }>`
+const ArticleLink = styled(Link)<{ narrow: string } & IWithTheme>`
     position: relative;
     display: block;
     width: 100%;

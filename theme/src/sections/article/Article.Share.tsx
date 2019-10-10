@@ -12,6 +12,7 @@ import {
     getWindowDimensions,
     getBreakpointFromTheme,
 } from '@utils'
+import { IWithTheme } from '@types'
 
 interface MenuFloatState {
     x: number
@@ -276,7 +277,7 @@ const popUpwards = keyframes`
   }
 `
 
-const MenuFloat = styled.div<{ isDark: boolean }>`
+const MenuFloat = styled.div<IWithTheme>`
     position: absolute;
     align-items: center;
     z-index: 1;

@@ -6,7 +6,7 @@ import Section from '@components/Section'
 import Bio from '@components/Bio'
 import Icons from '@icons'
 import mediaqueries from '@styles/media'
-import { IAuthor } from '@types'
+import { IAuthor, IWithTheme } from '@types'
 
 import { GridLayoutContext } from './Articles.List.Context'
 
@@ -27,7 +27,7 @@ const authorQuery = graphql`
     }
 `
 
-function ArticlesHero({ authors }: IAuthor) {
+function ArticlesHero({ authors }: { authors: IAuthor[] }) {
     const {
         gridLayout = 'tiles',
         hasSetGridLayout,
@@ -122,7 +122,7 @@ const HeadingContainer = styled.div`
   `}
 `
 
-const HeroHeading = styled.h1`
+const HeroHeading = styled.h1<IWithTheme>`
     font-style: normal;
     font-weight: 600;
     font-size: 52px;
@@ -142,7 +142,7 @@ const HeroHeading = styled.h1`
   `}
 `
 
-const GridButton = styled.button<{ active: boolean }>`
+const GridButton = styled.button<{ active: boolean } & IWithTheme>`
     position: relative;
     display: flex;
     align-items: center;

@@ -1,7 +1,8 @@
 import styled from '@emotion/styled'
 import mediaqueries from '@styles/media'
+import { IWithTheme } from '@types'
 
-const OrderedList = styled.ol`
+const OrderedList = styled.ol<IWithTheme>`
     list-style: none;
     counter-reset: list;
     color: ${p => p.theme.colors.articleText};

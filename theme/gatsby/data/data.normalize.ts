@@ -7,7 +7,7 @@
  *
  * @param {Object} heroSource
  */
-function normalizeHero(article) {
+const normalizeHero = article => {
     let hero = {
         full: {},
         regular: {},
@@ -29,7 +29,7 @@ function normalizeHero(article) {
     return hero
 }
 
-function normalizeAvatar(author) {
+const normalizeAvatar = author => {
     let avatar = {
         small: {},
         medium: {},
@@ -49,7 +49,7 @@ function normalizeAvatar(author) {
     return avatar
 }
 
-module.exports.local = {
+export const local = {
     articles: ({ node: article }) => {
         return {
             ...article,

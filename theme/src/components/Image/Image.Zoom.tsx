@@ -10,7 +10,7 @@ function handleImageZoomBackground(background: string) {
             img.previousElementSibling &&
             img.previousElementSibling.tagName === 'DIV'
         ) {
-            img.previousElementSibling.style.background = background
+            ;(img.previousElementSibling as any).style.background = background
         }
     })
 }

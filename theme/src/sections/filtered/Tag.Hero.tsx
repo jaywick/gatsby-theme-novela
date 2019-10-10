@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import mediaqueries from '@styles/media'
+import { IWithTheme } from '@types'
 
 interface TagHeroProps {
     tag: string
@@ -30,7 +31,7 @@ const Hero = styled.div`
     margin: 35px auto 110px;
 `
 
-const Heading = styled.h1`
+const Heading = styled.h1<IWithTheme>`
     font-size: 38px;
     font-family: ${p => p.theme.fonts.sansSerif};
     color: ${p => p.theme.colors.primary};
@@ -38,7 +39,7 @@ const Heading = styled.h1`
     font-weight: 600;
 `
 
-const Subheading = styled.p`
+const Subheading = styled.p<IWithTheme>`
     margin: 0 auto;
     max-width: 450px;
     color: ${p => p.theme.colors.grey};

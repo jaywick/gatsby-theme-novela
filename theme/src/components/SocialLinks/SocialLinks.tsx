@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 
 import Icons from '@icons'
 import mediaqueries from '@styles/media'
+import { IWithTheme } from '@types'
 
 interface SocialLinksProps {
     links: {
@@ -32,7 +33,7 @@ const getHostname = url => {
     return new URL(url.toLowerCase()).hostname.replace('www.', '').split('.')[0]
 }
 
-function SocialLinks({ links, fill = '#73737D' }: SocialLinksProps) {
+function SocialLinks({ links, fill = '#73737D' }: Partial<SocialLinksProps>) {
     if (!links) return null
 
     return (
@@ -65,7 +66,7 @@ function SocialLinks({ links, fill = '#73737D' }: SocialLinksProps) {
 
 export default SocialLinks
 
-const SocialIconContainer = styled.a`
+const SocialIconContainer = styled.a<IWithTheme>`
     position: relative;
     margin-left: 3.2rem;
     text-decoration: none;

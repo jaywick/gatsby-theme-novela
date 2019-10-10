@@ -6,6 +6,7 @@ import Section from '@components/Section'
 import SocialLinks from '@components/SocialLinks'
 
 import mediaqueries from '@styles/media'
+import { IWithTheme } from '@types'
 
 const siteQuery = graphql`
     {
@@ -48,7 +49,7 @@ function Footer() {
 
 export default Footer
 
-const FooterContainer = styled.div`
+const FooterContainer = styled.div<IWithTheme>`
     position: relative;
     display: flex;
     align-items: center;
@@ -66,7 +67,7 @@ const FooterContainer = styled.div`
     `}
 `
 
-const HoritzontalRule = styled.div`
+const HoritzontalRule = styled.div<IWithTheme>`
     position: relative;
     margin: 140px auto 50px;
     border-bottom: 1px solid ${p => p.theme.colors.horizontalRule};
@@ -90,7 +91,7 @@ const FooterText = styled.div`
     `}
 `
 
-const FooterGradient = styled.div`
+const FooterGradient = styled.div<IWithTheme>`
     position: absolute;
     bottom: 0;
     left: 0;

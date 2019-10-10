@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2015",
+        "lib": ["esnext", "dom"],
+        "noImplicitAny": false,
+        "strict": false,
+        "noEmit": true,
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "baseUrl": "./",
+        "paths": {
+            "@*": ["theme/src/*"]
+        }
+    }
+}

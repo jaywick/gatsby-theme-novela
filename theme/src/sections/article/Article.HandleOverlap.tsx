@@ -23,7 +23,9 @@ interface OverlapState {
 
 function HandleOverlap(props: OverlapProps) {
     const asideRef = useRef<HTMLDivElement>(null)
-    const [isOverlapping, setIsOverlapping] = useState<OverlapState>(false)
+    const [isOverlapping, setIsOverlapping] = useState<OverlapState>(
+        false as any,
+    )
 
     // Is the current element within the window's frame? That's all we care about!
     function isVisible(element: HTMLElement): boolean {
@@ -65,7 +67,7 @@ function HandleOverlap(props: OverlapProps) {
                 const isOverlapping = collide(asideRef.current, node)
 
                 if (noNodesAreVisible) {
-                    return setIsOverlapping(isOverlapping)
+                    return setIsOverlapping(isOverlapping as any)
                 }
                 /**
                  * If the node is not in the viewport don't fire state events for it,
@@ -75,7 +77,7 @@ function HandleOverlap(props: OverlapProps) {
                     return null
                 }
 
-                setIsOverlapping(isOverlapping)
+                setIsOverlapping(isOverlapping as any)
             })
         }, 20)
 
@@ -89,7 +91,7 @@ function HandleOverlap(props: OverlapProps) {
     }, [asideRef])
 
     return (
-        <OverlapContainer isOverlapping={isOverlapping} ref={asideRef}>
+        <OverlapContainer isOverlapping={isOverlapping as any} ref={asideRef}>
             {props.children}
         </OverlapContainer>
     )

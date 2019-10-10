@@ -1,7 +1,9 @@
+import React from 'react'
 import styled from '@emotion/styled'
 import mediaqueries from '@styles/media'
+import { IWithTheme } from '@types'
 
-const StyledTable = styled.table`
+const StyledTable = styled.table<IWithTheme>`
     position: relative;
     line-height: 1.65;
     color: ${p => p.theme.colors.grey};

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RowsIcon = ({ fill }) => (
+const RowsIcon = ({ fill }: { fill?: any }) => (
     <svg
         width='26'
         height='26'
