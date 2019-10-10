@@ -7,6 +7,7 @@
     "scripts": {
         "build": "yarn workspace www build",
         "dev": "yarn start",
+        "check:types": "cd theme && tsc --watch",
         "lint": "eslint --ignore-path .gitignore .",
         "start": "yarn workspace www develop",
         "bootstrap": "yarn lerna bootstrap",

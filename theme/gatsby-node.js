@@ -1,3 +1,7 @@
+const tsNode = require('ts-node')
+
+tsNode.register()
+
 exports.createPages = require('./gatsby/node/createPages')
 exports.createResolvers = require('./gatsby/node/createResolvers')
 exports.onCreateNode = require('./gatsby/node/onCreateNode')
