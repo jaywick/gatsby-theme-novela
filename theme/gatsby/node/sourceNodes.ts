@@ -1,5 +1,7 @@
-export const sourceNodes = ({ actions }) => {
-    actions.createTypes(`
+import { IPluginApi } from '@types'
+
+export const sourceNodes = ({ actions: { createTypes } }: IPluginApi) => {
+    createTypes(`
         type Article implements Node {
             id: ID!
             permaLink: String!

@@ -1,13 +1,6 @@
-/* eslint-disable */
+import { IArticle } from '@types'
 
-/**
- * In order to improve the authoring experience we'll set a fallback for hero images
- * when they're not provided. This will allow you to write articles without immediately
- * adding a hero image.
- *
- * @param {Object} heroSource
- */
-const normalizeHero = article => {
+const normalizeHero = (article: IArticle) => {
     let hero = {
         full: {},
         regular: {},

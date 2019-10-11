@@ -1,81 +1,190 @@
-import { union, flatMap } from 'lodash'
 import * as dotenv from 'dotenv'
-import * as path from 'path'
-import createPaginatedPages from 'gatsby-paginate'
-import * as query from '../data/data.query'
 import * as normalize from '../data/data.normalize'
+import * as query from '../data/data.query'
+import { resolve as resolvePath } from 'path'
+import {
+    buildPaginatedPath,
+    getUniqueListBy,
+    byDateSorter,
+    slugifyWithBase,
+} from './utils'
+import { IAuthor, IArticle, IConfig, IPluginApi } from '@types'
+import { log } from './utils'
+import { union, flatMap } from 'lodash'
+import createPaginatedPages from 'gatsby-paginate'
 
 dotenv.config()
 
-const log = (message: string, section: string) =>
-    console.log(
-        `\n\u001B[36m${message} \u001B[4m${section}\u001B[0m\u001B[0m\n`,
-    )
-
-const templatesDirectory = path.resolve(__dirname, '../../src/templates')
+const templatesDirectory = resolvePath(__dirname, '../../src/templates')
 const templates = {
-    articles: path.resolve(templatesDirectory, 'articles.template.tsx'),
-    article: path.resolve(templatesDirectory, 'article.template.tsx'),
-    author: path.resolve(templatesDirectory, 'author.template.tsx'),
-    articleRedirect: path.resolve(
+    articles: resolvePath(templatesDirectory, 'articles.template.tsx'),
+    article: resolvePath(templatesDirectory, 'article.template.tsx'),
+    author: resolvePath(templatesDirectory, 'author.template.tsx'),
+    articleRedirect: resolvePath(
         templatesDirectory,
         'article-redirect.template.tsx',
     ),
-    tags: path.resolve(templatesDirectory, 'tags.template.tsx'),
+    tags: resolvePath(templatesDirectory, 'tags.template.tsx'),
 }
 
-// ///////////////// Utility functions ///////////////////
+const createArticlePages = (opts: {
+    articles: IArticle[]
+    authors: IAuthor[]
+    createPage: Function
+    basePath: string
+    pageLength: number
+}) => {
+    log('Creating', 'articles page')
+    createPaginatedPages({
+        edges: opts.articles,
+        pathPrefix: opts.basePath,
+        createPage: opts.createPage,
+        pageLength: opts.pageLength,
+        pageTemplate: templates.articles,
+        buildPath: buildPaginatedPath,
+        context: {
+            authors: opts.authors,
+            basePath: opts.basePath,
+            skip: opts.pageLength,
+            limit: opts.pageLength,
+        },
+    })
 
-const buildPaginatedPath = (index, basePath) => {
-    if (basePath === '/') {
-        return index > 1 ? `${basePath}page/${index}` : basePath
-    }
-    return index > 1 ? `${basePath}/page/${index}` : basePath
+    log('Creating', 'article posts')
+    opts.articles.forEach((article, index) => {
+        let authorsThatWroteTheArticle: IAuthor[]
+        try {
+            authorsThatWroteTheArticle = opts.authors.filter(author => {
+                const allAuthors = article.author
+                    .split(',')
+                    .map(a => a.trim().toLowerCase())
+
+                return allAuthors.some(a => a === author.name.toLowerCase())
+            })
+        } catch (error) {
+            throw new Error(`
+                We could not find the Author for: "${article.title}".
+                Double check the author field is specified in your post and the name
+                matches a specified author.
+                Provided author: ${article.author}
+                ${error}
+            `)
+        }
+
+        let next = opts.articles.slice(index + 1, index + 3)
+
+        if (next.length === 0) {
+            next = opts.articles.slice(0, 2)
+        }
+
+        if (next.length === 1 && opts.articles.length !== 2) {
+            next = [...next, opts.articles[0]]
+        }
+
+        if (opts.articles.length === 1) {
+            next = []
+        }
+
+        opts.createPage({
+            path: article.permaLink,
+            component: templates.articleRedirect,
+            context: {
+                redirect: article.link,
+            },
+        })
+
+        opts.createPage({
+            path: article.link,
+            component: templates.article,
+            context: {
+                article,
+                authors: authorsThatWroteTheArticle,
+                basePath: opts.basePath,
+                permaLink: article.permaLink,
+                link: article.link,
+                id: article.id,
+                title: article.title,
+                next,
+            },
+        })
+    })
 }
 
-const slugify = (string, base) => {
-    const permaLink = string
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036F]/g, '')
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/(^-|-$)+/g, '')
+const createTagPages = (opts: {
+    articlesByTag: [string, IArticle[]][]
+    createPage: Function
+    pageLength: number
+}) => {
+    log('Creating', 'tag pages')
+    opts.articlesByTag.forEach(([tag, taggedArticles]) => {
+        const path = slugifyWithBase(tag, '/tags')
 
-    return `${base}/${permaLink}`.replace(/\/\/+/g, '/')
+        createPaginatedPages({
+            edges: taggedArticles,
+            pathPrefix: `/tags/${tag}`,
+            createPage: opts.createPage,
+            pageLength: opts.pageLength,
+            pageTemplate: templates.tags,
+            buildPath: buildPaginatedPath,
+            context: {
+                tag,
+                originalPath: path,
+                skip: opts.pageLength,
+                limit: opts.pageLength,
+            },
+        })
+    })
 }
 
-const getUniqueListBy = (array, key) => {
-    return [...new Map(array.map(item => [item[key], item])).values()]
+const createAuthorPages = (opts: {
+    articles: IArticle[]
+    authors: IAuthor[]
+    createPage: Function
+    pageLength: number
+}) => {
+    log('Creating', 'authors page')
+
+    opts.authors.forEach(author => {
+        const articlesTheAuthorHasWritten = opts.articles.filter(article =>
+            article.author.toLowerCase().includes(author.name.toLowerCase()),
+        )
+
+        const path = slugifyWithBase(author.name, '/tags')
+
+        createPaginatedPages({
+            edges: articlesTheAuthorHasWritten,
+            pathPrefix: author.permaLink,
+            createPage: opts.createPage,
+            pageLength: opts.pageLength,
+            pageTemplate: templates.author,
+            buildPath: buildPaginatedPath,
+            context: {
+                author,
+                originalPath: path,
+                skip: opts.pageLength,
+                limit: opts.pageLength,
+            },
+        })
+    })
 }
-
-const byDate = (a, b) =>
-    Number(new Date(b.dateForSEO)) - Number(new Date(a.dateForSEO))
-
-// ///////////////////////////////////////////////////////
 
 export const createPages = async (
-    { actions: { createPage }, graphql },
-    themeOptions,
+    pluginApi: IPluginApi,
+    themeOptions: IConfig,
 ) => {
     const {
-        basePath = '/',
-        authorsPath = '/authors',
-        authorsPage = true,
-        pageLength = 6,
-        mailchimp = '',
-    } = themeOptions
+        graphql,
+        actions: { createPage },
+    } = pluginApi
+    const { basePath = '/', pageLength = 6 } = themeOptions
 
-    // Defaulting to look at the local MDX files as sources.
-
-    let authors
-    let articles
-
-    const dataSources = {
+    const dataSources: {
+        local: { authors: IAuthor[]; articles: IArticle[] }
+    } = {
         local: { authors: [], articles: [] },
     }
 
     log('Config basePath', basePath)
-    if (authorsPage) log('Config authorsPath', authorsPath)
 
     try {
         log('Querying Authors & Aritcles source:', 'Local')
@@ -93,18 +202,16 @@ export const createPages = async (
         console.error(error)
     }
 
-    // Combining together all the articles from different sources
-    articles = [...dataSources.local.articles].sort(byDate)
-
-    const articlesThatArentSecret = articles.filter(article => !article.secret)
-
-    // Combining together all the authors from different sources
-    authors = getUniqueListBy([...dataSources.local.authors], 'name')
-    const allTags = union(flatMap(articles.map(x => x.tags)))
-    const articlesByTag = allTags.map(tag => [
-        tag,
-        articles.filter(article => article.tags.includes(tag)),
-    ])
+    const articles = dataSources.local.articles.sort(byDateSorter)
+    const authors = getUniqueListBy([...dataSources.local.authors], 'name')
+    const allTags = union(flatMap(articles.map(article => article.tags)))
+    const articlesByTag = allTags.map(
+        tag =>
+            [tag, articles.filter(article => article.tags.includes(tag))] as [
+                string,
+                IArticle[],
+            ],
+    )
 
     if (articles.length === 0 || authors.length === 0) {
         throw new Error(`
@@ -114,142 +221,20 @@ export const createPages = async (
         `)
     }
 
-    /**
-     * Once we've queried all our data sources and normalized them to the same structure
-     * we can begin creating our pages. First, we'll want to create all main articles pages
-     * that have pagination.
-     * /articles
-     * /articles/page/1
-     * ...
-     */
-    log('Creating', 'articles page')
-    createPaginatedPages({
-        edges: articlesThatArentSecret,
-        pathPrefix: basePath,
+    createArticlePages({
+        articles,
+        authors,
+        basePath,
         createPage,
         pageLength,
-        pageTemplate: templates.articles,
-        buildPath: buildPaginatedPath,
-        context: {
-            authors,
-            basePath,
-            skip: pageLength,
-            limit: pageLength,
-        },
     })
 
-    /**
-     * Once the list of articles have bene created, we need to make individual article posts.
-     * To do this, we need to find the corresponding authors since we allow for co-authors.
-     */
-    log('Creating', 'article posts')
-    articles.forEach((article, index) => {
-        // Match the Author to the one specified in the article
-        let authorsThatWroteTheArticle
-        try {
-            authorsThatWroteTheArticle = authors.filter(author => {
-                const allAuthors = article.author
-                    .split(',')
-                    .map(a => a.trim().toLowerCase())
+    createTagPages({ articlesByTag, createPage, pageLength })
 
-                return allAuthors.some(a => a === author.name.toLowerCase())
-            })
-        } catch (error) {
-            throw new Error(`
-                We could not find the Author for: "${article.title}".
-                Double check the author field is specified in your post and the name
-                matches a specified author.
-                Provided author: ${article.author}
-                ${error}
-            `)
-        }
-
-        /**
-         * We need a way to find the next artiles to suggest at the bottom of the articles page.
-         * To accomplish this there is some special logic surrounding what to show next.
-         */
-        let next = articlesThatArentSecret.slice(index + 1, index + 3)
-        // If it's the last item in the list, there will be no articles. So grab the first 2
-        if (next.length === 0) next = articlesThatArentSecret.slice(0, 2)
-        // If there's 1 item in the list, grab the first article
-        if (next.length === 1 && articlesThatArentSecret.length !== 2)
-            next = [...next, articlesThatArentSecret[0]]
-        if (articlesThatArentSecret.length === 1) next = []
-
-        createPage({
-            path: article.permaLink,
-            component: templates.articleRedirect,
-            context: {
-                redirect: article.link,
-            },
-        })
-
-        createPage({
-            path: article.link,
-            component: templates.article,
-            context: {
-                article,
-                authors: authorsThatWroteTheArticle,
-                basePath,
-                permaLink: article.permaLink,
-                link: article.link,
-                id: article.id,
-                title: article.title,
-                mailchimp,
-                next,
-            },
-        })
+    createAuthorPages({
+        articles,
+        authors,
+        createPage,
+        pageLength,
     })
-
-    log('Creating', 'tag pages')
-    articlesByTag.forEach(([tag, taggedArticles]) => {
-        const path = slugify(tag, '/tags')
-
-        createPaginatedPages({
-            edges: taggedArticles,
-            pathPrefix: `/tags/${tag}`,
-            createPage,
-            pageLength,
-            pageTemplate: templates.tags,
-            buildPath: buildPaginatedPath,
-            context: {
-                tag,
-                originalPath: path,
-                skip: pageLength,
-                limit: pageLength,
-            },
-        })
-    })
-
-    /**
-     * By default the author's page is not enabled. This can be enabled through the theme options.
-     * If enabled, each author will get their own page and a list of the articles they have written.
-     */
-    if (authorsPage) {
-        log('Creating', 'authors page')
-
-        authors.forEach(author => {
-            const articlesTheAuthorHasWritten = articlesThatArentSecret.filter(
-                article =>
-                    article.author
-                        .toLowerCase()
-                        .includes(author.name.toLowerCase()),
-            )
-
-            createPaginatedPages({
-                edges: articlesTheAuthorHasWritten,
-                pathPrefix: author.permaLink,
-                createPage,
-                pageLength,
-                pageTemplate: templates.author,
-                buildPath: buildPaginatedPath,
-                context: {
-                    author,
-                    originalPath: path,
-                    skip: pageLength,
-                    limit: pageLength,
-                },
-            })
-        })
-    }
 }

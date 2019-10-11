@@ -1,4 +1,6 @@
 import { ReactNode } from 'react'
+import { NodePluginArgs } from 'gatsby'
+import { Node } from 'gatsby'
 
 export interface IPaginator {
     pageCount: number
@@ -15,9 +17,16 @@ interface IGatsbyImage {
     tracedSVG?: string
 }
 
+interface IGatsbyImageFixed extends IGatsbyImage {
+    maxHeight: number
+    maxWidth: number
+    fixed: any
+}
+
 interface IGatsbyImageFluid extends IGatsbyImage {
     maxHeight: number
     maxWidth: number
+    fluid: any
 }
 
 interface IGatsbyImageFixed extends IGatsbyImage {
@@ -47,6 +56,7 @@ export interface IArticle {
     title: string
     link: string
     tags: string[]
+    author: string
     authors: IAuthor[]
     excerpt: string
     body: string
@@ -56,7 +66,7 @@ export interface IArticle {
         preview: IGatsbyImageFluid
         regular: IGatsbyImageFluid
         narrow: IGatsbyImageFluid
-        seo: any
+        seo: IGatsbyImageFixed
     }
     timeToRead: number
     date: string
@@ -80,4 +90,22 @@ export interface IProgress {
 export interface IWithTheme {
     theme?: any
     isDark?: boolean
+}
+
+export interface IConfig {
+    remotePosts: {
+        remote: string
+        patterns: string
+    }
+    contentPath: string
+    contentAuthors: string
+    basePath: string
+    authorsPage: boolean
+    mailchimp: boolean
+    pageLength: number
+}
+
+export interface IPluginApi extends NodePluginArgs {
+    node: Node & { frontmatter: { [key: string]: any } }
+    graphql: (query: string) => Promise<{ data: any }>
 }

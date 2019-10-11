@@ -32,7 +32,9 @@ function ImageZoom(props) {
         <ImageWithZoom
             image={image}
             zoomImage={image}
-            onZoom={() => handleImageZoomBackground(theme.colors.background)}
+            onZoom={() =>
+                handleImageZoomBackground(theme.colors.background) as any
+            }
             defaultStyles={{
                 zoomImage: {
                     borderRadius: '5px',

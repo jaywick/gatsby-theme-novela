@@ -1,7 +1,10 @@
 import path from 'path'
+import { IPluginApi } from '@types'
 
-export const onCreateWebpackConfig = ({ actions }) => {
-    actions.setWebpackConfig({
+export const onCreateWebpackConfig = ({
+    actions: { setWebpackConfig },
+}: IPluginApi) => {
+    setWebpackConfig({
         resolve: {
             alias: {
                 '@components': path.resolve(__dirname, '../../src/components/'),

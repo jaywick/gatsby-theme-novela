@@ -1,8 +1,12 @@
 import * as fs from 'fs-extra'
+import { IPluginApi, IConfig } from '@types'
 
-export const onPreBootstrap = ({ reporter }, themeOptions) => {
+export const onPreBootstrap = (
+    { reporter }: IPluginApi,
+    themeOptions: IConfig,
+) => {
     const authorsPath = themeOptions.contentAuthors || 'content/authors'
-    const postsPath = themeOptions.contentPosts || 'content/posts'
+    const postsPath = 'content/posts'
 
     if (!fs.existsSync(authorsPath)) {
         reporter.warn(`
