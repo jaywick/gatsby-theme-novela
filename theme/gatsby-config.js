@@ -22,10 +22,10 @@ module.exports = ({ contentAuthors = 'content/authors', remotePosts }) => {
             `gatsby-transformer-remark`,
             `gatsby-transformer-yaml`,
             `gatsby-plugin-theme-ui`,
-            {
-                resolve: `gatsby-plugin-feed`,
-                options: feedOptions,
-            },
+            // {
+            //     resolve: `gatsby-plugin-feed`,
+            //     options: feedOptions,
+            // },
             {
                 resolve: `gatsby-source-git`,
                 options: {
