@@ -108,7 +108,6 @@ function Article({ pageContext, location }: TemplateProps) {
                     <ArticleShare />
                 </MDXRenderer>
             </ArticleBody>
-            <Subscription />
             {article.tags.length > 0 && <Tags tags={article.tags} />}
             {next.length > 0 && (
                 <NextArticle narrow>
