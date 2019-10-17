@@ -49,10 +49,11 @@ const plugins = [
         resolve: 'xyz-theme',
         options: {
             remotePosts: {
+                name: 'content',
                 remote: gitRepo,
-                patterns: `doc/blog/**`,
+                patterns: `articles/**`,
             },
-            contentPath: 'doc/blog',
+            contentPath: 'articles',
             contentAuthors: 'content/authors',
             basePath: '/',
             authorsPage: true,

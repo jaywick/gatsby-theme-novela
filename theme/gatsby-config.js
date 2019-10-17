@@ -2,10 +2,18 @@
 const feedOptions = require('./config/gatsby-plugin-feed')
 const mdxOptions = require('./config/gatsby-plugin-mdx')
 
-module.exports = ({ contentAuthors = 'content/authors', remotePosts }) => {
-    if (!remotePosts || !remotePosts.remote || !remotePosts.patterns) {
+module.exports = ({
+    contentAuthors = 'content/authors',
+    remotePosts: remotePostOptions,
+}) => {
+    if (
+        !remotePostOptions ||
+        !remotePostOptions.name ||
+        !remotePostOptions.remote ||
+        !remotePostOptions.patterns
+    ) {
         throw new Error(
-            'Expected remotePosts.remote and remotePosts.patterns to be defined in gatsby-config.js',
+            'Expected remotePosts.name, remotePosts.remote and remotePosts.patterns to be defined in gatsby-config.js',
         )
     }
 
@@ -28,10 +36,7 @@ module.exports = ({ contentAuthors = 'content/authors', remotePosts }) => {
             // },
             {
                 resolve: `gatsby-source-git`,
-                options: {
-                    name: 'content/posts',
-                    ...remotePosts,
-                },
+                options: remotePostOptions,
             },
             {
                 resolve: `gatsby-source-filesystem`,

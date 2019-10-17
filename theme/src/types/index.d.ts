@@ -94,6 +94,7 @@ export interface IWithTheme {
 
 export interface IConfig {
     remotePosts: {
+        name: string
         remote: string
         patterns: string
     }
