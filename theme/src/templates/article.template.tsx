@@ -18,7 +18,17 @@ import ArticleControls from '../sections/article/Article.Controls'
 import ArticlesNext from '../sections/article/Article.Next'
 import ArticleSEO from '../sections/article/Article.SEO'
 import ArticleShare from '../sections/article/Article.Share'
-import { IWithTheme } from '@types'
+import { IWithTheme, IArticle, IAuthor } from '@types'
+import Tags from '@components/Tags'
+
+interface TemplateProps {
+    pageContext: {
+        article: IArticle
+        authors: IAuthor[]
+        next: any
+    }
+    location: any
+}
 
 const siteQuery = graphql`
     {
@@ -34,7 +44,7 @@ const siteQuery = graphql`
     }
 `
 
-function Article({ pageContext, location }) {
+function Article({ pageContext, location }: TemplateProps) {
     const contentSectionRef = useRef<HTMLElement>(null)
 
     const [hasCalculated, setHasCalculated] = useState<boolean>(false)
@@ -43,7 +53,7 @@ function Article({ pageContext, location }) {
     const results = useStaticQuery(siteQuery)
     const name = results.allSite.edges[0].node.siteMetadata.name
 
-    const { article, authors, mailchimp, next } = pageContext
+    const { article, authors, next } = pageContext
 
     useEffect(() => {
         const calculateBodySize = throttle(() => {
@@ -98,7 +108,8 @@ function Article({ pageContext, location }) {
                     <ArticleShare />
                 </MDXRenderer>
             </ArticleBody>
-            {mailchimp && article.subscription && <Subscription />}
+            <Subscription />
+            {article.tags.length > 0 && <Tags tags={article.tags} />}
             {next.length > 0 && (
                 <NextArticle narrow>
                     <FooterNext>More articles from {name}</FooterNext>
@@ -124,22 +135,22 @@ const MobileControls = styled.div`
 `
 
 const ArticleBody = styled.article`
-  position: relative;
-  padding: 160px 0 35px;
-  padding-left: 68px;
-  transition: background 0.2s linear;
+    position: relative;
+    padding: 160px 0 35px;
+    padding-left: 68px;
+    transition: background 0.2s linear;
 
-  ${mediaqueries.desktop`
-    padding-left: 53px;
-  `}
-  
-  ${mediaqueries.tablet`
-    padding: 70px 0 80px;
-  `}
+    ${mediaqueries.desktop`
+        padding-left: 53px;
+    `}
 
-  ${mediaqueries.phablet`
-    padding: 60px 0;
-  `}
+    ${mediaqueries.tablet`
+        padding: 70px 0 80px;
+    `}
+
+    ${mediaqueries.phablet`
+        padding: 60px 0;
+    `}
 `
 
 const NextArticle = styled(Section)`
@@ -147,37 +158,37 @@ const NextArticle = styled(Section)`
 `
 
 const FooterNext = styled.h3<IWithTheme>`
-  position: relative;
-  opacity: 0.25;
-  margin-bottom: 100px;
-  font-weight: 400;
-  color: ${p => p.theme.colors.primary};
-
-  ${mediaqueries.tablet`
-    margin-bottom: 60px;
-  `}
-
-  &::after {
-    content: '';
-    position: absolute;
-    background: ${p => p.theme.colors.grey};
-    width: ${(910 / 1140) * 100}%;
-    height: 1px;
-    right: 0;
-    top: 11px;
+    position: relative;
+    opacity: 0.25;
+    margin-bottom: 100px;
+    font-weight: 400;
+    color: ${p => p.theme.colors.primary};
 
     ${mediaqueries.tablet`
-      width: ${(600 / 1140) * 100}%;
+        margin-bottom: 60px;
     `}
 
-    ${mediaqueries.phablet`
-      width: ${(400 / 1140) * 100}%;
-    `}
+    &::after {
+        content: '';
+        position: absolute;
+        background: ${p => p.theme.colors.grey};
+        width: ${(910 / 1140) * 100}%;
+        height: 1px;
+        right: 0;
+        top: 11px;
 
-    ${mediaqueries.phone`
-      width: 90px
-    `}
-  }
+        ${mediaqueries.tablet`
+            width: ${(600 / 1140) * 100}%;
+        `}
+
+        ${mediaqueries.phablet`
+            width: ${(400 / 1140) * 100}%;
+        `}
+
+        ${mediaqueries.phone`
+            width: 90px
+        `}
+    }
 `
 
 const FooterSpacer = styled.div`
