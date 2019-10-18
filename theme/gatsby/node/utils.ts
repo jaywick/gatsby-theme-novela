@@ -16,10 +16,6 @@ export const slugifyWithBase = (string: string, base: string) => {
     return `${base}/${permaLink}`.replace(/\/\/+/g, '/')
 }
 
-export const getUniqueListBy = <T>(array: T[], key: string): T[] => {
-    return [...new Map(array.map(item => [item[key], item])).values()]
-}
-
 export const byDateSorter = (a, b) =>
     Number(new Date(b.dateForSEO)) - Number(new Date(a.dateForSEO))
 

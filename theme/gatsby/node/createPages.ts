@@ -5,6 +5,7 @@ import { resolve as resolvePath } from 'path'
 import { buildPaginatedPath, byDateSorter, slugifyWithBase } from './utils'
 import { IAuthor, IArticle, IConfig, IPluginApi, ITag } from '@types'
 import { log, tuple } from './utils'
+import { uniqBy } from 'lodash'
 import createPaginatedPages from 'gatsby-paginate'
 
 dotenv.config()
@@ -202,8 +203,8 @@ export const createPages = async (
     }
 
     const articles = dataSources.local.articles.sort(byDateSorter)
-    const tags = dataSources.local.tags
-    const authors = dataSources.local.authors
+    const tags = uniqBy(dataSources.local.tags, 'key')
+    const authors = uniqBy(dataSources.local.authors, 'name')
     const articlesByTag = tags.map(tag =>
         tuple(tag, articles.filter(article => article.tag === tag.key)),
     )
