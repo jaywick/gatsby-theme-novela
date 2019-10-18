@@ -2,19 +2,17 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import mediaqueries from '@styles/media'
-import { IWithTheme } from '@types'
+import { IWithTheme, ITag } from '@types'
 
 interface TagHeroProps {
-    tag: string
+    tag: ITag
 }
 
 const TagHero = (props: TagHeroProps) => {
     return (
         <Hero>
-            <Heading>#{props.tag}</Heading>
-            <Subheading>
-                Showing articles tagged under <em>{props.tag}</em>
-            </Subheading>
+            <Heading>{props.tag.name}</Heading>
+            <Subheading>{props.tag.story}</Subheading>
         </Hero>
     )
 }

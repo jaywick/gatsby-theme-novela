@@ -2,15 +2,9 @@ import * as dotenv from 'dotenv'
 import * as normalize from '../data/data.normalize'
 import * as query from '../data/data.query'
 import { resolve as resolvePath } from 'path'
-import {
-    buildPaginatedPath,
-    getUniqueListBy,
-    byDateSorter,
-    slugifyWithBase,
-} from './utils'
-import { IAuthor, IArticle, IConfig, IPluginApi } from '@types'
-import { log } from './utils'
-import { union, flatMap } from 'lodash'
+import { buildPaginatedPath, byDateSorter, slugifyWithBase } from './utils'
+import { IAuthor, IArticle, IConfig, IPluginApi, ITag } from '@types'
+import { log, tuple } from './utils'
 import createPaginatedPages from 'gatsby-paginate'
 
 dotenv.config()
@@ -111,17 +105,17 @@ const createArticlePages = (opts: {
 }
 
 const createTagPages = (opts: {
-    articlesByTag: [string, IArticle[]][]
+    articlesByTag: [ITag, IArticle[]][]
     createPage: Function
     pageLength: number
 }) => {
     log('Creating', 'tag pages')
     opts.articlesByTag.forEach(([tag, taggedArticles]) => {
-        const path = slugifyWithBase(tag, '/tags')
+        const path = slugifyWithBase(tag.key, '/tags')
 
         createPaginatedPages({
             edges: taggedArticles,
-            pathPrefix: `/tags/${tag}`,
+            pathPrefix: `/tags/${tag.key}`,
             createPage: opts.createPage,
             pageLength: opts.pageLength,
             pageTemplate: templates.tags,
@@ -179,9 +173,9 @@ export const createPages = async (
     const { basePath = '/', pageLength = 6 } = themeOptions
 
     const dataSources: {
-        local: { authors: IAuthor[]; articles: IArticle[] }
+        local: { authors: IAuthor[]; articles: IArticle[]; tags: ITag[] }
     } = {
-        local: { authors: [], articles: [] },
+        local: { authors: [], articles: [], tags: [] },
     }
 
     log('Config basePath', basePath)
@@ -189,10 +183,15 @@ export const createPages = async (
     try {
         log('Querying Authors & Aritcles source:', 'Local')
         const localAuthors = await graphql(query.local.authors)
+        const localTags = await graphql(query.local.tags)
         const localArticles = await graphql(query.local.articles)
 
         dataSources.local.authors = localAuthors.data.authors.edges.map(
             normalize.local.authors,
+        )
+
+        dataSources.local.tags = localTags.data.tags.edges.map(
+            normalize.local.tags,
         )
 
         dataSources.local.articles = localArticles.data.articles.edges.map(
@@ -203,14 +202,28 @@ export const createPages = async (
     }
 
     const articles = dataSources.local.articles.sort(byDateSorter)
-    const authors = getUniqueListBy([...dataSources.local.authors], 'name')
+    const tags = dataSources.local.tags
+    const authors = dataSources.local.authors
+    const articlesByTag = tags.map(tag =>
+        tuple(tag, articles.filter(article => article.tag === tag.key)),
+    )
 
-    if (articles.length === 0 || authors.length === 0) {
-        throw new Error(`
-            You must have at least one Author and Post. As reference you can view the
-            example repository. Look at the content folder in the example repo.
-            https://github.com/narative/gatsby-theme-novela-example
-        `)
+    if (articles.length === 0) {
+        throw new Error(
+            'You must have at least one Article. See the top level README about expected file structure',
+        )
+    }
+
+    if (authors.length === 0) {
+        throw new Error(
+            'You must have at least one Author. See the top level README about expected file structure',
+        )
+    }
+
+    if (tags.length === 0) {
+        throw new Error(
+            'You must have at least one Tag. See the top level README about expected file structure',
+        )
     }
 
     createArticlePages({
@@ -221,7 +234,7 @@ export const createPages = async (
         pageLength,
     })
 
-    // createTagPages({ articlesByTag, createPage, pageLength })
+    createTagPages({ articlesByTag, createPage, pageLength })
 
     createAuthorPages({
         articles,

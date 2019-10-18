@@ -8,10 +8,10 @@ import mediaqueries from '@styles/media'
 import { IWithTheme } from '@types'
 
 interface Props {
-    tags: string[]
+    tag: string
 }
 
-const Tags = ({ tags }: Props) => {
+const Tags = ({ tag }: Props) => {
     return (
         <Section narrow>
             <TagsContainer>
@@ -19,9 +19,7 @@ const Tags = ({ tags }: Props) => {
                     <Text>
                         Tagged under{' '}
                         <TagList>
-                            {/* {tags.map(tag => (
-                                <Tag href={`/tags/${tag}`}>{tag}</Tag>
-                            ))} */}
+                            <Tag href={`/tags/${tag}`}>{tag}</Tag>
                         </TagList>
                     </Text>
                 </Content>

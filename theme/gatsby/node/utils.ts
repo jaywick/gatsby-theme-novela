@@ -1,11 +1,11 @@
-export const buildPaginatedPath = (index, basePath) => {
+export const buildPaginatedPath = (index: number, basePath: string) => {
     if (basePath === '/') {
         return index > 1 ? `${basePath}page/${index}` : basePath
     }
     return index > 1 ? `${basePath}/page/${index}` : basePath
 }
 
-export const slugifyWithBase = (string, base) => {
+export const slugifyWithBase = (string: string, base: string) => {
     const permaLink = string
         .toLowerCase()
         .normalize('NFD')
@@ -40,3 +40,5 @@ export const slugify = (input: string) => {
 export const generateSlug = (...args: string[]) => {
     return `/${args.join('/')}`.replace(/\/\/+/g, '/')
 }
+
+export const tuple = <T extends any[]>(...args: T): T => args

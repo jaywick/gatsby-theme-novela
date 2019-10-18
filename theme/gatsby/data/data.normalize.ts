@@ -43,16 +43,16 @@ const normalizeAvatar = author => {
 }
 
 export const local = {
-    articles: ({ node: article }) => {
-        return {
-            ...article,
-            hero: normalizeHero(article),
-        }
-    },
-    authors: ({ node: author }) => {
-        return {
-            ...author,
-            avatar: normalizeAvatar(author),
-        }
-    },
+    articles: ({ node }) => ({
+        ...node,
+        hero: normalizeHero(node),
+    }),
+    tags: ({ node }) => ({
+        ...node,
+        hero: normalizeHero(node),
+    }),
+    authors: ({ node }) => ({
+        ...node,
+        avatar: normalizeAvatar(node),
+    }),
 }

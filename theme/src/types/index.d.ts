@@ -55,7 +55,7 @@ export interface IArticle {
     permaLink: string
     title: string
     link: string
-    tag: string[]
+    tag: string
     author: string
     authors: IAuthor[]
     excerpt: string
@@ -71,6 +71,12 @@ export interface IArticle {
     timeToRead: number
     date: string
     dateForSEO: string
+}
+
+export interface ITag {
+    key: string
+    name: string
+    story: string
 }
 
 interface IArticleQuery {
