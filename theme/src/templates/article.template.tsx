@@ -18,13 +18,14 @@ import ArticleControls from '../sections/article/Article.Controls'
 import ArticlesNext from '../sections/article/Article.Next'
 import ArticleSEO from '../sections/article/Article.SEO'
 import ArticleShare from '../sections/article/Article.Share'
-import { IWithTheme, IArticle, IAuthor } from '@types'
+import { IWithTheme, IArticle, IAuthor, ITag } from '@types'
 import Tags from '@components/Tags'
 
 interface TemplateProps {
     pageContext: {
         article: IArticle
         authors: IAuthor[]
+        tag: ITag
         next: any
     }
     location: any
@@ -53,7 +54,7 @@ function Article({ pageContext, location }: TemplateProps) {
     const results = useStaticQuery(siteQuery)
     const name = results.allSite.edges[0].node.siteMetadata.name
 
-    const { article, authors, next } = pageContext
+    const { article, authors, tag, next } = pageContext
 
     useEffect(() => {
         const calculateBodySize = throttle(() => {
@@ -108,7 +109,7 @@ function Article({ pageContext, location }: TemplateProps) {
                     <ArticleShare />
                 </MDXRenderer>
             </ArticleBody>
-            {article.tag && <Tags tag={article.tag} />}
+            {tag && <Tags tag={tag} />}
             {next.length > 0 && (
                 <NextArticle narrow>
                     <FooterNext>More articles from {name}</FooterNext>

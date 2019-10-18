@@ -25,6 +25,7 @@ const templates = {
 const createArticlePages = (opts: {
     articles: IArticle[]
     authors: IAuthor[]
+    tags: ITag[]
     createPage: Function
     basePath: string
     pageLength: number
@@ -47,25 +48,6 @@ const createArticlePages = (opts: {
 
     log('Creating', 'article posts')
     opts.articles.forEach((article, index) => {
-        let authorsThatWroteTheArticle: IAuthor[]
-        try {
-            authorsThatWroteTheArticle = opts.authors.filter(author => {
-                const allAuthors = article.author
-                    .split(',')
-                    .map(a => a.trim().toLowerCase())
-
-                return allAuthors.some(a => a === author.name.toLowerCase())
-            })
-        } catch (error) {
-            throw new Error(`
-                We could not find the Author for: "${article.title}".
-                Double check the author field is specified in your post and the name
-                matches a specified author.
-                Provided author: ${article.author}
-                ${error}
-            `)
-        }
-
         let next = opts.articles.slice(index + 1, index + 3)
 
         if (next.length === 0) {
@@ -80,6 +62,7 @@ const createArticlePages = (opts: {
             next = []
         }
 
+        // create redirect for URLs without slug
         opts.createPage({
             path: article.permaLink,
             component: templates.articleRedirect,
@@ -88,12 +71,27 @@ const createArticlePages = (opts: {
             },
         })
 
+        const articleAuthor = opts.authors.filter(
+            x => x.name === article.author,
+        )
+
+        if (!articleAuthor) {
+            throw new Error(
+                `Could not find author '${
+                    article.author
+                }' from authors list ${JSON.stringify(opts.authors)}`,
+            )
+        }
+
+        const articleTag = opts.tags.find(x => x.key === article.tag)
+
         opts.createPage({
             path: article.link,
             component: templates.article,
             context: {
                 article,
-                authors: authorsThatWroteTheArticle,
+                tag: articleTag,
+                authors: articleAuthor,
                 basePath: opts.basePath,
                 permaLink: article.permaLink,
                 link: article.link,
@@ -106,12 +104,17 @@ const createArticlePages = (opts: {
 }
 
 const createTagPages = (opts: {
-    articlesByTag: [ITag, IArticle[]][]
+    articles: IArticle[]
+    tags: ITag[]
     createPage: Function
     pageLength: number
 }) => {
+    const articlesByTag = opts.tags.map(tag =>
+        tuple(tag, opts.articles.filter(article => article.tag === tag.key)),
+    )
+
     log('Creating', 'tag pages')
-    opts.articlesByTag.forEach(([tag, taggedArticles]) => {
+    articlesByTag.forEach(([tag, taggedArticles]) => {
         const path = slugifyWithBase(tag.key, '/tags')
 
         createPaginatedPages({
@@ -205,9 +208,6 @@ export const createPages = async (
     const articles = dataSources.local.articles.sort(byDateSorter)
     const tags = uniqBy(dataSources.local.tags, 'key')
     const authors = uniqBy(dataSources.local.authors, 'name')
-    const articlesByTag = tags.map(tag =>
-        tuple(tag, articles.filter(article => article.tag === tag.key)),
-    )
 
     if (articles.length === 0) {
         throw new Error(
@@ -230,12 +230,13 @@ export const createPages = async (
     createArticlePages({
         articles,
         authors,
+        tags,
         basePath,
         createPage,
         pageLength,
     })
 
-    createTagPages({ articlesByTag, createPage, pageLength })
+    createTagPages({ articles, tags, createPage, pageLength })
 
     createAuthorPages({
         articles,

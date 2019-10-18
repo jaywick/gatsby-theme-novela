@@ -1,41 +1,47 @@
-import React, { Component } from 'react'
+import addToMailchimp from 'gatsby-plugin-mailchimp'
+import React, { useState } from 'react'
 
 import Section from '@components/Section'
 import Headings from '@components/Headings'
 
 import styled from '@emotion/styled'
 import mediaqueries from '@styles/media'
-import { IWithTheme } from '@types'
+import { IWithTheme, ITag } from '@types'
+import LongArrowRight from '@styles/media'
+import Icons from '@icons'
+import { useColorMode } from 'theme-ui'
 
 interface Props {
-    tag: string
+    tag: ITag
 }
 
 const Tags = ({ tag }: Props) => {
+    const [colorMode] = useColorMode()
+    const fill = colorMode === 'dark' ? '#000' : '#fff'
+
     return (
         <Section narrow>
-            <TagsContainer>
+            <SubscriptionContainer>
                 <Content>
-                    <Text>
-                        Tagged under{' '}
-                        <TagList>
-                            <Tag href={`/tags/${tag}`}>{tag}</Tag>
-                        </TagList>
-                    </Text>
+                    <Heading>{tag.name}</Heading>
+                    <Text>{tag.story}</Text>
+                    <Tag>See more &#10230;</Tag>
                 </Content>
-            </TagsContainer>
+            </SubscriptionContainer>
         </Section>
     )
 }
 
 export default Tags
 
-const TagsContainer = styled.div<{ theme?: any }>`
+const SubscriptionContainer = styled.div<{ theme?: any }>`
     position: relative;
     display: flex;
     flex-direction: column;
     padding: 64px 0 55px;
     margin: 10px auto 100px;
+    background: ${p => p.theme.colors.card};
+    box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
     z-index: 1;
 
     ${mediaqueries.tablet`
@@ -63,6 +69,14 @@ const Content = styled.div`
         h3 {
             padding: 0 24px;
         }
+    `}
+`
+
+const Heading = styled(Headings.h3)`
+    margin-bottom: 20px;
+
+    ${mediaqueries.tablet`
+        margin-bottom: 15px;
     `}
 `
 
@@ -120,5 +134,3 @@ const Tag = styled.a<IWithTheme>`
         }
     `}
 `
-
-const TagList = styled.span``
