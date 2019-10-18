@@ -39,7 +39,7 @@ Config which is used by the `theme` package to create the final website. Check o
 │
 │   # extra info about tags
 └───tags/
-    └───cool-new-project/
-        ├───index.mdx
-        └───hero.jpg
+│   └───avatars/
+│   │   └───cool-new-project-.png
+│   └───tags.yml
 ```

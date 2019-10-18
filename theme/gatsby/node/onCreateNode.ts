@@ -42,6 +42,36 @@ const createAuthorNode = (pluginApi: IPluginApi, themeOptions: IConfig) => {
     createParentChildLink({ parent: fileNode, child: node })
 }
 
+const createTagNode = (pluginApi: IPluginApi) => {
+    const {
+        actions: { createNode, createParentChildLink },
+        createNodeId,
+        getNode,
+        node,
+    } = pluginApi
+    const fileNode = getNode(node.parent)
+
+    const fieldData = { ...node }
+
+    createNode({
+        ...fieldData,
+        id: createNodeId(`${node.id} >>> Tag`),
+        parent: node.id,
+        children: [],
+        internal: {
+            type: 'Tag',
+            contentDigest: crypto
+                .createHash('md5')
+                .update(JSON.stringify(fieldData))
+                .digest('hex'),
+            content: JSON.stringify(fieldData),
+            description: 'Tag',
+        },
+    })
+
+    createParentChildLink({ parent: fileNode, child: node })
+}
+
 const createArticleNode = (pluginApi: IPluginApi, themeOptions: IConfig) => {
     const {
         actions: { createNode, createParentChildLink },
@@ -65,7 +95,7 @@ const createArticleNode = (pluginApi: IPluginApi, themeOptions: IConfig) => {
         hero: node.frontmatter.hero,
         secret: node.frontmatter.secret || false,
         slug,
-        tags: node.frontmatter.tags,
+        tag: node.frontmatter.tag,
         permaLink: generateSlug(basePath, 'blog', permaId),
         link: generateSlug(basePath, 'blog', permaId, slug),
         title: node.frontmatter.title,
@@ -100,6 +130,8 @@ export const onCreateNode = (pluginApi: IPluginApi, themeOptions: IConfig) => {
 
     if (nodeType === `AuthorsYaml`) {
         createAuthorNode(pluginApi, themeOptions)
+    } else if (nodeType === `TagsYaml`) {
+        createTagNode(pluginApi)
     } else if (nodeType === `Mdx`) {
         const fileNode = pluginApi.getNode(pluginApi.node.parent)
         const [parentFolder] = fileNode

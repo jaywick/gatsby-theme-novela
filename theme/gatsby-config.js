@@ -20,6 +20,7 @@ module.exports = ({
     return {
         mapping: {
             'Mdx.frontmatter.author': `AuthorsYaml`,
+            'Mdx.frontmatter.tag': `TagsYaml`,
         },
         plugins: [
             `gatsby-plugin-typescript`,

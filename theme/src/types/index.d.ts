@@ -55,7 +55,7 @@ export interface IArticle {
     permaLink: string
     title: string
     link: string
-    tags: string[]
+    tag: string[]
     author: string
     authors: IAuthor[]
     excerpt: string

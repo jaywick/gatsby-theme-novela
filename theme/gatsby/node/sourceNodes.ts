@@ -8,7 +8,7 @@ export const sourceNodes = ({ actions: { createTypes } }: IPluginApi) => {
             link: String!
             slug: String!
             title: String!
-            tags: [String]
+            tag: String
             date: Date! @dateformat
             author: String!
             excerpt(pruneLength: Int = 140): String!

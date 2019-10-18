@@ -30,7 +30,7 @@ export const local = {
                         timeToRead
                         excerpt
                         body
-                        tags
+                        tag
                         hero {
                             full: childImageSharp {
                                 fluid(maxWidth: 944, quality: 100) {

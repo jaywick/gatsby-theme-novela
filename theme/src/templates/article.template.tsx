@@ -108,7 +108,7 @@ function Article({ pageContext, location }: TemplateProps) {
                     <ArticleShare />
                 </MDXRenderer>
             </ArticleBody>
-            {article.tags.length > 0 && <Tags tags={article.tags} />}
+            {article.tags && <Tags tags={article.tag} />}
             {next.length > 0 && (
                 <NextArticle narrow>
                     <FooterNext>More articles from {name}</FooterNext>

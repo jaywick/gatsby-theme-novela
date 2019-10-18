@@ -19,9 +19,9 @@ const Tags = ({ tags }: Props) => {
                     <Text>
                         Tagged under{' '}
                         <TagList>
-                            {tags.map(tag => (
+                            {/* {tags.map(tag => (
                                 <Tag href={`/tags/${tag}`}>{tag}</Tag>
-                            ))}
+                            ))} */}
                         </TagList>
                     </Text>
                 </Content>

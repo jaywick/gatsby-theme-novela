@@ -204,14 +204,6 @@ export const createPages = async (
 
     const articles = dataSources.local.articles.sort(byDateSorter)
     const authors = getUniqueListBy([...dataSources.local.authors], 'name')
-    const allTags = union(flatMap(articles.map(article => article.tags)))
-    const articlesByTag = allTags.map(
-        tag =>
-            [tag, articles.filter(article => article.tags.includes(tag))] as [
-                string,
-                IArticle[],
-            ],
-    )
 
     if (articles.length === 0 || authors.length === 0) {
         throw new Error(`
@@ -229,7 +221,7 @@ export const createPages = async (
         pageLength,
     })
 
-    createTagPages({ articlesByTag, createPage, pageLength })
+    // createTagPages({ articlesByTag, createPage, pageLength })
 
     createAuthorPages({
         articles,
