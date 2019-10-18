@@ -51,7 +51,7 @@ const plugins = [
             remotePosts: {
                 name: 'content',
                 remote: gitRepo,
-                patterns: `articles/**`,
+                patterns: `**`,
             },
             contentPath: 'articles',
             contentAuthors: 'content/authors',

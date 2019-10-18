@@ -100,9 +100,14 @@ export const onCreateNode = (pluginApi: IPluginApi, themeOptions: IConfig) => {
 
     if (nodeType === `AuthorsYaml`) {
         createAuthorNode(pluginApi, themeOptions)
-    }
+    } else if (nodeType === `Mdx`) {
+        const fileNode = pluginApi.getNode(pluginApi.node.parent)
+        const [parentFolder] = fileNode
+            ? fileNode.relativePath.split(/\//g)
+            : []
 
-    if (nodeType === `Mdx`) {
-        createArticleNode(pluginApi, themeOptions)
+        if (parentFolder === 'articles') {
+            createArticleNode(pluginApi, themeOptions)
+        }
     }
 }
