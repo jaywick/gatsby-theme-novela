@@ -9,15 +9,14 @@ import mediaqueries from '@styles/media'
 import { IWithTheme, ITag } from '@types'
 import LongArrowRight from '@styles/media'
 import Icons from '@icons'
-import { useColorMode } from 'theme-ui'
+import { useColorMode, useThemeUI } from 'theme-ui'
 
 interface Props {
     tag: ITag
 }
 
 const Tags = ({ tag }: Props) => {
-    const [colorMode] = useColorMode()
-    const fill = colorMode === 'dark' ? '#000' : '#fff'
+    const { theme } = useThemeUI()
 
     return (
         <Section narrow>
@@ -25,7 +24,11 @@ const Tags = ({ tag }: Props) => {
                 <Content>
                     <Heading>{tag.name}</Heading>
                     <Text>{tag.story}</Text>
-                    <Tag>See more &#10230;</Tag>
+                    <ReadMoreLink href={`/tags/${tag.key}`}>
+                        More in this series
+                        <Spacer />
+                        <Icons.LongArrowRight fill={theme.colors.primary} />
+                    </ReadMoreLink>
                 </Content>
             </SubscriptionContainer>
         </Section>
@@ -80,7 +83,7 @@ const Heading = styled(Headings.h3)`
     `}
 `
 
-const Text = styled.p<{ theme?: any }>`
+const Text = styled.p<IWithTheme>`
     margin: 0 auto 30px;
     color: ${p => p.theme.colors.grey};
     line-height: 1.75;
@@ -91,46 +94,29 @@ const Text = styled.p<{ theme?: any }>`
     `}
 `
 
-const Tag = styled.a<IWithTheme>`
-    cursor: pointer;
-    padding: 4px 15px;
-    margin: 0 5px;
-    border: 1px solid ${p => p.theme.colors.accent};
-    color: ${p => p.theme.colors.accent};
-    background: transparent;
-    font-weight: 600;
-    border-radius: 35px;
-    letter-spacing: 0.42px;
-    transition: border-color 0.2s var(--ease-in-out-quad),
-        background 0.2s var(--ease-in-out-quad),
-        color 0.2s var(--ease-in-out-quad);
-
-    &:hover {
-        background: ${p => p.theme.colors.accent};
-        color: ${p => p.theme.colors.background};
-    }
-
-    &[disabled] {
-        cursor: not-allowed;
-    }
+const ReadMoreLink = styled.a<IWithTheme>`
+    color: ${p => p.theme.colors.primary};
+    font-weight: bold;
+    transition: color 0.2s linear, background-color 0.2s linear;
+    padding: 5px 10px;
+    margin-left: -10px;
+    border-radius: 20px;
 
     svg * {
-        fill: ${p => p.theme.colors.background};
+        fill: ${p => p.theme.colors.primary};
+        transition: fill 0.2s linear;
     }
 
-    ${p => mediaqueries.tablet`
-        position: relative;
-        height: 60px;
-        width: 100%;
-        top: 0;
-        left: 0;
-        border: none;
-        border-radius: 0;
-        border-top: 1px solid ${p.theme.colors.horizontalRule};
+    &:hover {
+        color: ${p => p.theme.colors.background};
+        background-color: ${p => p.theme.colors.primary};
 
-        &:hover {
-            color: initial;
-            background: initial;
+        svg * {
+            fill: ${p => p.theme.colors.background};
         }
-    `}
+    }
+`
+
+const Spacer = styled.span`
+    width: 4px;
 `

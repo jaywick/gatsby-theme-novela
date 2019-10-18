@@ -32,3 +32,5 @@ export default merge({
     breakpoints,
     tags,
 })
+
+export type IColors = typeof colors

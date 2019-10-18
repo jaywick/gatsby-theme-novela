@@ -14,6 +14,7 @@ import Paypal from './social/Paypal.Icon'
 import DevTo from './social/DevTo.Icon'
 
 // UI
+import LongArrowRight from './ui/LongArrowRight.Icon'
 import ChevronLeft from './ui/ChevronLeft.Icon'
 import Copied from './ui/Copied.Icon'
 import Copy from './ui/Copy.Icon'
@@ -40,6 +41,7 @@ export default {
     DevTo,
 
     ChevronLeft,
+    LongArrowRight,
     Copied,
     Copy,
     Ex,

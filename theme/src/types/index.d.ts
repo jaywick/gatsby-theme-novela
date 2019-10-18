@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { NodePluginArgs } from 'gatsby'
 import { Node } from 'gatsby'
+import { IColors } from '@gatsby-plugin-theme-ui'
 
 export interface IPaginator {
     pageCount: number
@@ -94,7 +95,7 @@ export interface IProgress {
 }
 
 export interface IWithTheme {
-    theme?: any
+    theme?: { [key: string]: any } & { colors: IColors }
     isDark?: boolean
 }
 
