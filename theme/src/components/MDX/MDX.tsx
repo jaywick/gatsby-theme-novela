@@ -17,6 +17,7 @@ import Paragraph from '@components/Paragraph'
 import Tables from '@components/Tables'
 import { ImageZoom } from '@components/Image'
 import Note from '@components/Note'
+import YouTube from '@components/YouTube'
 
 import mediaqueries from '@styles/media'
 import { toKebabCase } from '@utils'
@@ -42,6 +43,7 @@ const components = {
     th: Tables.HeadCell,
     td: Tables.Cell,
     Note,
+    YouTube,
 }
 
 function MDX({ content, children, ...props }) {
