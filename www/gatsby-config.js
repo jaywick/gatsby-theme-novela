@@ -1,47 +1,50 @@
-require('dotenv').config({
-    path: `../.env.${process.env.NODE_ENV}`,
-})
+const dotenv = require('dotenv')
 
-const gitCreds = `${process.env.GATSBY_GITHUB_USER}:${process.env.GATSBY_GITHUB_TOKEN}`
-const gitProject = process.env.GATSBY_GITHUB_REPO
+dotenv.config({ path: `../.env.${process.env.NODE_ENV}` })
 
-const bypassGitWithLocalTestFolder =
-    process.env.GATSBY_BYPASS_GIT_WITH_LOCAL_TEST_FOLDER
+const {
+    GATSBY_GITHUB_USER,
+    GATSBY_GITHUB_TOKEN,
+    GATSBY_GITHUB_REPO,
+    GATSBY_BYPASS_GIT_WITH_LOCAL_TEST_FOLDER,
+} = process.env
 
-const gitRepo = `https://${gitCreds}@github.com/${gitProject}`
+const branding = {
+    name: 'Jay Wick',
+    url: 'https://jaywick.xyz',
+    description: 'A journey of design, engineering, and unstructured rambling.',
+    socialLinks: [
+        'https://dev.to/jay_wick',
+        'https://twitter.com/jay_wick',
+        'https://github.com/jaywick',
+        'https://instagram.com/jaywick_',
+        'https://www.linkedin.com/in/jaywick/',
+        'https://dribbble.com/jaywick',
+        'https://www.youtube.com/user/jaywickvideos',
+    ],
+    googleAnalyticsTrackingId: undefined,
+}
+
+const progressiveWebAppOptions = {
+    name: branding.name,
+    short_name: branding.name,
+    start_url: `/`,
+    background_color: `#fff`,
+    theme_color: `#fff`,
+    display: `standalone`,
+    icon: `src/assets/favicon.png`,
+}
 
 const siteMetadata = {
-    title: `Jay Wick`,
-    name: `Jay Wick`,
-    siteUrl: `https://jaywick.xyz`,
-    description: `This is where I experiment with things`,
+    title: branding.name,
+    name: branding.name,
+    siteUrl: branding.url,
+    description: branding.description,
     hero: {
-        heading: `A journey of design, engineering, and unstructured rambling.`,
+        heading: branding.description,
         maxWidth: 652,
     },
-    social: [
-        {
-            url: `https://dev.to/jay_wick`,
-        },
-        {
-            url: `https://twitter.com/jay_wick`,
-        },
-        {
-            url: `https://github.com/jaywick`,
-        },
-        {
-            url: `https://instagram.com/jaywick_`,
-        },
-        {
-            url: `https://www.linkedin.com/in/jaywick/`,
-        },
-        {
-            url: `https://dribbble.com/jaywick`,
-        },
-        {
-            url: `https://www.youtube.com/user/jaywickvideos`,
-        },
-    ],
+    social: branding.socialLinks.map(url => ({ url })),
 }
 
 const plugins = [
@@ -50,9 +53,9 @@ const plugins = [
         options: {
             remotePosts: {
                 name: 'content',
-                remote: gitRepo,
+                remote: `https://${GATSBY_GITHUB_USER}:${GATSBY_GITHUB_TOKEN}@github.com/${GATSBY_GITHUB_REPO}`,
                 patterns: `**`,
-                bypassGitWithLocalTestFolder,
+                bypassGitWithLocalTestFolder: GATSBY_BYPASS_GIT_WITH_LOCAL_TEST_FOLDER,
             },
             contentPath: 'articles',
             contentAuthors: 'authors',
@@ -63,20 +66,12 @@ const plugins = [
     },
     {
         resolve: `gatsby-plugin-manifest`,
-        options: {
-            name: `Jay Wick`,
-            short_name: `Jay Wick`,
-            start_url: `/`,
-            background_color: `#fff`,
-            theme_color: `#fff`,
-            display: `standalone`,
-            icon: `src/assets/favicon.png`,
-        },
+        options: progressiveWebAppOptions,
     },
     {
         resolve: `gatsby-plugin-google-analytics`,
         options: {
-            // trackingId: '//TODO',
+            trackingId: branding.googleAnalyticsTrackingId,
         },
     },
 ]
