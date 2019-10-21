@@ -18,6 +18,7 @@ import Tables from '@components/Tables'
 import { ImageZoom } from '@components/Image'
 import Note from '@components/Note'
 import YouTube from '@components/YouTube'
+import Vimeo from '@components/Vimeo'
 
 import mediaqueries from '@styles/media'
 import { toKebabCase } from '@utils'
@@ -44,6 +45,7 @@ const components = {
     td: Tables.Cell,
     Note,
     YouTube,
+    Vimeo,
 }
 
 function MDX({ content, children, ...props }) {

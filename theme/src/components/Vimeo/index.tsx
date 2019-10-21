@@ -3,20 +3,19 @@ import mediaqueries from '@styles/media'
 import styled from '@emotion/styled'
 import { IWithTheme } from '@types'
 
-const YouTube = (props: { id: string }) => (
+const Vimeo = (props: { id: string }) => (
     <Wrapper>
         <iframe
-            width={680}
+            src={`https://player.vimeo.com/video/${props.id}`}
+            width='680'
             height={(680 * 9) / 16}
-            src={`https://www.youtube-nocookie.com/embed/${props.id}`}
             frameBorder='0'
-            allow='picture-in-picture'
             allowFullScreen
         ></iframe>
     </Wrapper>
 )
 
-export default YouTube
+export default Vimeo
 
 const Wrapper = styled.p<IWithTheme>`
     line-height: 1.756;
