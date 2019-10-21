@@ -1,5 +1,4 @@
-import addToMailchimp from 'gatsby-plugin-mailchimp'
-import React, { useState } from 'react'
+import React from 'react'
 
 import Section from '@components/Section'
 import Headings from '@components/Headings'
@@ -7,9 +6,8 @@ import Headings from '@components/Headings'
 import styled from '@emotion/styled'
 import mediaqueries from '@styles/media'
 import { IWithTheme, ITag } from '@types'
-import LongArrowRight from '@styles/media'
 import Icons from '@icons'
-import { useColorMode, useThemeUI } from 'theme-ui'
+import { useThemeUI } from 'theme-ui'
 
 interface Props {
     tag: ITag

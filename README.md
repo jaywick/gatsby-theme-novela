@@ -4,8 +4,15 @@ Gatsby theme for jaywick.xyz hard forked from [Narative's](https://www.narative.
 
 .env file with
 
+### Required
+
 * `GATSBY_GITHUB_USER`
 * `GATSBY_GITHUB_TOKEN`
+* `GATSBY_GITHUB_REPO` - repository name in the format of `author/project`
+
+### For testing
+
+* `GATSBY_BYPASS_GIT_WITH_LOCAL_TEST_FOLDER` - local folder in _www_ package to use for testing instead of using git
 
 ## Packages
 

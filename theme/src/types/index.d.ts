@@ -102,14 +102,17 @@ export interface IWithTheme {
 export interface IConfig {
     remotePosts: {
         name: string
+        // URL to the remote git repository
         remote: string
-        patterns: string
+        // Glob pattern(s) to find content
+        patterns: string | string[]
+        // Optionally path to a folder, which if set, bypasses git and uses that local folder relative to the www package
+        bypassGitWithLocalTestFolder?: string
     }
     contentPath: string
     contentAuthors: string
     basePath: string
     authorsPage: boolean
-    mailchimp: boolean
     pageLength: number
 }
 
