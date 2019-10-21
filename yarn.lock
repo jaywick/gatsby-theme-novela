@@ -7199,6 +7199,11 @@ gatsby-core-utils@^1.0.13:
   resolved "https://registry.npmjs.org/gatsby-core-utils/-/gatsby-core-utils-1.0.13.tgz#fdd89f70eac6f8eb08d53db34186a837aef20a66"
   integrity sha512-vRbsebZxQASxUNfWqoSP3i8r87ibgpksKCqdCkoQBXJwjVKd8VM2dfScheaHE2OuxFZa2AEA0uyCGSiaF6yzUA==
 
+gatsby-core-utils@^1.0.15:
+  version "1.0.15"
+  resolved "https://registry.npmjs.org/gatsby-core-utils/-/gatsby-core-utils-1.0.15.tgz#cca10e6e6bafbbfeb9fda70639a7af6c673f9d74"
+  integrity sha512-Sn94r4EEKAjngJqw761wBYkbYhAjY61cheFXSdB84m+neohislRH6a4QjW/0Rc3M36C0n5f6D8x4ZsVLdeBrcg==
+
 gatsby-graphiql-explorer@^0.2.23:
   version "0.2.23"
   resolved "https://registry.npmjs.org/gatsby-graphiql-explorer/-/gatsby-graphiql-explorer-0.2.23.tgz#435ba64aa201634d367a1891cce7e0ad18ce8fde"
@@ -7493,7 +7498,7 @@ gatsby-remark-typescript@^0.0.12:
     prettier "^1.18.2"
     unist-util-visit "^1.4.1"
 
-gatsby-source-filesystem@^2.1.19, gatsby-source-filesystem@^2.1.6, gatsby-source-filesystem@^2.1.9:
+gatsby-source-filesystem@^2.1.19, gatsby-source-filesystem@^2.1.9:
   version "2.1.31"
   resolved "https://registry.npmjs.org/gatsby-source-filesystem/-/gatsby-source-filesystem-2.1.31.tgz#60bd38c8d190a34d18268d143a4c946f333a021b"
   integrity sha512-+P/2jKYKH3UWDgvvO2XpYy9izjXGAsvekomykf8usJpGMu+mLMEMmmM0CPEGMCMxo1HB74xEMjYxtw9KCtUaEw==
@@ -7505,6 +7510,27 @@ gatsby-source-filesystem@^2.1.19, gatsby-source-filesystem@^2.1.6, gatsby-source
     file-type "^12.3.0"
     fs-extra "^8.1.0"
     gatsby-core-utils "^1.0.13"
+    got "^7.1.0"
+    md5-file "^3.2.3"
+    mime "^2.4.4"
+    pretty-bytes "^4.0.2"
+    progress "^2.0.3"
+    read-chunk "^3.2.0"
+    valid-url "^1.0.9"
+    xstate "^4.6.7"
+
+gatsby-source-filesystem@^2.1.33:
+  version "2.1.33"
+  resolved "https://registry.npmjs.org/gatsby-source-filesystem/-/gatsby-source-filesystem-2.1.33.tgz#6a6e4a075be7af5db603acb695b9eabdc885985e"
+  integrity sha512-QhhHM8lalThJs5OsNgL6ILxIA36rRYsC+9ynUSEBku88+qBajycURxPjg+gn4NfWYfGAUXigxQzomQagHOLvlQ==
+  dependencies:
+    "@babel/runtime" "^7.6.3"
+    better-queue "^3.8.10"
+    bluebird "^3.7.0"
+    chokidar "3.2.1"
+    file-type "^12.3.0"
+    fs-extra "^8.1.0"
+    gatsby-core-utils "^1.0.15"
     got "^7.1.0"
     md5-file "^3.2.3"
     mime "^2.4.4"

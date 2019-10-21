@@ -3,10 +3,10 @@ require('dotenv').config({
 })
 
 const gitCreds = `${process.env.GATSBY_GITHUB_USER}:${process.env.GATSBY_GITHUB_TOKEN}`
-const gitProject =
-    process.env.NODE_ENV === 'development'
-        ? 'jaywick/test-xyz-content.git'
-        : 'jaywick/jaywick-xyz-content.git'
+const gitProject = process.env.GATSBY_GITHUB_REPO
+
+const bypassGitWithLocalTestFolder =
+    process.env.GATSBY_BYPASS_GIT_WITH_LOCAL_TEST_FOLDER
 
 const gitRepo = `https://${gitCreds}@github.com/${gitProject}`
 
@@ -52,6 +52,7 @@ const plugins = [
                 name: 'content',
                 remote: gitRepo,
                 patterns: `**`,
+                bypassGitWithLocalTestFolder,
             },
             contentPath: 'articles',
             contentAuthors: 'content/authors',

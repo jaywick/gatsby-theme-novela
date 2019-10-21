@@ -1,25 +1,38 @@
 /* eslint-disable */
-const feedOptions = require('./config/gatsby-plugin-feed')
+// const feedOptions = require('./config/gatsby-plugin-feed')
 const mdxOptions = require('./config/gatsby-plugin-mdx')
+const { get, isNil } = require('lodash')
+
+const sourcePostsPlugin = remotePostOptions => {
+    if (remotePostOptions.bypassGitWithLocalTestFolder) {
+        console.warn(
+            `Bypassing git with local folder content for testing: ${remotePostOptions.bypassGitWithLocalTestFolder}`,
+        )
+
+        return {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: remotePostOptions.bypassGitWithLocalTestFolder,
+                path: remotePostOptions.bypassGitWithLocalTestFolder,
+            },
+        }
+    }
+
+    return {
+        resolve: `gatsby-source-git`,
+        options: remotePostOptions,
+    }
+}
 
 module.exports = ({
     contentAuthors = 'content/authors',
     remotePosts: remotePostOptions,
 }) => {
-    if (
-        !remotePostOptions ||
-        !remotePostOptions.name ||
-        !remotePostOptions.remote ||
-        !remotePostOptions.patterns
-    ) {
-        throw new Error(
-            'Expected remotePosts.name, remotePosts.remote and remotePosts.patterns to be defined in gatsby-config.js',
-        )
-    }
+    ensure(remotePostOptions, 'remotePostOptions', 'name', 'remote', 'patterns')
 
     return {
         mapping: {
-            'Mdx.frontmatter.author': `AuthorsYaml`,
+            'Mdx.frontmatter.author': `Authors2Yaml`,
             'Mdx.frontmatter.tag': `TagsYaml`,
         },
         plugins: [
@@ -35,10 +48,7 @@ module.exports = ({
             //     resolve: `gatsby-plugin-feed`,
             //     options: feedOptions,
             // },
-            {
-                resolve: `gatsby-source-git`,
-                options: remotePostOptions,
-            },
+            sourcePostsPlugin(remotePostOptions),
             {
                 resolve: `gatsby-source-filesystem`,
                 options: {
@@ -57,5 +67,17 @@ module.exports = ({
                 },
             },
         ],
+    }
+}
+
+function ensure(obj, objName, ...paths) {
+    const missingProperties = paths.filter(path => isNil(get(obj, path)))
+
+    if (missingProperties.length > 0) {
+        throw new Error(
+            `Config values cannot be nil for gatsby-config/xyz-theme for: ${missingProperties.map(
+                p => `${objName}.${p}`,
+            )}`,
+        )
     }
 }
