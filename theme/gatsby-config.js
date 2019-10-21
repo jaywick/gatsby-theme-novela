@@ -24,15 +24,13 @@ const sourcePostsPlugin = remotePostOptions => {
     }
 }
 
-module.exports = ({
-    contentAuthors = 'content/authors',
-    remotePosts: remotePostOptions,
-}) => {
+module.exports = ({ contentAuthors, remotePosts: remotePostOptions }) => {
+    ensure(contentAuthors, 'contentAuthors')
     ensure(remotePostOptions, 'remotePostOptions', 'name', 'remote', 'patterns')
 
     return {
         mapping: {
-            'Mdx.frontmatter.author': `Authors2Yaml`,
+            'Mdx.frontmatter.author': `AuthorsYaml`,
             'Mdx.frontmatter.tag': `TagsYaml`,
         },
         plugins: [
@@ -50,13 +48,6 @@ module.exports = ({
             // },
             sourcePostsPlugin(remotePostOptions),
             {
-                resolve: `gatsby-source-filesystem`,
-                options: {
-                    path: contentAuthors,
-                    name: contentAuthors,
-                },
-            },
-            {
                 resolve: `gatsby-plugin-mdx`,
                 options: mdxOptions,
             },
@@ -71,6 +62,15 @@ module.exports = ({
 }
 
 function ensure(obj, objName, ...paths) {
+    if (!paths || paths.length === 0) {
+        if (isNil(obj)) {
+            throw new Error(
+                `Config value cannot be nil for gatsby-config/xyz-theme for: ${objName}`,
+            )
+        }
+        return
+    }
+
     const missingProperties = paths.filter(path => isNil(get(obj, path)))
 
     if (missingProperties.length > 0) {

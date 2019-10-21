@@ -55,7 +55,7 @@ const plugins = [
                 bypassGitWithLocalTestFolder,
             },
             contentPath: 'articles',
-            contentAuthors: 'content/authors',
+            contentAuthors: 'authors',
             basePath: '/',
             authorsPage: true,
             mailchimp: false,
