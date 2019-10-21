@@ -7,7 +7,6 @@ import Layout from '@components/Layout'
 import MDXRenderer from '@components/MDX'
 import Progress from '@components/Progress'
 import Section from '@components/Section'
-import Subscription from '@components/Subscription'
 
 import mediaqueries from '@styles/media'
 import { debounce } from '@utils'

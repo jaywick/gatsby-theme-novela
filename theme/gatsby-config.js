@@ -57,6 +57,15 @@ module.exports = ({ contentAuthors, remotePosts: remotePostOptions }) => {
                     displayName: process.env.NODE_ENV === `development`,
                 },
             },
+            // annoyingly we need this plugin loaded with an empty folder for
+            // git-source-plugin to work 🤷‍♂️
+            {
+                resolve: `gatsby-source-filesystem`,
+                options: {
+                    name: 'empty',
+                    path: 'empty',
+                },
+            },
         ],
     }
 }
