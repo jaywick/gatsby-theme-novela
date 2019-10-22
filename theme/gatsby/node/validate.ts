@@ -1,7 +1,8 @@
+import '../../../types'
 import matchAll from 'string.prototype.matchall'
 import { pathExistsSync } from 'fs-extra'
 import { join as joinPath } from 'path'
-import { IPluginApi, IMdxNode } from '@types'
+import { IPluginApi, IMdxNode, IFileNode } from '@types'
 import { Reporter } from 'gatsby'
 
 export const validate = ({
@@ -9,33 +10,39 @@ export const validate = ({
     node: mdxNode,
     reporter,
 }: IPluginApi<IMdxNode>) => {
-    const fileNode = getNode(mdxNode.parent)
+    const fileNode = getNode(mdxNode.parent) as IFileNode
 
-    validateImagesExist({
-        body: mdxNode.rawBody,
-        folderPath: fileNode.relativeDirectory,
-        reporter,
-    })
+    validateImages(mdxNode.rawBody, fileNode.relativePath, reporter)
 }
 
-function validateImagesExist(opt: {
-    body: string
-    folderPath: string
-    reporter: Reporter
-}) {
-    const imageTags = Array.from(matchAll(opt.body, /!\[.*?\]\((.+?)\)/g))
+function validateImages(body: string, filePath: string, reporter: Reporter) {
+    const imageTags = Array.from(matchAll(body, /!\[.*?\]\((.+?)\)/g))
+
     imageTags.forEach(match => {
-        const imageFileName = match[1]
+        const [altText, imageFileName] = match
+
         const isRelative = imageFileName.startsWith('./')
 
         if (!isRelative) {
             return
         }
 
-        const imagePath = joinPath(opt.folderPath, imageFileName)
+        const imagePath = joinPath(filePath, '..', imageFileName)
 
         if (!pathExistsSync(imagePath)) {
-            opt.reporter.warn(`Missing referenced image ${imagePath}`)
+            reporter.warn('Missing referenced image', imagePath)
+        }
+
+        if (isBlank(altText)) {
+            reporter.warn('Missing alt text for image', imageFileName, filePath)
         }
     })
+}
+
+function isBlank(text: string | null | undefined) {
+    if (!text) {
+        return true
+    }
+
+    return !text.trim()
 }

@@ -125,3 +125,41 @@ export interface IMdxNode extends Node {
     frontmatter: { [key: string]: any }
     rawBody: string
 }
+
+export interface IFileNode extends Node {
+    absolutePath: string
+    accessTime: string
+    atime: string
+    atimeMs: number
+    base: string
+    birthTime: string
+    birthtime: string
+    birthtimeMs: number
+    blksize: number
+    blocks: number
+    changeTime: string
+    uid: number
+    sourceInstanceName: string
+    size: number
+    root: string
+    relativePath: string
+    relativeDirectory: string
+    rdev: number
+    publicURL: string
+    prettySize: string
+    nlink: number
+    mtimeMs: number
+    mtime: string
+    name: string
+    modifiedTime: string
+    mode: number
+    ino: number
+    id: string
+    gid: number
+    extension: string
+    ext: string
+    dir: string
+    dev: number
+    ctimeMs: number
+    ctime: string
+}
