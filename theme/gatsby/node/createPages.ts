@@ -46,6 +46,8 @@ const createArticlePages = (opts: {
         },
     })
 
+    const unknownTags = []
+
     log('Creating', 'article posts')
     opts.articles.forEach((article, index) => {
         let next = opts.articles.slice(index + 1, index + 3)
@@ -85,6 +87,10 @@ const createArticlePages = (opts: {
 
         const articleTag = opts.tags.find(x => x.key === article.tag)
 
+        if (!articleTag) {
+            unknownTags.push(article.tag)
+        }
+
         opts.createPage({
             path: article.link,
             component: templates.article,
@@ -101,6 +107,15 @@ const createArticlePages = (opts: {
             },
         })
     })
+
+    if (unknownTags.length > 0) {
+        unknownTags.forEach(tag => {
+            console.log(
+                '\u001B[33m',
+                `Article tag "${tag} missing in tags yaml"`,
+            )
+        })
+    }
 }
 
 const createTagPages = (opts: {
