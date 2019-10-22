@@ -7,6 +7,7 @@ import { IAuthor, IArticle, IConfig, IPluginApi, ITag } from '@types'
 import { log, tuple } from './utils'
 import { uniqBy } from 'lodash'
 import createPaginatedPages from 'gatsby-paginate'
+import { Node } from 'gatsby'
 
 dotenv.config()
 
@@ -182,7 +183,7 @@ const createAuthorPages = (opts: {
 }
 
 export const createPages = async (
-    pluginApi: IPluginApi,
+    pluginApi: IPluginApi<Node>,
     themeOptions: IConfig,
 ) => {
     const {

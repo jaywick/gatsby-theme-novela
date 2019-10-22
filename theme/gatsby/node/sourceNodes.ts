@@ -1,6 +1,7 @@
 import { IPluginApi } from '@types'
+import { Node } from 'gatsby'
 
-export const sourceNodes = ({ actions: { createTypes } }: IPluginApi) => {
+export const sourceNodes = ({ actions: { createTypes } }: IPluginApi<Node>) => {
     createTypes(`
         type Article implements Node {
             id: ID!

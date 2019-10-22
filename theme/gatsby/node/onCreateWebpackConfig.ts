@@ -1,9 +1,10 @@
 import path from 'path'
 import { IPluginApi } from '@types'
+import { Node } from 'gatsby'
 
 export const onCreateWebpackConfig = ({
     actions: { setWebpackConfig },
-}: IPluginApi) => {
+}: IPluginApi<Node>) => {
     setWebpackConfig({
         resolve: {
             alias: {

@@ -1,8 +1,8 @@
-import * as fs from 'fs-extra'
 import { IPluginApi, IConfig } from '@types'
+import { Node } from 'gatsby'
 
 export const onPreBootstrap = (
-    { reporter }: IPluginApi,
+    { reporter }: IPluginApi<Node>,
     themeOptions: IConfig,
 ) => {
     // noop

@@ -116,7 +116,12 @@ export interface IConfig {
     pageLength: number
 }
 
-export interface IPluginApi extends NodePluginArgs {
-    node: Node & { frontmatter: { [key: string]: any } }
+export interface IPluginApi<TNode extends Node> extends NodePluginArgs {
+    node: TNode
     graphql: (query: string) => Promise<{ data: any }>
+}
+
+export interface IMdxNode extends Node {
+    frontmatter: { [key: string]: any }
+    rawBody: string
 }

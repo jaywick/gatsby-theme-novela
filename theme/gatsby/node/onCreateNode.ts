@@ -1,8 +1,13 @@
 import * as crypto from 'crypto'
-import { IPluginApi, IConfig } from '@types'
+import { IPluginApi, IConfig, IMdxNode } from '@types'
 import { slugify, generateSlug } from './utils'
+import { validate } from './validate'
+import { Node } from 'gatsby'
 
-const createAuthorNode = (pluginApi: IPluginApi, themeOptions: IConfig) => {
+const createAuthorNode = (
+    pluginApi: IPluginApi<Node>,
+    themeOptions: IConfig,
+) => {
     const {
         actions: { createNode, createParentChildLink },
         createNodeId,
@@ -42,7 +47,7 @@ const createAuthorNode = (pluginApi: IPluginApi, themeOptions: IConfig) => {
     createParentChildLink({ parent: fileNode, child: node })
 }
 
-const createTagNode = (pluginApi: IPluginApi) => {
+const createTagNode = (pluginApi: IPluginApi<Node>) => {
     const {
         actions: { createNode, createParentChildLink },
         createNodeId,
@@ -72,7 +77,10 @@ const createTagNode = (pluginApi: IPluginApi) => {
     createParentChildLink({ parent: fileNode, child: node })
 }
 
-const createArticleNode = (pluginApi: IPluginApi, themeOptions: IConfig) => {
+const createArticleNode = (
+    pluginApi: IPluginApi<IMdxNode>,
+    themeOptions: IConfig,
+) => {
     const {
         actions: { createNode, createParentChildLink },
         createNodeId,
@@ -86,6 +94,8 @@ const createArticleNode = (pluginApi: IPluginApi, themeOptions: IConfig) => {
     const permaId = fileNode
         ? fileNode.relativeDirectory.split(/\//g).slice(-1)
         : undefined
+
+    validate(pluginApi)
 
     const slug = slugify(node.frontmatter.permaLink || node.frontmatter.title)
 
@@ -125,7 +135,10 @@ const createArticleNode = (pluginApi: IPluginApi, themeOptions: IConfig) => {
  * Create fields for post slugs and source
  * This will change with schema customization with work
  */
-export const onCreateNode = (pluginApi: IPluginApi, themeOptions: IConfig) => {
+export const onCreateNode = (
+    pluginApi: IPluginApi<Node>,
+    themeOptions: IConfig,
+) => {
     const nodeType = pluginApi.node.internal.type
 
     if (nodeType === `AuthorsYaml`) {
@@ -139,7 +152,7 @@ export const onCreateNode = (pluginApi: IPluginApi, themeOptions: IConfig) => {
             : []
 
         if (parentFolder === 'articles') {
-            createArticleNode(pluginApi, themeOptions)
+            createArticleNode(pluginApi as IPluginApi<IMdxNode>, themeOptions)
         }
     }
 }
