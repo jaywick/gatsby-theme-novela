@@ -113,7 +113,7 @@ const createArticlePages = (opts: {
         unknownTags.forEach(tag => {
             console.log(
                 '\u001B[33m',
-                `Article tag "${tag} missing in tags yaml"`,
+                `Article tag "${tag}" is not defined in the Tags yaml`,
             )
         })
     }

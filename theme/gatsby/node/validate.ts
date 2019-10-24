@@ -1,9 +1,8 @@
-import '../../../types'
 import matchAll from 'string.prototype.matchall'
-import { pathExistsSync } from 'fs-extra'
-import { join as joinPath } from 'path'
+import { pathExistsSync, readdirSync } from 'fs-extra'
+import { join } from 'path'
 import { IPluginApi, IMdxNode, IFileNode } from '@types'
-import { Reporter } from 'gatsby'
+import { difference } from 'lodash'
 
 export const validate = ({
     getNode,
@@ -12,30 +11,46 @@ export const validate = ({
 }: IPluginApi<IMdxNode>) => {
     const fileNode = getNode(mdxNode.parent) as IFileNode
 
-    validateImages(mdxNode.rawBody, fileNode.relativePath, reporter)
-}
+    const imageTags = Array.from(
+        matchAll(mdxNode.rawBody, /!\[(.*?)\]\((.+?)\)/g),
+    )
 
-function validateImages(body: string, filePath: string, reporter: Reporter) {
-    const imageTags = Array.from(matchAll(body, /!\[.*?\]\((.+?)\)/g))
+    const localImages = imageTags
+        .map(match => {
+            return {
+                alt: match[1],
+                filename: match[2],
+            }
+        })
+        .filter(({ filename }) => filename.startsWith('./'))
 
-    imageTags.forEach(match => {
-        const [altText, imageFileName] = match
-
-        const isRelative = imageFileName.startsWith('./')
-
-        if (!isRelative) {
-            return
-        }
-
-        const imagePath = joinPath(filePath, '..', imageFileName)
+    localImages.forEach(({ alt, filename }) => {
+        const imagePath = join(fileNode.absolutePath, '..', filename)
 
         if (!pathExistsSync(imagePath)) {
-            reporter.warn('Missing referenced image', imagePath)
+            reporter.error(`Missing referenced image ${imagePath}`)
         }
 
-        if (isBlank(altText)) {
-            reporter.warn('Missing alt text for image', imageFileName, filePath)
+        if (isBlank(alt)) {
+            reporter.info(
+                `Missing alt text for image ${filename} in ${fileNode.relativePath}`,
+            )
         }
+    })
+
+    const folderPath = join(fileNode.absolutePath, '..')
+    const attachments = readdirSync(folderPath).filter(
+        filepath => !filepath.endsWith('.mdx') && !filepath.endsWith('.md'),
+    )
+
+    const orphans = difference(
+        attachments.map(x => `./${x}`),
+        localImages.map(x => x.filename),
+    )
+    orphans.forEach(filename => {
+        reporter.info(
+            `Orphaned attachment in ${fileNode.relativeDirectory}/: "${filename}"`,
+        )
     })
 }
 

@@ -16,7 +16,10 @@ const normalizeHero = (article: IArticle) => {
             seo: article.hero.seo.fixed,
         }
     } else {
-        console.log('\u001B[33m', `Missing hero for "${article.title}"`)
+        console.log(
+            '\u001B[33m',
+            `Missing hero for "${article.title || (article as any).name}"`,
+        )
     }
 
     return hero
