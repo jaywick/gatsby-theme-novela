@@ -4,11 +4,10 @@ import styled from '@emotion/styled'
 
 import Section from '@components/Section'
 import Bio from '@components/Bio'
-import Icons from '@icons'
 import mediaqueries from '@styles/media'
 import { IAuthor, IWithTheme } from '@types'
 
-import { GridLayoutContext } from './Articles.List.Context'
+import { ViewTabContext } from './Articles.List.Context'
 
 const authorQuery = graphql`
     {
@@ -28,22 +27,20 @@ const authorQuery = graphql`
 `
 
 function ArticlesHero({ authors }: { authors: IAuthor[] }) {
-    const {
-        gridLayout = 'tiles',
-        hasSetGridLayout,
-        setGridLayout,
-    } = useContext(GridLayoutContext)
+    const { viewTab = 'articles', hasSetViewTab, setViewTab } = useContext(
+        ViewTabContext,
+    )
 
     const results = useStaticQuery(authorQuery)
     const hero = results.site.edges[0].node.siteMetadata.hero
-    const tilesIsActive = hasSetGridLayout && gridLayout === 'tiles'
+    const articlesIsActive = hasSetViewTab && viewTab === 'articles'
     const featuredAuthor = authors.find(author => author.featured)
 
     if (!featuredAuthor) {
         throw new Error(`
-      No featured Author found.
-      Please ensure you have at least featured Author.
-  `)
+            No featured Author found.
+            Please ensure you have at least featured Author.
+        `)
     }
 
     return (
@@ -55,26 +52,26 @@ function ArticlesHero({ authors }: { authors: IAuthor[] }) {
             </HeadingContainer>
             <SubheadingContainer>
                 <Bio author={featuredAuthor} />
-                <GridControlsContainer>
-                    <GridButton
-                        onClick={() => setGridLayout('tiles')}
-                        active={tilesIsActive}
+                <ViewTabContainer>
+                    <ViewTab
+                        onClick={() => setViewTab('articles')}
+                        active={articlesIsActive}
                         data-a11y='false'
                         title='Show articles in Tile grid'
                         aria-label='Show articles in Tile grid'
                     >
-                        <Icons.Tiles />
-                    </GridButton>
-                    <GridButton
-                        onClick={() => setGridLayout('rows')}
-                        active={!tilesIsActive}
+                        Articles
+                    </ViewTab>
+                    <ViewTab
+                        onClick={() => setViewTab('projects')}
+                        active={!articlesIsActive}
                         data-a11y='false'
                         title='Show articles in Row grid'
                         aria-label='Show articles in Row grid'
                     >
-                        <Icons.Rows />
-                    </GridButton>
-                </GridControlsContainer>
+                        Projects
+                    </ViewTab>
+                </ViewTabContainer>
             </SubheadingContainer>
         </Section>
     )
@@ -89,37 +86,37 @@ const SubheadingContainer = styled.div`
     margin-bottom: 100px;
 
     ${mediaqueries.desktop`
-    margin-bottom: 80px;
-  `};
+        margin-bottom: 80px;
+    `};
 
     ${mediaqueries.tablet`
-    margin-bottom: 60px;
-  `};
+        margin-bottom: 60px;
+    `};
 
     ${mediaqueries.phablet`
-    display: none;
-  `};
+        display: none;
+    `};
 `
 
-const GridControlsContainer = styled.div`
+const ViewTabContainer = styled.div`
     display: flex;
     align-items: center;
 
     ${mediaqueries.tablet`
-    display: none;
-  `};
+        display: none;
+    `};
 `
 
 const HeadingContainer = styled.div`
     margin: 100px 0;
 
     ${mediaqueries.desktop`
-    width: 80%;
-  `}
+        width: 80%;
+    `}
 
     ${mediaqueries.tablet`
-    width: 100%;
-  `}
+        width: 100%;
+    `}
 `
 
 const HeroHeading = styled.h1<IWithTheme>`
@@ -134,12 +131,12 @@ const HeroHeading = styled.h1<IWithTheme>`
     }
 
     ${mediaqueries.desktop`
-    font-size: 38px
-  `}
+        font-size: 38px
+    `}
 
     ${mediaqueries.phablet`
-    font-size: 32px;
-  `}
+        font-size: 32px;
+    `}
 `
 
 const GridButton = styled.button<{ active: boolean } & IWithTheme>`
@@ -180,5 +177,49 @@ const GridButton = styled.button<{ active: boolean } & IWithTheme>`
         path {
             fill: ${p => p.theme.colors.primary};
         }
+    }
+`
+
+const ViewTab = styled.button<{ active: boolean } & IWithTheme>`
+    max-width: 430px;
+    font-weight: bold;
+    line-height: 1.15;
+    color: ${p => p.theme.colors.primary};
+    margin-bottom: 2px;
+
+    a {
+        color: ${p => p.theme.colors.primary};
+    }
+
+    &:not(:last-child) {
+        margin-right: 30px;
+    }
+
+    background-image: linear-gradient(120deg, white 0%, white 100%);
+    background-repeat: no-repeat;
+    background-size: ${p => (p.active ? '75%' : '0')} 0.2em;
+    background-position: 50% 100%;
+    padding: 6px 0;
+    transition: background 100ms ease-in;
+
+    &:hover {
+        background-image: linear-gradient(
+            120deg,
+            rgba(255, 255, 255, 0.5) 0%,
+            rgba(255, 255, 255, 0.5) 100%
+        );
+        background-size: ${p => (p.active ? '75%' : '66%')} 0.2em;
+    }
+
+    &[data-a11y='true']:focus::after {
+        content: '';
+        position: absolute;
+        left: -10%;
+        top: -10%;
+        width: 120%;
+        height: 120%;
+        border: 2px solid ${p => p.theme.colors.accent};
+        background: rgba(255, 255, 255, 0.01);
+        border-radius: 50%;
     }
 `

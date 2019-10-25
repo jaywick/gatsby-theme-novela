@@ -1,44 +1,53 @@
 import React, { createContext, useState } from 'react'
 
-interface GridLayoutProviderProps {
+interface ViewTabProviderProps {
     children: React.ReactChild
 }
 
-export const GridLayoutContext = createContext({
-    gridLayout: 'tiles',
-    hasSetGridLayout: false,
-    setGridLayout: (tile: string) => {},
-    getGridLayout: () => {},
+type ViewTab = 'articles' | 'projects'
+
+interface IViewTabContext {
+    viewTab: ViewTab
+    hasSetViewTab: boolean
+    setViewTab: (viewTab: ViewTab) => any
+    getViewTab: () => any
+}
+
+export const ViewTabContext = createContext<IViewTabContext>({
+    viewTab: 'articles',
+    hasSetViewTab: false,
+    setViewTab: () => {},
+    getViewTab: () => {},
 })
 
-function GridLayoutProvider({ children }: GridLayoutProviderProps) {
-    const initialLayout = 'tiles'
+function ViewTabProvider({ children }: ViewTabProviderProps) {
+    const initialTab: ViewTab = 'articles'
 
-    const [gridLayout, setGridLayout] = useState<string>(initialLayout)
-    const [hasSetGridLayout, setHasSetGridLayout] = useState<boolean>(false)
+    const [viewTab, setViewTab] = useState<ViewTab>(initialTab)
+    const [hasSetViewTab, setHasSetViewTab] = useState<boolean>(false)
 
-    function setGridLayoutAndSave(tile: string) {
-        localStorage.setItem('gridLayout', tile || initialLayout)
-        setGridLayout(tile)
+    function setViewTabAndSave(viewTab: ViewTab) {
+        localStorage.setItem('viewTab', viewTab || initialTab)
+        setViewTab(viewTab)
     }
 
-    function getGridLayoutAndSave() {
-        setGridLayout(localStorage.getItem('gridLayout') || initialLayout)
-        setHasSetGridLayout(true)
+    function getViewTabAndSave() {
+        setViewTab((localStorage.getItem('viewTab') as ViewTab) || initialTab)
+        setHasSetViewTab(true)
     }
 
     return (
-        <GridLayoutContext.Provider
+        <ViewTabContext.Provider
             value={{
-                gridLayout,
-                hasSetGridLayout,
-                setGridLayout: setGridLayoutAndSave,
-                getGridLayout: getGridLayoutAndSave,
+                viewTab,
+                hasSetViewTab,
+                setViewTab: setViewTabAndSave,
+                getViewTab: getViewTabAndSave,
             }}
         >
             {children}
-        </GridLayoutContext.Provider>
+        </ViewTabContext.Provider>
     )
 }
 
-export default GridLayoutProvider
+export default ViewTabProvider
