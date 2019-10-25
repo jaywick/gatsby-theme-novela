@@ -9,20 +9,11 @@ import Image, { ImagePlaceholder } from '@components/Image'
 import mediaqueries from '@styles/media'
 import { IArticle, IWithTheme } from '@types'
 
-import { ViewTabContext } from './Articles.List.Context'
-
 /**
  * Tiles
  * [LONG], [SHORT]
  * [SHORT], [LONG]
  * [SHORT], [LONG]
- *
- * or ------------
- *
- * Rows
- * [LONG]
- * [LONG]
- * [LONG]
  */
 
 interface ArticlesListProps {
@@ -39,9 +30,6 @@ function ArticlesList({ articles, alwaysShowAllDetails }: ArticlesListProps) {
     if (!articles) return null
 
     const hasOnlyOneArticle = articles.length === 1
-    const { viewTab = 'articles', hasSetViewTab, getViewTab } = useContext(
-        ViewTabContext,
-    )
 
     /**
      * We're taking the flat array of articles [{}, {}, {}...]
@@ -55,13 +43,8 @@ function ArticlesList({ articles, alwaysShowAllDetails }: ArticlesListProps) {
         return result
     }, [])
 
-    useEffect(() => getViewTab(), [])
-
     return (
-        <ArticlesListContainer
-            style={{ opacity: hasSetViewTab ? 1 : 0 }}
-            alwaysShowAllDetails={alwaysShowAllDetails}
-        >
+        <ArticlesListContainer alwaysShowAllDetails={alwaysShowAllDetails}>
             {articlePairs.map((ap, index) => {
                 const isEven = index % 2 !== 0
                 const isOdd = index % 2 !== 1
@@ -69,7 +52,6 @@ function ArticlesList({ articles, alwaysShowAllDetails }: ArticlesListProps) {
                 return (
                     <List
                         key={index}
-                        viewTab={viewTab}
                         hasOnlyOneArticle={hasOnlyOneArticle}
                         reverse={isEven}
                     >
@@ -87,7 +69,6 @@ export default ArticlesList
 const ListItem = ({ article, narrow }: ArticlesListItemProps) => {
     if (!article) return null
 
-    const { viewTab } = useContext(ViewTabContext)
     const hasOverflow = narrow && article.title.length > 35
     const imageSource = narrow ? article.hero.narrow : article.hero.regular
     const hasHeroImage =
@@ -96,8 +77,8 @@ const ListItem = ({ article, narrow }: ArticlesListItemProps) => {
 
     return (
         <ArticleLink to={article.link} data-a11y='false'>
-            <Item viewTab={viewTab}>
-                <ImageContainer narrow={narrow} viewTab={viewTab}>
+            <Item>
+                <ImageContainer narrow={narrow}>
                     {hasHeroImage ? (
                         <Image src={imageSource} />
                     ) : (
@@ -105,14 +86,10 @@ const ListItem = ({ article, narrow }: ArticlesListItemProps) => {
                     )}
                 </ImageContainer>
                 <div>
-                    <Title dark hasOverflow={hasOverflow} viewTab={viewTab}>
+                    <Title dark hasOverflow={hasOverflow}>
                         {article.title}
                     </Title>
-                    <Excerpt
-                        narrow={narrow}
-                        hasOverflow={hasOverflow}
-                        viewTab={viewTab}
-                    >
+                    <Excerpt narrow={narrow} hasOverflow={hasOverflow}>
                         {article.excerpt}
                     </Excerpt>
                     <MetaData>
@@ -239,22 +216,21 @@ const listRow = p => css`
 
 const List = styled.div<{
     reverse: boolean
-    viewTab: string
     hasOnlyOneArticle: boolean
 }>`
-    ${p => (p.viewTab === 'articles' ? listTile : listRow)}
+    ${listTile}
 `
 
-const Item = styled.div<{ viewTab: string }>`
-    ${p => (p.viewTab === 'projects' ? listItemRow : listItemTile)}
+const Item = styled.div`
+    ${listItemTile}
 `
 
-const ImageContainer = styled.div<{ narrow: boolean; viewTab: string }>`
+const ImageContainer = styled.div<{ narrow: boolean }>`
     position: relative;
-    height: ${p => (p.viewTab === 'articles' ? '280px' : '220px')};
+    height: 280px;
     box-shadow: 0 30px 60px -10px rgba(0, 0, 0, ${p => (p.narrow ? 0.22 : 0.3)}),
         0 18px 36px -18px rgba(0, 0, 0, ${p => (p.narrow ? 0.25 : 0.33)});
-    margin-bottom: ${p => (p.viewTab === 'articles' ? '30px' : 0)};
+    margin-bottom: 30px;
     transition: transform 0.3s var(--ease-out-quad),
         box-shadow 0.3s var(--ease-out-quad);
 
@@ -263,55 +239,57 @@ const ImageContainer = styled.div<{ narrow: boolean; viewTab: string }>`
     }
 
     ${mediaqueries.tablet`
-    height: 200px;
-    margin-bottom: 35px;
-  `}
+        height: 200px;
+        margin-bottom: 35px;
+    `}
 
     ${mediaqueries.phablet`
-    overflow: hidden;
-    margin-bottom: 0;
-    box-shadow: none;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-  `}
+        overflow: hidden;
+        margin-bottom: 0;
+        box-shadow: none;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+    `}
 `
 
-const Title = styled(Headings.h2)`
-  font-size: 21px;
-  font-family: ${p => (p.theme as any).fonts.serif};
-  margin-bottom: ${p =>
-      p.hasOverflow && p.viewTab === 'articles' ? '35px' : '10px'};
-  transition: color 0.3s ease-in-out;
-  ${limitToTwoLines};
+const Title = styled(Headings.h2)<
+    {
+        hasOverflow: boolean
+    } & IWithTheme
+>`
+    font-size: 21px;
+    font-family: ${p => (p.theme as any).fonts.serif};
+    margin-bottom: ${p => (p.hasOverflow ? '35px' : '10px')};
+    transition: color 0.3s ease-in-out;
+    ${limitToTwoLines};
 
-  ${mediaqueries.desktop`
-    margin-bottom: 15px;
-  `}
+    ${mediaqueries.desktop`
+        margin-bottom: 15px;
+    `}
 
-  ${mediaqueries.tablet`
-    font-size: 24px;  
-  `}
+    ${mediaqueries.tablet`
+        font-size: 24px;  
+    `}
 
-  ${mediaqueries.phablet`
-    font-size: 22px;  
-    padding: 30px 20px 0;
-    margin-bottom: 10px;
-    -webkit-line-clamp: 3;
-  `}
+    ${mediaqueries.phablet`
+        font-size: 22px;  
+        padding: 30px 20px 0;
+        margin-bottom: 10px;
+        -webkit-line-clamp: 3;
+    `}
 `
 
 const Excerpt = styled.p<
     {
         hasOverflow: boolean
         narrow: boolean
-        viewTab: string
     } & IWithTheme
 >`
   ${limitToTwoLines};
   font-size: 16px;
   margin-bottom: 10px;
   color: ${p => p.theme.colors.grey};
-  display: ${p => (p.hasOverflow && p.viewTab === 'articles' ? 'none' : 'box')};
+  display: ${p => (p.hasOverflow ? 'none' : 'box')};
   max-width: ${p => (p.narrow ? '415px' : '515px')};
 
   ${mediaqueries.desktop`
@@ -337,9 +315,9 @@ const MetaData = styled.div<IWithTheme>`
     opacity: 0.33;
 
     ${mediaqueries.phablet`
-    max-width: 100%;
-    padding:  0 20px 30px;
-  `}
+        max-width: 100%;
+        padding:  0 20px 30px;
+    `}
 `
 
 const ArticleLink = styled<any>(Link)`
@@ -378,13 +356,13 @@ const ArticleLink = styled<any>(Link)`
     }
 
     ${mediaqueries.phablet`
-    &:hover ${ImageContainer} {
-      transform: none;
-      box-shadow: initial;
-    }
+        &:hover ${ImageContainer} {
+            transform: none;
+            box-shadow: initial;
+        }
 
-    &:active {
-      transform: scale(0.97) translateY(3px);
-    }
-  `}
+        &:active {
+            transform: scale(0.97) translateY(3px);
+        }
+    `}
 `
