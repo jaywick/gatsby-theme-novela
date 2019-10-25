@@ -221,9 +221,9 @@ export const createPages = async (
         console.error(error)
     }
 
-    const articles = dataSources.local.articles.sort(byDateSorter)
-    const tags = uniqBy(dataSources.local.tags, 'key')
-    const authors = uniqBy(dataSources.local.authors, 'name')
+    const articles = dataSources.local.articles.sort(byDateSorter) as IArticle[]
+    const tags = uniqBy(dataSources.local.tags, 'key') as ITag[]
+    const authors = uniqBy(dataSources.local.authors, 'name') as IAuthor[]
 
     if (articles.length === 0) {
         throw new Error(
