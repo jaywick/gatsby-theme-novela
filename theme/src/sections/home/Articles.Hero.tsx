@@ -7,7 +7,7 @@ import Bio from '@components/Bio'
 import mediaqueries from '@styles/media'
 import { IAuthor, IWithTheme } from '@types'
 
-import { ViewTabContext } from './Articles.List.Context'
+import { ViewTabContext } from './ViewTabContext'
 
 const authorQuery = graphql`
     {
@@ -27,13 +27,11 @@ const authorQuery = graphql`
 `
 
 function ArticlesHero({ authors }: { authors: IAuthor[] }) {
-    const { viewTab = 'articles', hasSetViewTab, setViewTab } = useContext(
-        ViewTabContext,
-    )
+    const { viewTab = 'articles', setViewTab } = useContext(ViewTabContext)
 
     const results = useStaticQuery(authorQuery)
     const hero = results.site.edges[0].node.siteMetadata.hero
-    const articlesIsActive = hasSetViewTab && viewTab === 'articles'
+    const articlesIsActive = viewTab === 'articles'
     const featuredAuthor = authors.find(author => author.featured)
 
     if (!featuredAuthor) {

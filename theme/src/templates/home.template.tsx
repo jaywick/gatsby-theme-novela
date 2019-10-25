@@ -7,29 +7,21 @@ import Layout from '@components/Layout'
 import Paginator from '@components/Navigation/Navigation.Paginator'
 
 import ArticlesHero from '../sections/home/Articles.Hero'
-import ArticlesList from '../sections/home/Articles.List'
-import TagsList from '../sections/home/Tags.List'
 import { IWithTheme } from '@types'
-import { ViewTabContext } from '../sections/home/Articles.List.Context'
+import { ViewTabContext } from '../sections/home/ViewTabContext'
+import { HomeList } from '../sections/home/home-list'
 
 function ArticlesPage({ location, pageContext }) {
     const articles = pageContext.group
     const tags = [] //TODO
     const authors = pageContext.additionalContext.authors
-    const { viewTab } = useContext(ViewTabContext)
-
-    const isArticlesView = viewTab === 'articles'
 
     return (
         <Layout>
             <SEO pathname={location.pathname} />
             <ArticlesHero authors={authors} />
             <Section narrow>
-                {isArticlesView ? (
-                    <ArticlesList articles={articles} />
-                ) : (
-                    <TagsList tags={tags} />
-                )}
+                <HomeList articles={articles} tags={tags} />
                 <ArticlesPaginator show={pageContext.pageCount > 1}>
                     <Paginator {...pageContext} />
                 </ArticlesPaginator>
