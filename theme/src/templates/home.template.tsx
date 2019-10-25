@@ -6,11 +6,11 @@ import SEO from '@components/SEO'
 import Layout from '@components/Layout'
 import Paginator from '@components/Navigation/Navigation.Paginator'
 
-import ArticlesHero from '../sections/articles/Articles.Hero'
-import ArticlesList from '../sections/articles/Articles.List'
-import TagsList from '../sections/articles/Tags.List'
+import ArticlesHero from '../sections/home/Articles.Hero'
+import ArticlesList from '../sections/home/Articles.List'
+import TagsList from '../sections/home/Tags.List'
 import { IWithTheme } from '@types'
-import { ViewTabContext } from '../sections/articles/Articles.List.Context'
+import { ViewTabContext } from '../sections/home/Articles.List.Context'
 
 function ArticlesPage({ location, pageContext }) {
     const articles = pageContext.group

@@ -13,7 +13,7 @@ dotenv.config()
 
 const templatesDirectory = resolvePath(__dirname, '../../src/templates')
 const templates = {
-    articles: resolvePath(templatesDirectory, 'articles.template.tsx'),
+    articles: resolvePath(templatesDirectory, 'home.template.tsx'),
     article: resolvePath(templatesDirectory, 'article.template.tsx'),
     author: resolvePath(templatesDirectory, 'author.template.tsx'),
     articleRedirect: resolvePath(
