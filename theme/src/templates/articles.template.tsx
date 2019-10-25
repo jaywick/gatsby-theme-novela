@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from '@emotion/styled'
 
 import Section from '@components/Section'
@@ -8,18 +8,28 @@ import Paginator from '@components/Navigation/Navigation.Paginator'
 
 import ArticlesHero from '../sections/articles/Articles.Hero'
 import ArticlesList from '../sections/articles/Articles.List'
+import TagsList from '../sections/articles/Tags.List'
 import { IWithTheme } from '@types'
+import { ViewTabContext } from '../sections/articles/Articles.List.Context'
 
 function ArticlesPage({ location, pageContext }) {
     const articles = pageContext.group
+    const tags = [] //TODO
     const authors = pageContext.additionalContext.authors
+    const { viewTab } = useContext(ViewTabContext)
+
+    const isArticlesView = viewTab === 'articles'
 
     return (
         <Layout>
             <SEO pathname={location.pathname} />
             <ArticlesHero authors={authors} />
             <Section narrow>
-                <ArticlesList articles={articles} />
+                {isArticlesView ? (
+                    <ArticlesList articles={articles} />
+                ) : (
+                    <TagsList tags={tags} />
+                )}
                 <ArticlesPaginator show={pageContext.pageCount > 1}>
                     <Paginator {...pageContext} />
                 </ArticlesPaginator>
