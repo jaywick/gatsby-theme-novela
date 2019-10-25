@@ -35,6 +35,14 @@ interface IGatsbyImageFixed extends IGatsbyImage {
     width: number
 }
 
+interface IImageFormats {
+    full: IGatsbyImageFluid
+    preview: IGatsbyImageFluid
+    regular: IGatsbyImageFluid
+    narrow: IGatsbyImageFluid
+    seo: IGatsbyImageFixed
+}
+
 export interface IAuthor {
     authorsPage?: boolean
     link?: string
@@ -43,13 +51,7 @@ export interface IAuthor {
     permaLink: string
     bio: string
     social: { name: string; url: string }[]
-    avatar: {
-        image: IGatsbyImageFluid
-        small: IGatsbyImageFluid
-        large: IGatsbyImageFluid
-        medium: IGatsbyImageFluid
-        full: IGatsbyImageFluid
-    }
+    avatar: IImageFormats
 }
 
 export interface IArticle {
@@ -62,13 +64,7 @@ export interface IArticle {
     excerpt: string
     body: string
     id: string
-    hero: {
-        full: IGatsbyImageFluid
-        preview: IGatsbyImageFluid
-        regular: IGatsbyImageFluid
-        narrow: IGatsbyImageFluid
-        seo: IGatsbyImageFixed
-    }
+    hero: IImageFormats
     timeToRead: number
     date: string
     dateForSEO: string
@@ -78,6 +74,8 @@ export interface ITag {
     key: string
     name: string
     story: string
+    link: string // TODO
+    avatar: IImageFormats // TODO
 }
 
 interface IArticleQuery {
