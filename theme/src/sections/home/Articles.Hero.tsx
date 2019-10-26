@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import styled from '@emotion/styled'
 
-import Section from '@components/Section'
-import Bio from '@components/Bio'
+import Section from '@components/section'
+import { Bio } from '@components/bio'
 import mediaqueries from '@styles/media'
 import { IAuthor, IWithTheme } from '@types'
 

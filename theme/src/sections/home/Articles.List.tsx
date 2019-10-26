@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 
-import Headings from '@components/Headings'
-import Image, { ImagePlaceholder } from '@components/Image'
+import { h2 } from '@components/headings'
+import { Image, Placeholder } from '@components/image'
 
 import mediaqueries from '@styles/media'
 import { IArticle, IWithTheme } from '@types'
@@ -82,7 +82,7 @@ const ListItem = ({ article, narrow }: ArticlesListItemProps) => {
                     {hasHeroImage ? (
                         <Image src={imageSource} />
                     ) : (
-                        <ImagePlaceholder />
+                        <Placeholder />
                     )}
                 </ImageContainer>
                 <div>
@@ -252,8 +252,9 @@ const ImageContainer = styled.div<{ narrow: boolean }>`
     `}
 `
 
-const Title = styled(Headings.h2)<
+const Title = styled(h2)<
     {
+        dark?: boolean
         hasOverflow: boolean
     } & IWithTheme
 >`

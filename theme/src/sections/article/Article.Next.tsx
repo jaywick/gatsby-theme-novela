@@ -3,8 +3,8 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 
-import Headings from '@components/Headings'
-import Image from '@components/Image'
+import { h3 } from '@components/headings'
+import { Image } from '@components/image'
 
 import mediaqueries from '@styles/media'
 
@@ -153,7 +153,7 @@ const Item = styled.div<IWithTheme>`
     }
 `
 
-const Title = styled(Headings.h3)`
+const Title = styled(h3)<IWithTheme & { hasOverflow: boolean; dark: boolean }>`
     font-size: 22px;
     line-height: 1.4;
     margin-bottom: ${p => (p.hasOverflow ? '45px' : '10px')};
@@ -163,39 +163,40 @@ const Title = styled(Headings.h3)`
     ${limitToTwoLines};
 
     ${mediaqueries.tablet`
-    margin-bottom: 15px;
-  `}
+        margin-bottom: 15px;
+    `}
+
     ${mediaqueries.phablet`
-    padding: 30px 20px 0;
-    margin-bottom: 10px;
-    -webkit-line-clamp: 3;
-  `}
+        padding: 30px 20px 0;
+        margin-bottom: 10px;
+        -webkit-line-clamp: 3;
+    `}
 `
 
 const Excerpt = styled.p<
     { narrow?: boolean; hasOverflow?: boolean } & IWithTheme
 >`
-  ${limitToTwoLines};
-  font-size: 16px;
-  margin-bottom: 10px;
-  color: ${p => p.theme.colors.grey};
-  display: ${p => (p.hasOverflow ? 'none' : 'box')};
-  max-width: ${p => (p.narrow ? '415px' : '515px')};
+    ${limitToTwoLines};
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: ${p => p.theme.colors.grey};
+    display: ${p => (p.hasOverflow ? 'none' : 'box')};
+    max-width: ${p => (p.narrow ? '415px' : '515px')};
 
-  ${mediaqueries.desktop`
-    display: -webkit-box;
-  `}
+    ${mediaqueries.desktop`
+        display: -webkit-box;
+    `}
 
-  ${mediaqueries.tablet`
-    margin-bottom: 15px;
-  `}
+    ${mediaqueries.tablet`
+        margin-bottom: 15px;
+    `}
 
-  ${mediaqueries.phablet`
-    max-width: 100%;
-    padding:  0 20px;
-    margin-bottom: 20px;
-    -webkit-line-clamp: 3;
-  `}
+    ${mediaqueries.phablet`
+        max-width: 100%;
+        padding:  0 20px;
+        margin-bottom: 20px;
+        -webkit-line-clamp: 3;
+    `}
 `
 
 const MetaData = styled.div<IWithTheme>`
@@ -205,9 +206,9 @@ const MetaData = styled.div<IWithTheme>`
     opacity: 0.33;
 
     ${mediaqueries.phablet`
-    max-width: 100%;
-    padding:  0 20px 30px;
-  `}
+        max-width: 100%;
+        padding:  0 20px 30px;
+    `}
 `
 
 const ArticleLink = styled(Link)<{ narrow: string } & IWithTheme>`
@@ -246,13 +247,13 @@ const ArticleLink = styled(Link)<{ narrow: string } & IWithTheme>`
     ${p => p.narrow === 'true' && mediaqueries.tablet`display: none;`}
 
     ${mediaqueries.phablet`
-    &:hover ${ImageContainer} {
-      transform: none;
-      box-shadow: initial;
-    }
+        &:hover ${ImageContainer} {
+            transform: none;
+            box-shadow: initial;
+        }
 
-    &:active {
-      transform: scale(0.97) translateY(3px);
-    }
-  `}
+        &:active {
+            transform: scale(0.97) translateY(3px);
+        }
+    `}
 `

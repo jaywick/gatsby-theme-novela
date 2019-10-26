@@ -1,3 +1,5 @@
-export { default } from './Image'
-export { default as ImageZoom } from './Image.Zoom'
-export { default as ImagePlaceholder } from './Image.Placeholder'
+import { Image } from './image'
+import { Placeholder } from './placeholder'
+import { Zoom } from './zoom'
+
+export { Image, Placeholder, Zoom }

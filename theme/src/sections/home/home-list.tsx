@@ -1,5 +1,5 @@
 import ArticlesList from './Articles.List'
-import Paginator from '@components/Navigation/Navigation.Paginator'
+import Paginator from '@components/navigation/paginator'
 import React, { useContext } from 'react'
 import { TagsList } from './Tags.List'
 import { IArticle, ITag, IPaginator } from '@types'

@@ -3,10 +3,10 @@ import styled from '@emotion/styled'
 import throttle from 'lodash/throttle'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import Layout from '@components/Layout'
-import MDXRenderer from '@components/MDX'
-import Progress from '@components/Progress'
-import Section from '@components/Section'
+import { Layout } from '@components/layout'
+import { MDX } from '@components/mdx'
+import { Progress } from '@components/progress'
+import Section from '@components/section'
 
 import mediaqueries from '@styles/media'
 import { debounce } from '@utils'
@@ -18,7 +18,7 @@ import ArticlesNext from '../sections/article/Article.Next'
 import ArticleSEO from '../sections/article/Article.SEO'
 import ArticleShare from '../sections/article/Article.Share'
 import { IWithTheme, IArticle, IAuthor, ITag } from '@types'
-import Tags from '@components/Tags'
+import { Tags } from '@components/tags'
 
 interface TemplateProps {
     pageContext: {
@@ -104,9 +104,9 @@ function Article({ pageContext, location }: TemplateProps) {
                 <ArticleControls />
             </MobileControls>
             <ArticleBody ref={contentSectionRef}>
-                <MDXRenderer content={article.body}>
+                <MDX content={article.body}>
                     <ArticleShare />
-                </MDXRenderer>
+                </MDX>
             </ArticleBody>
             {tag && <Tags tag={tag} />}
             {next.length > 0 && (

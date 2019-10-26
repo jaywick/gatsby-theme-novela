@@ -3,8 +3,8 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 
-import Headings from '@components/Headings'
-import Image, { ImagePlaceholder } from '@components/Image'
+import { h2 } from '@components/headings'
+import { Image, Placeholder } from '@components/image'
 
 import mediaqueries from '@styles/media'
 import { ITag, IWithTheme } from '@types'
@@ -74,7 +74,7 @@ const ListItem = ({ tag, narrow }: TagsListItemProps) => {
                     {hasAvatarImage ? (
                         <Image src={imageSource} />
                     ) : (
-                        <ImagePlaceholder />
+                        <Placeholder />
                     )}
                 </ImageContainer>
                 <div>
@@ -188,7 +188,13 @@ const ImageContainer = styled.div<{ narrow: boolean }>`
     `}
 `
 
-const Title = styled(Headings.h2)`
+const Title = styled(h2)<
+    IWithTheme & {
+        hasOverflow: boolean
+        dark: boolean
+        children: string
+    }
+>`
     font-size: 21px;
     font-family: ${p => (p.theme as any).fonts.serif};
     margin-bottom: ${p => (p.hasOverflow ? '35px' : '10px')};

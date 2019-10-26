@@ -1,11 +1,6 @@
-import Cell from './Table.Cell'
-import Head from './Table.Head'
-import HeadCell from './Table.Head.Cell'
-import Table from './Table'
+import { Cell } from './cell'
+import { Head } from './head'
+import { HeadCell } from './head-cell'
+import { Table } from './table'
 
-export default {
-    Cell,
-    Head,
-    HeadCell,
-    Table,
-}
+export { Cell, Head, HeadCell, Table }

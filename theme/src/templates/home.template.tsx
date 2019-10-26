@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import styled from '@emotion/styled'
 
-import Section from '@components/Section'
-import SEO from '@components/SEO'
-import Layout from '@components/Layout'
+import Section from '@components/section'
+import { SEO } from '@components/seo'
+import { Layout } from '@components/layout'
 
 import ArticlesHero from '../sections/home/Articles.Hero'
 import { IWithTheme } from '@types'

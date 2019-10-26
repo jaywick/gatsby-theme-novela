@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { IWithTheme } from '@types'
 
-const Note = styled.p<IWithTheme>`
+export const Note = styled.p<IWithTheme>`
     line-height: 1.756;
     font-size: 18px;
     color: ${p => p.theme.colors.articleText};
@@ -17,5 +17,3 @@ const Note = styled.p<IWithTheme>`
     border-radius: 4px;
     border-left: 8px solid var(--theme-ui-colors-primary, hsl(260, 100%, 80%));
 `
-
-export default Note

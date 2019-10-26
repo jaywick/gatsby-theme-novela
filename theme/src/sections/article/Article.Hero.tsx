@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import Headings from '@components/Headings'
-import Image, { ImagePlaceholder } from '@components/Image'
+import { h1 } from '@components/headings'
+import { Image, Placeholder } from '@components/image'
 
 import mediaqueries from '@styles/media'
 import { IArticle, IAuthor, IWithTheme } from '@types'
@@ -35,7 +35,7 @@ const ArticleHero = ({ article, authors }: ArticleHeroProps) => {
                 {hasHeroImage ? (
                     <Image src={article.hero.full} />
                 ) : (
-                    <ImagePlaceholder />
+                    <Placeholder />
                 )}
             </HeroImage>
         </Hero>
@@ -109,7 +109,7 @@ const Header = styled.header`
     }
 `
 
-const HeroHeading = styled(Headings.h1)`
+const HeroHeading = styled(h1)`
     font-size: 48px;
     font-family: ${p => (p.theme as any).fonts.serif};
     margin-bottom: 25px;

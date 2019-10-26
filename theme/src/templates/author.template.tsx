@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import Section from '@components/Section'
-import SEO from '@components/SEO'
-import Layout from '@components/Layout'
-import Paginator from '@components/Navigation/Navigation.Paginator'
+import Section from '@components/section'
+import { SEO } from '@components/seo'
+import { Layout } from '@components/layout'
+import Paginator from '@components/navigation/paginator'
 
 import AuthorHero from '../sections/filtered/Author.Hero'
 import FilteredArticles from '../sections/filtered/Filtered.Articles'
