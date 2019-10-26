@@ -52,7 +52,7 @@ export const local = {
     }),
     tags: ({ node }) => ({
         ...node,
-        hero: normalizeHero(node),
+        avatar: normalizeAvatar(node),
     }),
     authors: ({ node }) => ({
         ...node,

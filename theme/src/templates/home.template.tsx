@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 
 import Section from '@components/Section'
@@ -8,14 +8,12 @@ import Paginator from '@components/Navigation/Navigation.Paginator'
 
 import ArticlesHero from '../sections/home/Articles.Hero'
 import { IWithTheme } from '@types'
-import { ViewTabContext } from '../sections/home/ViewTabContext'
 import { HomeList } from '../sections/home/home-list'
 
 function ArticlesPage({ location, pageContext }) {
     const articles = pageContext.group
-    const tags = [] //TODO
+    const tags = pageContext.additionalContext.tags
     const authors = pageContext.additionalContext.authors
-
     return (
         <Layout>
             <SEO pathname={location.pathname} />

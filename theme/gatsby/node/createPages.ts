@@ -44,10 +44,11 @@ const createArticlePages = (opts: {
             basePath: opts.basePath,
             skip: opts.pageLength,
             limit: opts.pageLength,
+            tags: opts.tags,
         },
     })
 
-    const unknownTags = []
+    const unknownTags = new Set<string>()
 
     log('Creating', 'article posts')
     opts.articles.forEach((article, index) => {
@@ -89,7 +90,7 @@ const createArticlePages = (opts: {
         const articleTag = opts.tags.find(x => x.key === article.tag)
 
         if (!articleTag) {
-            unknownTags.push(article.tag)
+            unknownTags.add(article.tag)
         }
 
         opts.createPage({
@@ -109,7 +110,7 @@ const createArticlePages = (opts: {
         })
     })
 
-    if (unknownTags.length > 0) {
+    if (unknownTags.size > 0) {
         unknownTags.forEach(tag => {
             console.log(
                 '\u001B[33m',

@@ -19,8 +19,10 @@ interface TagsListItemProps {
     narrow?: boolean
 }
 
-function TagsList({ tags, alwaysShowAllDetails }: TagsListProps) {
-    if (!tags) return null
+export const TagsList = ({ tags, alwaysShowAllDetails }: TagsListProps) => {
+    if (!tags) {
+        return null
+    }
 
     const hasOnlyOneTag = tags.length === 1
 
@@ -57,16 +59,13 @@ function TagsList({ tags, alwaysShowAllDetails }: TagsListProps) {
     )
 }
 
-export default TagsList
-
 const ListItem = ({ tag, narrow }: TagsListItemProps) => {
     if (!tag) return null
 
     const hasOverflow = narrow && tag.name.length > 35
     const imageSource = narrow ? tag.avatar.narrow : tag.avatar.regular
     const hasAvatarImage =
-        Object.keys(imageSource).length !== 0 &&
-        imageSource.constructor === Object
+        typeof imageSource === 'object' && Object.keys(imageSource).length !== 0
 
     return (
         <ArticleLink to={tag.link} data-a11y='false'>
@@ -238,18 +237,6 @@ const Excerpt = styled.p<
         padding:  0 20px;
         margin-bottom: 20px;
         -webkit-line-clamp: 3;
-    `}
-`
-
-const MetaData = styled.div<IWithTheme>`
-    font-weight: 600;
-    font-size: 16px;
-    color: ${p => p.theme.colors.grey};
-    opacity: 0.33;
-
-    ${mediaqueries.phablet`
-        max-width: 100%;
-        padding:  0 20px 30px;
     `}
 `
 

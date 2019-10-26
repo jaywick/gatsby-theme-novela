@@ -1,6 +1,6 @@
 import ArticlesList from './Articles.List'
 import React, { useContext } from 'react'
-import TagsList from './Tags.List'
+import { TagsList } from './Tags.List'
 import { IArticle, ITag } from '@types'
 import { ViewTabContext } from './ViewTabContext'
 
