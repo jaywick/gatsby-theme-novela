@@ -1,4 +1,4 @@
-export default {
+export const prism = {
     token: `#fff`,
     languageJavascript: `#e8696b`,
     javascript: `#e8696b`,

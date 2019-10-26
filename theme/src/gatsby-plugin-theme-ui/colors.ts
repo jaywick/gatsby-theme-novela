@@ -1,6 +1,6 @@
-import prism from './prism'
+import { prism } from './prism'
 
-export default {
+export const colors = {
     prism,
 
     primary: '#000',

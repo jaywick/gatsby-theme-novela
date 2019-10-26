@@ -1,4 +1,4 @@
-export default {
+export const tags = {
     pre: {
         variant: `prism`,
         fontFamily: `"Operator Mono", monospace`,

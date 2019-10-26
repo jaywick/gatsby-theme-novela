@@ -1,7 +1,7 @@
-import merge from 'lodash/merge'
+import { merge } from 'lodash'
 
-import colors from './colors'
-import tags from './tags'
+import { colors } from './colors'
+import { tags } from './tags'
 
 const breakpoints = [
     ['phone_small', 320],
@@ -23,7 +23,7 @@ const fonts = {
 const colorModeTransition =
     'background 0.25s var(--ease-in-out-quad), color 0.25s var(--ease-in-out-quad)'
 
-export default merge({
+export const theme = merge({
     initialColorMode: 'dark',
     useCustomProperties: true,
     colorModeTransition,
