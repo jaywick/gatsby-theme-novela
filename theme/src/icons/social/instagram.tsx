@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InstagramIcon = ({ fill = 'white' }) => (
+export const Instagram = ({ fill = 'white' }) => (
     <svg
         width='13'
         height='13'
@@ -28,5 +28,3 @@ const InstagramIcon = ({ fill = 'white' }) => (
         />
     </svg>
 )
-
-export default InstagramIcon

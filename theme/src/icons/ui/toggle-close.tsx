@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ToggleClose = ({ fill }) => (
+export const ToggleClose = ({ fill }) => (
     <svg
         width='17'
         height='17'
@@ -18,5 +18,3 @@ const ToggleClose = ({ fill }) => (
         />
     </svg>
 )
-
-export default ToggleClose

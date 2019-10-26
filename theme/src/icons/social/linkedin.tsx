@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LinkedinIcon = ({ fill = 'white', ...props }) => (
+export const LinkedIn = ({ fill = 'white', ...props }) => (
     <svg
         width='14'
         height='14'
@@ -17,5 +17,3 @@ const LinkedinIcon = ({ fill = 'white', ...props }) => (
         />
     </svg>
 )
-
-export default LinkedinIcon

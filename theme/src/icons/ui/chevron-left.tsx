@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ChevronLeft = ({ fill }) => (
+export const ChevronLeft = ({ fill }) => (
     <svg
         width='24'
         height='24'
@@ -14,5 +14,3 @@ const ChevronLeft = ({ fill }) => (
         />
     </svg>
 )
-
-export default ChevronLeft

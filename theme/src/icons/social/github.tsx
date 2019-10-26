@@ -1,6 +1,6 @@
 import React from 'react'
 
-const GithubIcon = ({ fill = 'white' }) => (
+export const Github = ({ fill = 'white' }) => (
     <svg
         width='14'
         height='14'
@@ -16,5 +16,3 @@ const GithubIcon = ({ fill = 'white' }) => (
         />
     </svg>
 )
-
-export default GithubIcon

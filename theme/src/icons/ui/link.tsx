@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LinkIcon = ({ fill }) => (
+export const Link = ({ fill }) => (
     <svg
         width='24'
         height='20'
@@ -16,5 +16,3 @@ const LinkIcon = ({ fill }) => (
         />
     </svg>
 )
-
-export default LinkIcon

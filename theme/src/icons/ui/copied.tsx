@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CopiedIcon = ({ fill = '#fff' }) => (
+export const Copied = ({ fill = '#fff' }) => (
     <svg
         width='15'
         height='19'
@@ -14,5 +14,3 @@ const CopiedIcon = ({ fill = '#fff' }) => (
         />
     </svg>
 )
-
-export default CopiedIcon

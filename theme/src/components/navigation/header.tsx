@@ -6,13 +6,9 @@ import { useColorMode } from 'theme-ui'
 import Section from '@components/Section'
 import { Logo } from '@components/logo'
 
-import Icons from '@icons'
+import { Icons } from '@icons'
 import mediaqueries from '@styles/media'
-import {
-    copyToClipboard,
-    getWindowDimensions,
-    getBreakpointFromTheme,
-} from '@utils'
+import { getWindowDimensions, getBreakpointFromTheme } from '@utils'
 import { IWithTheme } from '@types'
 
 function NavigationHeader() {

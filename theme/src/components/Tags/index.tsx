@@ -2,7 +2,7 @@ import React from 'react'
 
 import Section from '@components/section'
 import { ITag } from '@types'
-import Icons from '@icons'
+import { Icons } from '@icons'
 import { useThemeUI } from 'theme-ui'
 import {
     SubscriptionContainer,

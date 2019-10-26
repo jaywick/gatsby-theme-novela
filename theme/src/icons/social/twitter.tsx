@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TwitterIcon = ({ fill = 'white', ...props }) => (
+export const Twitter = ({ fill = 'white', ...props }) => (
     <svg
         width='16'
         height='13'
@@ -17,5 +17,3 @@ const TwitterIcon = ({ fill = 'white', ...props }) => (
         />
     </svg>
 )
-
-export default TwitterIcon

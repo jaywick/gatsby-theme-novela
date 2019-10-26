@@ -1,5 +1,5 @@
 import React from 'react'
-import Icons from '@icons'
+import { Icons } from '@icons'
 import { SocialIconContainer, Hidden } from './styles'
 
 interface SocialLinksProps {
@@ -11,18 +11,12 @@ interface SocialLinksProps {
 }
 
 const icons = {
-    behance: Icons.Behance,
     dribbble: Icons.Dribbble,
     linkedin: Icons.LinkedIn,
     twitter: Icons.Twitter,
-    facebook: Icons.Facebook,
     instagram: Icons.Instagram,
     github: Icons.Github,
     youtube: Icons.YouTube,
-    medium: Icons.Medium,
-    unsplash: Icons.Unsplash,
-    patreon: Icons.Patreon,
-    paypal: Icons.Paypal,
     dev: Icons.DevTo,
 }
 

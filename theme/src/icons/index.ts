@@ -1,53 +1,41 @@
 // Social
-import Behance from './social/Behance.Icon'
-import Dribbble from './social/Dribbble.Icon'
-import Facebook from './social/Facebook.Icon'
-import Instagram from './social/Instagram.Icon'
-import Twitter from './social/Twitter.Icon'
-import LinkedIn from './social/LinkedIn.Icon'
-import Medium from './social/Medium.Icon'
-import Github from './social/Github.Icon'
-import Unsplash from './social/Unsplash.Icon'
-import YouTube from './social/YouTube.Icon'
-import Patreon from './social/Patreon.Icon'
-import Paypal from './social/Paypal.Icon'
-import DevTo from './social/DevTo.Icon'
+import { DevTo } from './social/devto'
+import { Dribbble } from './social/dribbble'
+import { Github } from './social/github'
+import { Instagram } from './social/instagram'
+import { LinkedIn } from './social/linkedin'
+import { Twitter } from './social/twitter'
+import { YouTube } from './social/youtube'
 
 // UI
-import LongArrowRight from './ui/LongArrowRight.Icon'
-import ChevronLeft from './ui/ChevronLeft.Icon'
-import Copied from './ui/Copied.Icon'
-import Copy from './ui/Copy.Icon'
-import Ex from './ui/Ex.Icon'
-import Link from './ui/Link.Icon'
-import ToggleOpen from './ui/ToggleOpen.Icon'
-import ToggleClose from './ui/ToggleClose.Icon'
-import Rows from './ui/Rows.Icon'
-import Tiles from './ui/Tiles.Icon'
+import { ChevronLeft } from './ui/chevron-left'
+import { Copied } from './ui/copied'
+import { Copy } from './ui/copy'
+import { Ex } from './ui/ex'
+import { Link } from './ui/link'
+import { LongArrowRight } from './ui/long-arrow-right'
+import { Rows } from './ui/rows'
+import { Tiles } from './ui/tiles'
+import { ToggleClose } from './ui/toggle-close'
+import { ToggleOpen } from './ui/toggle-open'
 
-export default {
-    Behance,
-    Dribbble,
-    Facebook,
-    Instagram,
-    Twitter,
-    LinkedIn,
-    Medium,
-    Github,
-    Unsplash,
-    YouTube,
-    Patreon,
-    Paypal,
+export const Icons = {
     DevTo,
+    Dribbble,
+    Github,
+    Instagram,
+    LinkedIn,
+    Twitter,
+    YouTube,
 
     ChevronLeft,
-    LongArrowRight,
     Copied,
     Copy,
     Ex,
     Link,
-    ToggleClose,
-    ToggleOpen,
+    LongArrowRight,
     Rows,
     Tiles,
+    ToggleClose,
+    ToggleOpen,
 }

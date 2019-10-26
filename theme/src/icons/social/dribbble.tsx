@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DribbbleIcon = ({ fill = 'white' }) => (
+export const Dribbble = ({ fill = 'white' }) => (
     <svg
         width='14'
         height='14'
@@ -14,5 +14,3 @@ const DribbbleIcon = ({ fill = 'white' }) => (
         />
     </svg>
 )
-
-export default DribbbleIcon

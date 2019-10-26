@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LongArrowRight = ({ fill }) => (
+export const LongArrowRight = ({ fill }) => (
     <svg
         width='40'
         viewBox='0 0 72 24'
@@ -13,5 +13,3 @@ const LongArrowRight = ({ fill }) => (
         />
     </svg>
 )
-
-export default LongArrowRight

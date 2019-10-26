@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DevToIcon = ({ fill = 'white', ...props }) => (
+export const DevTo = ({ fill = 'white', ...props }) => (
     <svg
         width='16'
         height='13'
@@ -15,5 +15,3 @@ const DevToIcon = ({ fill = 'white', ...props }) => (
         ></path>
     </svg>
 )
-
-export default DevToIcon

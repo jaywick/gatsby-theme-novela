@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ToggleOpen = ({ fill }) => (
+export const ToggleOpen = ({ fill }) => (
     <svg
         width='17'
         height='17'
@@ -18,5 +18,3 @@ const ToggleOpen = ({ fill }) => (
         />
     </svg>
 )
-
-export default ToggleOpen

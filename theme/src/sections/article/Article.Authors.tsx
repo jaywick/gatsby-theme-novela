@@ -5,7 +5,7 @@ import { useColorMode } from 'theme-ui'
 import { Link } from 'gatsby'
 
 import { Image } from '@components/image'
-import Icons from '@icons'
+import { Icons } from '@icons'
 import mediaqueries from '@styles/media'
 import { IAuthor, IWithTheme } from '@types'
 
