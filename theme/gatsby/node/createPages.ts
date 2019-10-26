@@ -44,7 +44,7 @@ const createArticlePages = (opts: {
             basePath: opts.basePath,
             skip: opts.pageLength,
             limit: opts.pageLength,
-            tags: opts.tags,
+            tags: opts.tags.map(enrichTags),
         },
     })
 
@@ -262,3 +262,8 @@ export const createPages = async (
         pageLength,
     })
 }
+
+const enrichTags = (tag: ITag): ITag => ({
+    ...tag,
+    link: tag.link || `/tags/${tag.key}`,
+})
