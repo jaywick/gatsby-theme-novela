@@ -93,7 +93,7 @@ const ListItem = ({ tag, narrow }: TagsListItemProps) => {
 const limitToTwoLines = css`
     text-overflow: ellipsis;
     overflow-wrap: normal;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     display: -webkit-box;
     white-space: normal;
