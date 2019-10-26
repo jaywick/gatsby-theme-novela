@@ -63,7 +63,7 @@ const ListItem = ({ tag, narrow }: TagsListItemProps) => {
     if (!tag) return null
 
     const hasOverflow = narrow && tag.name.length > 35
-    const imageSource = narrow ? tag.avatar.medium : tag.avatar.large
+    const imageSource = narrow ? tag.hero.narrow : tag.hero.regular
     const hasAvatarImage =
         typeof imageSource === 'object' && Object.keys(imageSource).length !== 0
 

@@ -81,7 +81,7 @@ export interface ITag {
     name: string
     story: string
     link: string
-    avatar: IAvatarImage
+    hero: IHeroImage
 }
 
 interface IArticleQuery {

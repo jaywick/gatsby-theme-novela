@@ -74,9 +74,9 @@ const tags = `
                 name
                 key
                 story
-                avatar {
-                    small: childImageSharp {
-                        fluid(maxWidth: 50, quality: 100) {
+                hero {
+                    full: childImageSharp {
+                        fluid(maxWidth: 944, quality: 100) {
                             base64
                             aspectRatio
                             src
@@ -86,8 +86,8 @@ const tags = `
                             sizes
                         }
                     }
-                    medium: childImageSharp {
-                        fluid(maxWidth: 100, quality: 100) {
+                    regular: childImageSharp {
+                        fluid(maxWidth: 653, quality: 100) {
                             base64
                             aspectRatio
                             src
@@ -97,8 +97,8 @@ const tags = `
                             sizes
                         }
                     }
-                    large: childImageSharp {
-                        fluid(maxWidth: 328, quality: 100) {
+                    narrow: childImageSharp {
+                        fluid(maxWidth: 457, quality: 100) {
                             base64
                             aspectRatio
                             src
@@ -106,6 +106,11 @@ const tags = `
                             srcWebp
                             srcSetWebp
                             sizes
+                        }
+                    }
+                    seo: childImageSharp {
+                        fixed(width: 1200, quality: 100) {
+                            src
                         }
                     }
                 }
