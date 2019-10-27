@@ -1,12 +1,7 @@
-import { IArticle } from '@types'
+import { IArticle, IAuthor } from '@types'
 
 const normalizeHero = (article: IArticle) => {
-    let hero = {
-        full: {},
-        regular: {},
-        narrow: {},
-        seo: {},
-    }
+    let hero = { full: {}, regular: {}, narrow: {}, seo: {} }
 
     if (article.hero) {
         hero = {
@@ -25,12 +20,8 @@ const normalizeHero = (article: IArticle) => {
     return hero
 }
 
-const normalizeAvatar = author => {
-    let avatar = {
-        small: {},
-        medium: {},
-        large: {},
-    }
+const normalizeAvatar = (author: IAuthor) => {
+    let avatar = { small: {}, medium: {}, large: {} }
 
     if (author.avatar) {
         avatar = {
@@ -45,17 +36,17 @@ const normalizeAvatar = author => {
     return avatar
 }
 
-export const local = {
-    articles: ({ node }) => ({
-        ...node,
-        hero: normalizeHero(node),
-    }),
-    tags: ({ node }) => ({
-        ...node,
-        hero: normalizeHero(node),
-    }),
-    authors: ({ node }) => ({
-        ...node,
-        avatar: normalizeAvatar(node),
-    }),
-}
+export const articles = ({ node }) => ({
+    ...node,
+    hero: normalizeHero(node),
+})
+
+export const tags = ({ node }) => ({
+    ...node,
+    hero: normalizeHero(node),
+})
+
+export const authors = ({ node }) => ({
+    ...node,
+    avatar: normalizeAvatar(node),
+})

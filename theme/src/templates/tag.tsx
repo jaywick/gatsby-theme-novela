@@ -2,7 +2,6 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import Section from '@components/section'
-import { SEO } from '@components/seo'
 import { Layout } from '@components/layout'
 import Paginator from '@components/navigation/paginator'
 

@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv'
-import * as normalize from '../data/data.normalize'
-import * as query from '../data/data.query'
+import * as normalize from '../data/normalize'
+import * as query from '../data/query'
 import { resolve as resolvePath } from 'path'
 import { buildPaginatedPath, byDateSorter, slugifyWithBase } from './utils'
 import { IAuthor, IArticle, IConfig, IPluginApi, ITag } from '@types'
@@ -11,16 +11,10 @@ import { Node } from 'gatsby'
 
 dotenv.config()
 
-const templatesDirectory = resolvePath(__dirname, '../../src/templates')
-const templates = {
-    articles: resolvePath(templatesDirectory, 'home.template.tsx'),
-    article: resolvePath(templatesDirectory, 'article.template.tsx'),
-    author: resolvePath(templatesDirectory, 'author.template.tsx'),
-    articleRedirect: resolvePath(
-        templatesDirectory,
-        'article-redirect.template.tsx',
-    ),
-    tags: resolvePath(templatesDirectory, 'tags.template.tsx'),
+type Templates = 'home' | 'article' | 'author' | 'tag' | 'redirect'
+
+const resolveTemplate = (filename: Templates) => {
+    return resolvePath(__dirname, '../../src/templates', filename + '.tsx')
 }
 
 const createArticlePages = (opts: {
@@ -37,7 +31,7 @@ const createArticlePages = (opts: {
         pathPrefix: opts.basePath,
         createPage: opts.createPage,
         pageLength: opts.pageLength,
-        pageTemplate: templates.articles,
+        pageTemplate: resolveTemplate('article'),
         buildPath: buildPaginatedPath,
         context: {
             authors: opts.authors,
@@ -69,14 +63,14 @@ const createArticlePages = (opts: {
         // create redirect for URLs without slug
         opts.createPage({
             path: article.permaLink,
-            component: templates.articleRedirect,
+            component: resolveTemplate('redirect'),
             context: {
                 redirect: article.link,
             },
         })
 
         const articleAuthor = opts.authors.filter(
-            x => x.name === article.author,
+            author => author.name === article.author,
         )
 
         if (!articleAuthor) {
@@ -95,7 +89,7 @@ const createArticlePages = (opts: {
 
         opts.createPage({
             path: article.link,
-            component: templates.article,
+            component: resolveTemplate('article'),
             context: {
                 article,
                 tag: articleTag,
@@ -139,7 +133,7 @@ const createTagPages = (opts: {
             pathPrefix: `/tags/${tag.key}`,
             createPage: opts.createPage,
             pageLength: opts.pageLength,
-            pageTemplate: templates.tags,
+            pageTemplate: resolveTemplate('tag'),
             buildPath: buildPaginatedPath,
             context: {
                 tag,
@@ -171,7 +165,7 @@ const createAuthorPages = (opts: {
             pathPrefix: author.permaLink,
             createPage: opts.createPage,
             pageLength: opts.pageLength,
-            pageTemplate: templates.author,
+            pageTemplate: resolveTemplate('author'),
             buildPath: buildPaginatedPath,
             context: {
                 author,
@@ -193,38 +187,28 @@ export const createPages = async (
     } = pluginApi
     const { basePath = '/', pageLength = 6 } = themeOptions
 
-    const dataSources: {
-        local: { authors: IAuthor[]; articles: IArticle[]; tags: ITag[] }
-    } = {
-        local: { authors: [], articles: [], tags: [] },
-    }
+    let allAuthors: IAuthor[] = []
+    let allArticles: IArticle[] = []
+    let allTags: ITag[] = []
 
     log('Config basePath', basePath)
 
     try {
         log('Querying Authors & Aritcles source:', 'Local')
-        const localAuthors = await graphql(query.local.authors)
-        const localTags = await graphql(query.local.tags)
-        const localArticles = await graphql(query.local.articles)
+        const articlesQuery = await graphql(query.articles)
+        const authorsQuery = await graphql(query.authors)
+        const tagsQuery = await graphql(query.tags)
 
-        dataSources.local.authors = localAuthors.data.authors.edges.map(
-            normalize.local.authors,
-        )
-
-        dataSources.local.tags = localTags.data.tags.edges.map(
-            normalize.local.tags,
-        )
-
-        dataSources.local.articles = localArticles.data.articles.edges.map(
-            normalize.local.articles,
-        )
+        allAuthors = articlesQuery.data.authors.edges.map(normalize.authors)
+        allTags = authorsQuery.data.tags.edges.map(normalize.tags)
+        allArticles = tagsQuery.data.articles.edges.map(normalize.articles)
     } catch (error) {
         console.error(error)
     }
 
-    const articles = dataSources.local.articles.sort(byDateSorter) as IArticle[]
-    const tags = uniqBy(dataSources.local.tags, 'key') as ITag[]
-    const authors = uniqBy(dataSources.local.authors, 'name') as IAuthor[]
+    const articles = allArticles.sort(byDateSorter)
+    const tags = uniqBy(allTags, 'key')
+    const authors = uniqBy(allAuthors, 'name')
 
     if (articles.length === 0) {
         throw new Error(
@@ -263,6 +247,7 @@ export const createPages = async (
     })
 }
 
+// todo: move to onCreateNode
 const enrichTags = (tag: ITag): ITag => ({
     ...tag,
     link: tag.link || `/tags/${tag.key}`,
