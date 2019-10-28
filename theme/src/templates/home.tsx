@@ -6,13 +6,10 @@ import { Layout } from '@components/layout'
 
 import { ArticlesHero } from '../sections/home/articles-hero'
 import { HomeList } from '../sections/home/home-list'
-import { ViewTabContext } from '../sections/home/view-tab-context'
 import { ArticlesGradient } from './styles'
 
 export const ArticlesPage = ({ location, pageContext }) => {
     const authors = pageContext.additionalContext.authors
-
-    const { viewTab } = useContext(ViewTabContext)
 
     return (
         <Layout>

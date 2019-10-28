@@ -92,7 +92,7 @@ export const getWindowDimensions = (): { height: number; width: number } => {
     }
 }
 
-export function useResize() {
+export const useResize = () => {
     const [dimensions, setDimensions] = useState({ width: 1280, height: 900 })
 
     useEffect(() => {
@@ -127,7 +127,7 @@ export const scrollable = (action: string) => {
     }
 }
 
-export function useScrollPosition() {
+export const useScrollPosition = () => {
     const [offset, setOffset] = useState(0)
 
     useEffect(() => {
@@ -146,7 +146,7 @@ export function useScrollPosition() {
  * and animation on mount but it not flowing correctly
  * due to fram timing.
  */
-export function startAnimation(callback) {
+export const startAnimation = callback => {
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
             callback()
@@ -194,7 +194,7 @@ export const getHighlightedTextPositioning = () => {
 
             // Fall back to inserting a temporary element
             if (x === 0 && y === 0) {
-                var span = doc.createElement('span')
+                let span = doc.createElement('span')
                 if (span.getClientRects) {
                     // Ensure span has dimensions and position by
                     // adding a zero-width space character
@@ -203,7 +203,7 @@ export const getHighlightedTextPositioning = () => {
                     rect = span.getClientRects()[0]
                     x = rect.left
                     y = rect.top
-                    var spanParent = span.parentNode
+                    let spanParent = span.parentNode
                     spanParent.removeChild(span)
 
                     // Glue any broken text nodes back together
@@ -216,7 +216,7 @@ export const getHighlightedTextPositioning = () => {
     return { x, y }
 }
 
-function isOrContains(node, container) {
+const isOrContains = (node, container) => {
     while (node) {
         if (node === container) {
             return true
@@ -226,12 +226,12 @@ function isOrContains(node, container) {
     return false
 }
 
-function elementContainsSelection(el) {
-    var sel
+const elementContainsSelection = el => {
+    let sel
     if (window.getSelection) {
         sel = window.getSelection()
         if (sel.rangeCount > 0) {
-            for (var i = 0; i < sel.rangeCount; ++i) {
+            for (let i = 0; i < sel.rangeCount; ++i) {
                 if (
                     !isOrContains(sel.getRangeAt(i).commonAncestorContainer, el)
                 ) {
@@ -288,7 +288,7 @@ export const getSelectionDimensions = () => {
         if (sel.rangeCount) {
             range = sel.getRangeAt(0).cloneRange()
             if (range.getBoundingClientRect) {
-                var rect = range.getBoundingClientRect()
+                let rect = range.getBoundingClientRect()
                 width = rect.right - rect.left
                 height = rect.bottom - rect.top
             }
@@ -298,7 +298,7 @@ export const getSelectionDimensions = () => {
     return { width, height }
 }
 
-export function getSelectionText() {
+export const getSelectionText = () => {
     let text = ''
     if (window.getSelection) {
         text = window.getSelection().toString()
@@ -316,7 +316,7 @@ export function getSelectionText() {
  * thisIsMyInput
  * this-is-my-output
  */
-export function toKebabCase(str: string): string {
+export const toKebabCase = (str: string): string => {
     return str
         .match(
             /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
@@ -325,14 +325,14 @@ export function toKebabCase(str: string): string {
         .join('-')
 }
 
-export function copyToClipboard(toCopy: string) {
-    const el = document.createElement(`textarea`)
+export const copyToClipboard = (toCopy: string) => {
+    const el = document.createElement('textarea')
     el.value = toCopy
-    el.setAttribute(`readonly`, ``)
-    el.style.position = `absolute`
-    el.style.left = `-9999px`
+    el.setAttribute('readonly', '')
+    el.style.position = 'absolute'
+    el.style.left = '-9999px'
     document.body.appendChild(el)
     el.select()
-    document.execCommand(`copy`)
+    document.execCommand('copy')
     document.body.removeChild(el)
 }

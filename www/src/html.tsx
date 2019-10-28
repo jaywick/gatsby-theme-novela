@@ -9,7 +9,7 @@ interface Props {
     preBodyComponents: any
 }
 
-export default (props: Props) => (
+export const html = (props: Props) => (
     <html {...props.htmlAttributes}>
         <head>
             <meta charSet='utf-8' />
@@ -36,3 +36,5 @@ export default (props: Props) => (
         </body>
     </html>
 )
+
+export default html
