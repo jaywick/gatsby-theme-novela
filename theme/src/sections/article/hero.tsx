@@ -4,17 +4,17 @@ import styled from '@emotion/styled'
 import { h1 } from '@components/headings'
 import { Image, Placeholder } from '@components/image'
 
-import mediaqueries from '@styles/media'
+import { mediaqueries } from '@styles/media'
 import { IArticle, IAuthor, IWithTheme } from '@types'
 
-import ArticleAuthors from './Article.Authors'
+import { ArticleAuthors } from './authors'
 
 interface ArticleHeroProps {
     article: IArticle
     authors: IAuthor[]
 }
 
-const ArticleHero = ({ article, authors }: ArticleHeroProps) => {
+export const ArticleHero = ({ article, authors }: ArticleHeroProps) => {
     const hasCoAUthors = authors.length > 1
     const hasHeroImage =
         Object.keys(article.hero.full).length !== 0 &&
@@ -41,8 +41,6 @@ const ArticleHero = ({ article, authors }: ArticleHeroProps) => {
         </Hero>
     )
 }
-
-export default ArticleHero
 
 const Hero = styled.div<IWithTheme>`
     ${p => mediaqueries.phablet`

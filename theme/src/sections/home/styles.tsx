@@ -1,110 +1,159 @@
-import React from 'react'
+import { mediaqueries } from '@styles/media'
 import styled from '@emotion/styled'
-import { css } from '@emotion/core'
+import { IWithTheme } from '@types'
 import { Link } from 'gatsby'
-
 import { h2 } from '@components/headings'
-import { Image, Placeholder } from '@components/image'
+import { css } from '@emotion/core'
 
-import mediaqueries from '@styles/media'
-import { IArticle, IWithTheme } from '@types'
+export const SubheadingContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 100px;
 
-/**
- * Tiles
- * [LONG], [SHORT]
- * [SHORT], [LONG]
- * [SHORT], [LONG]
- */
+    ${mediaqueries.desktop`
+        margin-bottom: 80px;
+    `};
 
-interface ArticlesListProps {
-    articles: IArticle[]
-    alwaysShowAllDetails?: boolean
-}
+    ${mediaqueries.tablet`
+        margin-bottom: 60px;
+    `};
 
-interface ArticlesListItemProps {
-    article: IArticle
-    narrow?: boolean
-}
+    ${mediaqueries.phablet`
+        display: none;
+    `};
+`
 
-function ArticlesList({ articles, alwaysShowAllDetails }: ArticlesListProps) {
-    if (!articles) return null
+export const ViewTabContainer = styled.div`
+    display: flex;
+    align-items: center;
 
-    const hasOnlyOneArticle = articles.length === 1
+    ${mediaqueries.tablet`
+        display: none;
+    `};
+`
 
-    /**
-     * We're taking the flat array of articles [{}, {}, {}...]
-     * and turning it into an array of pairs of articles [[{}, {}], [{}, {}], [{}, {}]...]
-     * This makes it simpler to create the grid we want
-     */
-    const articlePairs = articles.reduce((result, value, index, array) => {
-        if (index % 2 === 0) {
-            result.push(array.slice(index, index + 2))
+export const HeadingContainer = styled.div`
+    margin: 100px 0;
+
+    ${mediaqueries.desktop`
+        width: 80%;
+    `}
+
+    ${mediaqueries.tablet`
+        width: 100%;
+    `}
+`
+
+export const HeroHeading = styled.h1<IWithTheme>`
+    font-style: normal;
+    font-weight: 600;
+    font-size: 52px;
+    line-height: 1.15;
+    color: ${p => p.theme.colors.primary};
+
+    a {
+        color: ${p => p.theme.colors.accent};
+    }
+
+    ${mediaqueries.desktop`
+    font-size: 38px
+`}
+
+    ${mediaqueries.phablet`
+    font-size: 32px;
+`}
+`
+
+export const GridButton = styled.button<{ active: boolean } & IWithTheme>`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    background: transparent;
+    transition: background 0.25s;
+
+    &:not(:last-child) {
+        margin-right: 30px;
+    }
+
+    &:hover {
+        background: ${p => p.theme.colors.hover};
+    }
+
+    &[data-a11y='true']:focus::after {
+        content: '';
+        position: absolute;
+        left: -10%;
+        top: -10%;
+        width: 120%;
+        height: 120%;
+        border: 2px solid ${p => p.theme.colors.accent};
+        background: rgba(255, 255, 255, 0.01);
+        border-radius: 50%;
+    }
+
+    svg {
+        opacity: ${p => (p.active ? 1 : 0.25)};
+        transition: opacity 0.2s;
+
+        path {
+            fill: ${p => p.theme.colors.primary};
         }
-        return result
-    }, [])
+    }
+`
 
-    return (
-        <ArticlesListContainer alwaysShowAllDetails={alwaysShowAllDetails}>
-            {articlePairs.map((ap, index) => {
-                const isEven = index % 2 !== 0
-                const isOdd = index % 2 !== 1
+export const ViewTab = styled.button<{ active: boolean } & IWithTheme>`
+    max-width: 430px;
+    font-weight: bold;
+    line-height: 1.15;
+    color: ${p => p.theme.colors.primary};
+    margin-bottom: 2px;
 
-                return (
-                    <List
-                        key={index}
-                        hasOnlyOneArticle={hasOnlyOneArticle}
-                        reverse={isEven}
-                    >
-                        <ListItem article={ap[0]} narrow={isEven} />
-                        <ListItem article={ap[1]} narrow={isOdd} />
-                    </List>
-                )
-            })}
-        </ArticlesListContainer>
-    )
-}
+    a {
+        color: ${p => p.theme.colors.primary};
+    }
 
-export default ArticlesList
+    &:not(:last-child) {
+        margin-right: 30px;
+    }
 
-const ListItem = ({ article, narrow }: ArticlesListItemProps) => {
-    if (!article) return null
+    background-image: linear-gradient(120deg, white 0%, white 100%);
+    background-repeat: no-repeat;
+    background-size: ${p => (p.active ? '75%' : '0')} 0.2em;
+    background-position: 50% 100%;
+    padding: 6px 0;
+    transition: background 100ms ease-in;
 
-    const hasOverflow = narrow && article.title.length > 35
-    const imageSource = narrow ? article.hero.narrow : article.hero.regular
-    const hasHeroImage =
-        Object.keys(imageSource).length !== 0 &&
-        imageSource.constructor === Object
+    &:hover {
+        background-image: linear-gradient(
+            120deg,
+            rgba(255, 255, 255, 0.5) 0%,
+            rgba(255, 255, 255, 0.5) 100%
+        );
+        background-size: ${p => (p.active ? '75%' : '66%')} 0.2em;
+    }
 
-    return (
-        <ArticleLink to={article.link} data-a11y='false'>
-            <Item>
-                <ImageContainer narrow={narrow}>
-                    {hasHeroImage ? (
-                        <Image src={imageSource} />
-                    ) : (
-                        <Placeholder />
-                    )}
-                </ImageContainer>
-                <div>
-                    <Title dark hasOverflow={hasOverflow}>
-                        {article.title}
-                    </Title>
-                    <Excerpt narrow={narrow} hasOverflow={hasOverflow}>
-                        {article.excerpt}
-                    </Excerpt>
-                    <MetaData>
-                        {article.date} · {article.timeToRead} min read
-                    </MetaData>
-                </div>
-            </Item>
-        </ArticleLink>
-    )
-}
+    &[data-a11y='true']:focus::after {
+        content: '';
+        position: absolute;
+        left: -10%;
+        top: -10%;
+        width: 120%;
+        height: 120%;
+        border: 2px solid ${p => p.theme.colors.accent};
+        background: rgba(255, 255, 255, 0.01);
+        border-radius: 50%;
+    }
+`
 
 const wide = '1fr'
 const narrow = '457px'
 
-const limitToTwoLines = css`
+export const limitToTwoLines = css`
     text-overflow: ellipsis;
     overflow-wrap: normal;
     -webkit-line-clamp: 2;
@@ -118,7 +167,7 @@ const limitToTwoLines = css`
     `}
 `
 
-const showDetails = css`
+export const showDetails = css`
     p {
         display: -webkit-box;
     }
@@ -128,12 +177,14 @@ const showDetails = css`
     }
 `
 
-const ArticlesListContainer = styled.div<{ alwaysShowAllDetails?: boolean }>`
+export const ArticlesListContainer = styled.div<{
+    alwaysShowAllDetails?: boolean
+}>`
     transition: opacity 0.25s;
     ${p => p.alwaysShowAllDetails && showDetails}
 `
 
-const listTile = p => css`
+export const listTile = p => css`
     position: relative;
     display: grid;
     grid-template-columns: ${p.reverse
@@ -159,7 +210,7 @@ const listTile = p => css`
     `}
 `
 
-const listItemRow = p => css`
+export const listItemRow = p => css`
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 488px;
@@ -189,7 +240,7 @@ const listItemRow = p => css`
     `}
 `
 
-const listItemTile = p => css`
+export const listItemTile = p => css`
     position: relative;
 
     ${mediaqueries.tablet`
@@ -209,23 +260,23 @@ const listItemTile = p => css`
 `
 
 // If only 1 article, dont create 2 rows.
-const listRow = p => css`
+export const listRow = p => css`
     display: grid;
     grid-template-rows: ${p.hasOnlyOneArticle ? '1fr' : '1fr 1fr'};
 `
 
-const List = styled.div<{
+export const List = styled.div<{
     reverse: boolean
     hasOnlyOneArticle: boolean
 }>`
     ${listTile}
 `
 
-const Item = styled.div`
+export const Item = styled.div`
     ${listItemTile}
 `
 
-const ImageContainer = styled.div<{ narrow: boolean }>`
+export const ImageContainer = styled.div<{ narrow: boolean }>`
     position: relative;
     height: 280px;
     box-shadow: 0 30px 60px -10px rgba(0, 0, 0, ${p => (p.narrow ? 0.22 : 0.3)}),
@@ -252,7 +303,7 @@ const ImageContainer = styled.div<{ narrow: boolean }>`
     `}
 `
 
-const Title = styled(h2)<
+export const Title = styled(h2)<
     {
         dark?: boolean
         hasOverflow: boolean
@@ -280,36 +331,36 @@ const Title = styled(h2)<
     `}
 `
 
-const Excerpt = styled.p<
+export const Excerpt = styled.p<
     {
         hasOverflow: boolean
         narrow: boolean
     } & IWithTheme
 >`
-  ${limitToTwoLines};
-  font-size: 16px;
-  margin-bottom: 10px;
-  color: ${p => p.theme.colors.grey};
-  display: ${p => (p.hasOverflow ? 'none' : 'box')};
-  max-width: ${p => (p.narrow ? '415px' : '515px')};
+    ${limitToTwoLines};
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: ${p => p.theme.colors.grey};
+    display: ${p => (p.hasOverflow ? 'none' : 'box')};
+    max-width: ${p => (p.narrow ? '415px' : '515px')};
 
-  ${mediaqueries.desktop`
-    display: -webkit-box;
-  `}
+    ${mediaqueries.desktop`
+        display: -webkit-box;
+    `}
 
-  ${mediaqueries.phablet`
-    margin-bottom; 15px;
-  `}
+    ${mediaqueries.phablet`
+        margin-bottom; 15px;
+    `}
 
-  ${mediaqueries.phablet`
-    max-width: 100%;
-    padding:  0 20px;
-    margin-bottom: 20px;
-    -webkit-line-clamp: 3;
-  `}
+    ${mediaqueries.phablet`
+        max-width: 100%;
+        padding:  0 20px;
+        margin-bottom: 20px;
+        -webkit-line-clamp: 3;
+    `}
 `
 
-const MetaData = styled.div<IWithTheme>`
+export const MetaData = styled.div<IWithTheme>`
     font-weight: 600;
     font-size: 16px;
     color: ${p => p.theme.colors.grey};
@@ -321,7 +372,7 @@ const MetaData = styled.div<IWithTheme>`
     `}
 `
 
-const ArticleLink = styled<any>(Link)`
+export const ArticleLink = styled<any>(Link)`
     position: relative;
     display: block;
     width: 100%;

@@ -2,7 +2,7 @@
 
 // https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-transformer-sharp/src/fragments.js
 
-export const articles = `
+export const queryArticles = `
 {
     articles: allArticle(
         sort: { fields: [date, title], order: DESC }
@@ -66,7 +66,7 @@ export const articles = `
     }
 }`
 
-export const tags = `
+export const queryTags = `
 {
     tags: allTag {
         edges {
@@ -119,7 +119,7 @@ export const tags = `
     }
 }`
 
-export const authors = `
+export const queryAuthors = `
 {
     authors: allAuthor {
         edges {

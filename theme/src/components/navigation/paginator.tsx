@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import mediaqueries from '@styles/media'
+import { mediaqueries } from '@styles/media'
 import { range } from '@utils'
 
 import { IPaginator } from '@types'
@@ -21,7 +21,7 @@ import { IPaginator } from '@types'
  * Receives the gatsby-paginator props
  */
 
-class Paginator extends Component<IPaginator, {}> {
+export class Paginator extends Component<IPaginator, {}> {
     maxPages = 3
     count = this.props.pageCount
     current = this.props.index
@@ -155,8 +155,6 @@ class Paginator extends Component<IPaginator, {}> {
         )
     }
 }
-
-export default Paginator
 
 const paginationItemMixin = p => css`
     line-height: 1;

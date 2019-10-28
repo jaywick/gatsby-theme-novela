@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import styled from '@emotion/styled'
-import { keyframes } from '@emotion/core'
 import { useColorMode } from 'theme-ui'
 
 import { Icons } from '@icons'
@@ -12,7 +10,15 @@ import {
     getWindowDimensions,
     getBreakpointFromTheme,
 } from '@utils'
-import { IWithTheme } from '@types'
+import {
+    MenuFloat,
+    MenuText,
+    MenuButton,
+    MenuShare,
+    Hidden,
+    MENU_WIDTH,
+    MENU_HEIGHT,
+} from './styles'
 
 interface MenuFloatState {
     x: number
@@ -20,14 +26,7 @@ interface MenuFloatState {
     show: boolean
 }
 
-/**
- * Values we get to be able to ensure the positionting context are correct!
- * Padding is derviced from the CSS value in Editor
- */
-const MENU_WIDTH: number = 225
-const MENU_HEIGHT: number = 46
-
-function ArticelShare() {
+export const ArticleShare = () => {
     const [colorMode] = useColorMode()
     const [text, setText] = useState('')
     const [focus, setFocus] = useState(false)
@@ -44,7 +43,7 @@ function ArticelShare() {
     useEffect(() => {
         const events: string[] = ['keydown', 'keyup', 'mouseup', 'resize']
 
-        function handleMenuFloatSettings() {
+        const handleMenuFloatSettings = () => {
             /**
              * Why is there a setTimeout here?
              * There is an issue with clicking on highlited text and the browsers ability
@@ -136,7 +135,7 @@ function ArticelShare() {
         }, 0)
     }, [show])
 
-    function handleCopyClick() {
+    const handleCopyClick = () => {
         const tempInput = document.createElement('input')
         document.body.appendChild(tempInput)
         tempInput.setAttribute('value', text)
@@ -197,8 +196,6 @@ function ArticelShare() {
     )
 }
 
-export default ArticelShare
-
 function ReferralLink({ disabled, share, title, children }) {
     function handleClick(event) {
         event.preventDefault()
@@ -224,7 +221,7 @@ function ReferralLink({ disabled, share, title, children }) {
     )
 }
 
-function truncate(text: string) {
+const truncate = (text: string) => {
     if (text.length <= 100) {
         return text
     }
@@ -232,7 +229,7 @@ function truncate(text: string) {
     return text.slice(0, 100).toString() + '…'
 }
 
-function generateShare(shareText: string) {
+const generateShare = (shareText: string) => {
     if (!shareText) return {}
     const url = window.location.href
 
@@ -242,112 +239,14 @@ function generateShare(shareText: string) {
             `https://dev.to/new?prefill=` +
             [
                 `---`,
-                `title: ` + truncate(shareText),
+                `title: ${truncate(shareText)}`,
                 `---`,
                 '',
-                '> ' + shareText.split('\n').join('\n> '),
+                `> ${shareText.split('\n').join('\n> ')}`,
                 '',
-                ' — ' + url,
+                ` — ${url}`,
             ]
                 .map(encodeURI)
                 .join(encodeURI('\n')),
     }
 }
-
-const popUpwards = keyframes`
-  0% {
-    transform:matrix(.97,0,0,1,0,12);
-    opacity:0
-  }
-  20% {
-    transform:matrix(.99,0,0,1,0,2);
-    opacity:.7
-  }
-  40% {
-    transform:matrix(1,0,0,1,0,-1);
-    opacity:1
-  }
-  70% {
-    transform:matrix(1,0,0,1,0,0);
-    opacity:1
-  }
-  100% {
-    transform:matrix(1,0,0,1,0,0);
-    opacity:1
-  }
-`
-
-const MenuFloat = styled.div<IWithTheme>`
-    position: absolute;
-    align-items: center;
-    z-index: 1;
-    width: ${MENU_WIDTH}px;
-    height: ${MENU_HEIGHT}px;
-    padding: 7px 11px 7px 19px;
-    color: ${p => p.theme.colors.grey};
-    background: ${p => (p.isDark ? '#fafafa' : '#000')};
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: 600;
-    transition: left 75ms ease-out, right 75ms ease-out, background 200ms;
-    animation: ${popUpwards} 200ms forwards;
-
-    &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        bottom: -8px;
-        width: 0;
-        height: 0;
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-top: 8px solid ${p => (p.isDark ? '#fafafa' : '#000')};
-        transition: border-color 200ms;
-    }
-
-    svg {
-        path {
-            fill: ${p => (p.isDark ? '#000' : '#fff')};
-        }
-    }
-`
-
-const MenuText = styled.span`
-    margin-right: 11px;
-`
-
-const Hidden = styled.div`
-    width: 0px;
-    height: 0px;
-    visibility: hidden;
-    opacity: 0;
-`
-
-const MenuShare = styled.a<{ disabled: boolean }>`
-    display: flex;
-    align-items: center;
-    padding: 16px 11px;
-    cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
-
-    svg {
-        path {
-            fill: ${p => (p.disabled ? '#F89797' : '')};
-        }
-    }
-`
-
-const MenuButton = styled.button`
-    display: inline-block;
-    padding: 16px 11px;
-`
-
-const MenuDivider = styled.div`
-    display: inline-block;
-    height: 17px;
-    width: 1px;
-    position: relative;
-    margin: 0 8px;
-    background: rgba(115, 115, 125, 0.3);
-`

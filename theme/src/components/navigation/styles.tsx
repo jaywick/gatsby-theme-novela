@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { IWithTheme } from '@types'
-import mediaqueries from '@styles/media'
+import { mediaqueries } from '@styles/media'
 
 export const FooterContainer = styled.div<IWithTheme>`
     position: relative;

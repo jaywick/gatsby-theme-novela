@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 
-import mediaqueries from '@styles/media'
+import { mediaqueries } from '@styles/media'
 import { IWithTheme } from '@types'
 
 /**

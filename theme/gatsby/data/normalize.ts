@@ -36,17 +36,17 @@ const normalizeAvatar = (author: IAuthor) => {
     return avatar
 }
 
-export const articles = ({ node }) => ({
+export const normalizeArticles = ({ node }) => ({
     ...node,
     hero: normalizeHero(node),
 })
 
-export const tags = ({ node }) => ({
+export const normalizeTags = ({ node }) => ({
     ...node,
     hero: normalizeHero(node),
 })
 
-export const authors = ({ node }) => ({
+export const normalizeAuthors = ({ node }) => ({
     ...node,
     avatar: normalizeAvatar(node),
 })

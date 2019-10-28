@@ -6,7 +6,7 @@ import { Link } from 'gatsby'
 import { h3 } from '@components/headings'
 import { Image } from '@components/image'
 
-import mediaqueries from '@styles/media'
+import { mediaqueries } from '@styles/media'
 
 import { IArticle, IWithTheme } from '@types'
 
@@ -22,9 +22,13 @@ import { IArticle, IWithTheme } from '@types'
  * as the next one suggested article, which requires special styling we didn't want to
  * mix into the generic list component.
  */
-const ArticlesNext = ({ articles }: { articles: IArticle[] }) => {
-    if (!articles) return null
+export const ArticlesNext = ({ articles }: { articles: IArticle[] }) => {
+    if (!articles) {
+        return null
+    }
+
     const numberOfArticles = articles.length
+
     return (
         <Grid numberOfArticles={numberOfArticles}>
             <GridItem article={articles[0]} />
@@ -32,8 +36,6 @@ const ArticlesNext = ({ articles }: { articles: IArticle[] }) => {
         </Grid>
     )
 }
-
-export default ArticlesNext
 
 const GridItem = ({
     article,

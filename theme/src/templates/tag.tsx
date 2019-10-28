@@ -1,14 +1,14 @@
 import React from 'react'
-import styled from '@emotion/styled'
 
-import Section from '@components/section'
+import { Section } from '@components/section'
 import { Layout } from '@components/layout'
-import Paginator from '@components/navigation/paginator'
+import { Paginator } from '@components/navigation/paginator'
 
-import TagHero from '../sections/filtered/Tag.Hero'
-import FilteredArticles from '../sections/filtered/Filtered.Articles'
+import { TagHero } from '../sections/filtered/tag-hero'
+import { FilteredArticles } from '../sections/filtered/articles'
+import { AuthorPaginator, AuthorsGradient } from './styles'
 
-function TagsPage({ location, pageContext }) {
+export const TagsPage = ({ location, pageContext }) => {
     const tag = pageContext.additionalContext.tag
     const articles = pageContext.group
 
@@ -25,21 +25,3 @@ function TagsPage({ location, pageContext }) {
         </Layout>
     )
 }
-
-export default TagsPage
-
-const AuthorsGradient = styled.div<any>`
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 590px;
-    z-index: 0;
-    pointer-events: none;
-    background: ${p => p.theme.colors.gradient};
-    transition: ${p => p.theme.colorModeTransition};
-`
-
-const AuthorPaginator = styled.div`
-    text-align: center;
-`

@@ -1,20 +1,18 @@
 import React, { useContext } from 'react'
-import styled from '@emotion/styled'
 
-import Section from '@components/section'
+import { Section } from '@components/section'
 import { SEO } from '@components/seo'
 import { Layout } from '@components/layout'
 
-import ArticlesHero from '../sections/home/Articles.Hero'
-import { IWithTheme } from '@types'
+import { ArticlesHero } from '../sections/home/articles-hero'
 import { HomeList } from '../sections/home/home-list'
-import { ViewTabContext } from '../sections/home/ViewTabContext'
+import { ViewTabContext } from '../sections/home/view-tab-context'
+import { ArticlesGradient } from './styles'
 
-function ArticlesPage({ location, pageContext }) {
+export const ArticlesPage = ({ location, pageContext }) => {
     const authors = pageContext.additionalContext.authors
 
     const { viewTab } = useContext(ViewTabContext)
-    console.log(viewTab)
 
     return (
         <Layout>
@@ -27,17 +25,3 @@ function ArticlesPage({ location, pageContext }) {
         </Layout>
     )
 }
-
-export default ArticlesPage
-
-const ArticlesGradient = styled.div<IWithTheme>`
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 590px;
-    z-index: 0;
-    pointer-events: none;
-    background: ${p => p.theme.colors.gradient};
-    transition: ${p => p.theme.colorModeTransition};
-`

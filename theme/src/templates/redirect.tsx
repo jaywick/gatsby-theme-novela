@@ -8,10 +8,8 @@ interface Props {
     location: string
 }
 
-const ArticleRedirect = (props: Props) => {
+export const ArticleRedirect = (props: Props) => {
     useEffect(() => void navigate(props.pageContext.redirect), [])
 
     return null
 }
-
-export default ArticleRedirect

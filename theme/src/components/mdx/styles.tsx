@@ -1,5 +1,5 @@
 import css from '@emotion/css'
-import mediaqueries from '@styles/media'
+import { mediaqueries } from '@styles/media'
 import { IWithTheme } from '@types'
 import { toKebabCase } from '@utils'
 import styled from '@emotion/styled'

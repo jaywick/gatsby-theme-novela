@@ -1,4 +1,4 @@
-import mediaqueries from '@styles/media'
+import { mediaqueries } from '@styles/media'
 import { IWithTheme } from '@types'
 import styled from '@emotion/styled'
 

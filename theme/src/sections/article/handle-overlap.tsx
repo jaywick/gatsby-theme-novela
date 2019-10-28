@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from '@emotion/styled'
-import throttle from 'lodash/throttle'
+import { throttle } from 'lodash'
 
 interface OverlapProps {
     children: React.ReactNode[]
@@ -21,14 +21,14 @@ interface OverlapState {
  * we want to hide the top element.
  */
 
-function HandleOverlap(props: OverlapProps) {
+export const HandleOverlap = (props: OverlapProps) => {
     const asideRef = useRef<HTMLDivElement>(null)
     const [isOverlapping, setIsOverlapping] = useState<OverlapState>(
         false as any,
     )
 
     // Is the current element within the window's frame? That's all we care about!
-    function isVisible(element: HTMLElement): boolean {
+    const isVisible = (element: HTMLElement): boolean => {
         const rect = element.getBoundingClientRect()
 
         return rect.top < window.innerHeight && rect.bottom >= 0
@@ -39,7 +39,7 @@ function HandleOverlap(props: OverlapProps) {
      * we've added is a small BUFFER because we don't want it to disppear as it touches.
      * We prefer to start the fade out a few pixels before!
      */
-    function collide(fixedElement: HTMLElement, node: HTMLElement): boolean {
+    const collide = (fixedElement: HTMLElement, node: HTMLElement): boolean => {
         const BUFFER = 80
         const rect1 = fixedElement.getBoundingClientRect()
         const rect2 = node.getBoundingClientRect()
@@ -96,8 +96,6 @@ function HandleOverlap(props: OverlapProps) {
         </OverlapContainer>
     )
 }
-
-export default HandleOverlap
 
 const OverlapContainer = styled.div<{ isOverlapping: boolean }>`
     user-select: ${p => (p.isOverlapping ? 'none' : 'initial')};

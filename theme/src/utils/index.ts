@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import throttle from 'lodash/throttle'
+import { throttle } from 'lodash'
 
 import { theme } from '../gatsby-plugin-theme-ui'
 

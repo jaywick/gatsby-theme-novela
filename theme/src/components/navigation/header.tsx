@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, SyntheticEvent } from 'react'
 import styled from '@emotion/styled'
 import { Link, navigate } from 'gatsby'
 import { useColorMode } from 'theme-ui'
 
-import Section from '@components/Section'
+import { Section } from '@components/section'
 import { Logo } from '@components/logo'
 
 import { Icons } from '@icons'
-import mediaqueries from '@styles/media'
+import { mediaqueries } from '@styles/media'
 import { getWindowDimensions, getBreakpointFromTheme } from '@utils'
 import { IWithTheme } from '@types'
 
-function NavigationHeader() {
+export const NavigationHeader = () => {
     const [showBackArrow, setShowBackArrow] = useState<boolean>(false)
     const [previousPath, setPreviousPath] = useState<string>('/')
 
@@ -71,13 +71,11 @@ function NavigationHeader() {
     )
 }
 
-export default NavigationHeader
-
-function DarkModeToggle() {
+const DarkModeToggle = () => {
     const [colorMode, setColorMode] = useColorMode()
     const isDark = colorMode === `dark`
 
-    function toggleColorMode(event) {
+    const toggleColorMode = (event: SyntheticEvent) => {
         event.preventDefault()
         setColorMode(isDark ? `light` : `dark`)
     }

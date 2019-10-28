@@ -1,22 +1,22 @@
 import React, { useRef, useState, useEffect } from 'react'
 import styled from '@emotion/styled'
-import throttle from 'lodash/throttle'
+import { throttle } from 'lodash'
 import { graphql, useStaticQuery } from 'gatsby'
 
 import { Layout } from '@components/layout'
 import { MDX } from '@components/mdx'
 import { Progress } from '@components/progress'
-import Section from '@components/section'
+import { Section } from '@components/section'
 
-import mediaqueries from '@styles/media'
+import { mediaqueries } from '@styles/media'
 import { debounce } from '@utils'
 
-import ArticleAside from '../sections/article/Article.Aside'
-import ArticleHero from '../sections/article/Article.Hero'
-import ArticleControls from '../sections/article/Article.Controls'
-import ArticlesNext from '../sections/article/Article.Next'
-import ArticleSEO from '../sections/article/Article.SEO'
-import ArticleShare from '../sections/article/Article.Share'
+import { ArticleAside } from '../sections/article/aside'
+import { ArticleHero } from '../sections/article/hero'
+import { ArticleControls } from '../sections/article/controls'
+import { ArticlesNext } from '../sections/article/next'
+import { ArticleSEO } from '../sections/article/seo'
+import { ArticleShare } from '../sections/article/share'
 import { IWithTheme, IArticle, IAuthor, ITag } from '@types'
 import { Tags } from '@components/tags'
 
@@ -44,7 +44,7 @@ const siteQuery = graphql`
     }
 `
 
-function Article({ pageContext, location }: TemplateProps) {
+export const Article = ({ pageContext, location }: TemplateProps) => {
     const contentSectionRef = useRef<HTMLElement>(null)
 
     const [hasCalculated, setHasCalculated] = useState<boolean>(false)
@@ -119,8 +119,6 @@ function Article({ pageContext, location }: TemplateProps) {
         </Layout>
     )
 }
-
-export default Article
 
 const MobileControls = styled.div`
     position: relative;

@@ -1,6 +1,15 @@
 import React from 'react'
 
-export default props => (
+interface Props {
+    body: any
+    bodyAttributes: any
+    headComponents: any
+    htmlAttributes: any
+    postBodyComponents: any
+    preBodyComponents: any
+}
+
+export default (props: Props) => (
     <html {...props.htmlAttributes}>
         <head>
             <meta charSet='utf-8' />

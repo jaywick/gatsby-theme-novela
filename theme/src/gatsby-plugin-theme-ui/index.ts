@@ -34,3 +34,5 @@ export const theme = merge({
 })
 
 export type IColors = typeof colors
+
+export default theme

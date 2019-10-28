@@ -1,16 +1,15 @@
 import React from 'react'
-import styled from '@emotion/styled'
 
-import Section from '@components/section'
 import { SEO } from '@components/seo'
 import { Layout } from '@components/layout'
-import Paginator from '@components/navigation/paginator'
 
-import AuthorHero from '../sections/filtered/Author.Hero'
-import FilteredArticles from '../sections/filtered/Filtered.Articles'
-import { IWithTheme } from '@types'
+import { AuthorHero } from '../sections/filtered/author-hero'
+import { FilteredArticles } from '../sections/filtered/articles'
+import { Section } from '@components/section'
+import { Paginator } from '@components/navigation/paginator'
+import { AuthorPaginator, AuthorsGradient } from './styles'
 
-function ArticlesPage({ location, pageContext }) {
+export const ArticlesPage = ({ location, pageContext }) => {
     const author = pageContext.additionalContext.author
     const articles = pageContext.group
 
@@ -32,21 +31,3 @@ function ArticlesPage({ location, pageContext }) {
         </Layout>
     )
 }
-
-export default ArticlesPage
-
-const AuthorsGradient = styled.div<IWithTheme>`
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 590px;
-    z-index: 0;
-    pointer-events: none;
-    background: ${p => p.theme.colors.gradient};
-    transition: ${p => p.theme.colorModeTransition};
-`
-
-const AuthorPaginator = styled.div`
-    text-align: center;
-`

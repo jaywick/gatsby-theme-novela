@@ -16,7 +16,7 @@ const toEm = (size: number) => size / 16 + 'em'
  *    ${mediaqueries.tablet_up` width: 200px; `};
  */
 
-const mediaqueries = theme.breakpoints.reduce(
+export const mediaqueries = theme.breakpoints.reduce(
     (acc, [label, size], i) => ({
         ...acc,
         // max-width media query e.g. mediaqueries.desktop
@@ -35,7 +35,3 @@ const mediaqueries = theme.breakpoints.reduce(
     }),
     {},
 )
-
-export const media = mediaqueries
-
-export default mediaqueries

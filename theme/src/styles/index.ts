@@ -1,4 +1,4 @@
 import { globalStyles } from '@styles/global'
-import { media } from '@styles/media'
+import { mediaqueries } from '@styles/media'
 
-export { globalStyles, media }
+export { globalStyles, mediaqueries }

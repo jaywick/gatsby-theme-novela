@@ -1,6 +1,10 @@
-import * as dotenv from 'dotenv'
-import * as normalize from '../data/normalize'
-import * as query from '../data/query'
+import dotenv from 'dotenv'
+import {
+    normalizeArticles,
+    normalizeTags,
+    normalizeAuthors,
+} from '../data/normalize'
+import { queryArticles, queryTags, queryAuthors } from '../data/query'
 import { resolve as resolvePath } from 'path'
 import { buildPaginatedPath, byDateSorter, slugifyWithBase } from './utils'
 import { IAuthor, IArticle, IConfig, IPluginApi, ITag } from '@types'
@@ -187,28 +191,28 @@ export const createPages = async (
     } = pluginApi
     const { basePath = '/', pageLength = 6 } = themeOptions
 
-    let allAuthors: IAuthor[] = []
     let allArticles: IArticle[] = []
+    let allAuthors: IAuthor[] = []
     let allTags: ITag[] = []
 
     log('Config basePath', basePath)
 
     try {
         log('Querying Authors & Aritcles source:', 'Local')
-        const articlesQuery = await graphql(query.articles)
-        const authorsQuery = await graphql(query.authors)
-        const tagsQuery = await graphql(query.tags)
+        const articlesQuery = await graphql(queryArticles)
+        const authorsQuery = await graphql(queryAuthors)
+        const tagsQuery = await graphql(queryTags)
 
-        allAuthors = articlesQuery.data.authors.edges.map(normalize.authors)
-        allTags = authorsQuery.data.tags.edges.map(normalize.tags)
-        allArticles = tagsQuery.data.articles.edges.map(normalize.articles)
+        allArticles = articlesQuery.data.articles.edges.map(normalizeArticles)
+        allAuthors = authorsQuery.data.authors.edges.map(normalizeAuthors)
+        allTags = tagsQuery.data.tags.edges.map(normalizeTags)
     } catch (error) {
         console.error(error)
     }
 
     const articles = allArticles.sort(byDateSorter)
-    const tags = uniqBy(allTags, 'key')
     const authors = uniqBy(allAuthors, 'name')
+    const tags = uniqBy(allTags, 'key')
 
     if (articles.length === 0) {
         throw new Error(

@@ -6,7 +6,7 @@ import { Link } from 'gatsby'
 import { h2 } from '@components/headings'
 import { Image, Placeholder } from '@components/image'
 
-import mediaqueries from '@styles/media'
+import { mediaqueries } from '@styles/media'
 import { ITag, IWithTheme } from '@types'
 
 interface TagsListProps {

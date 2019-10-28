@@ -1,11 +1,8 @@
 import React, { useState, useRef, useEffect, ReactNode } from 'react'
-import styled from '@emotion/styled'
-import throttle from 'lodash/throttle'
-
-import HandleOverlap from './Article.HandleOverlap'
-
-import mediaqueries from '@styles/media'
+import { throttle } from 'lodash'
+import { HandleOverlap } from './handle-overlap'
 import { clamp } from '@utils'
+import { AsideContainer, Align } from './styles'
 
 interface AsideProps {
     children: ReactNode[] | ReactNode
@@ -27,7 +24,7 @@ interface AsideProps {
  *                  |  content  |
  *
  */
-function Aside({ contentHeight, children }: AsideProps) {
+export const ArticleAside = ({ contentHeight, children }: AsideProps) => {
     const progressRef = useRef<HTMLDivElement>(null)
 
     const [progress, setProgress] = useState<number>(0)
@@ -90,36 +87,3 @@ function Aside({ contentHeight, children }: AsideProps) {
         </AsideContainer>
     )
 }
-
-export default Aside
-
-const AsideContainer = styled.aside`
-    display: flex;
-    margin: 0 auto;
-    max-width: 1140px;
-
-    ${mediaqueries.desktop_medium`
-    display: none;
-  `}
-`
-
-const Align = React.memo(styled.div<{
-    show: boolean
-    shouldFixAside: boolean
-    imageOffset: number
-}>`
-    position: ${p => (p.shouldFixAside ? 'fixed' : 'absolute')};
-    display: flex;
-    transform: translateY(0px);
-    top: ${p => (p.shouldFixAside ? 0 : p.imageOffset)}px;
-    align-items: ${p => (p.shouldFixAside ? 'center' : 'flex-start')};
-    height: 100vh;
-    z-index: 3;
-
-    opacity: ${p => (p.show ? 1 : 0)};
-    visibility: ${p => (p.show ? 'visible' : 'hidden')};
-    transition: ${p =>
-        p.show
-            ? 'opacity 0.4s linear, visibility 0.4s linear'
-            : 'opacity 0.2s linear, visibility 0.4s linear'};
-`)
