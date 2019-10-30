@@ -9,7 +9,7 @@ import { Section } from '@components/section'
 import { Paginator } from '@components/navigation/paginator'
 import { AuthorPaginator, AuthorsGradient } from './styles'
 
-export const ArticlesPage = ({ location, pageContext }) => {
+const ArticlesPage = ({ location, pageContext }) => {
     const author = pageContext.additionalContext.author
     const articles = pageContext.group
 
@@ -31,3 +31,5 @@ export const ArticlesPage = ({ location, pageContext }) => {
         </Layout>
     )
 }
+
+export default ArticlesPage

@@ -18,7 +18,7 @@ dotenv.config()
 type Templates = 'home' | 'article' | 'author' | 'tag' | 'redirect'
 
 const resolveTemplate = (filename: Templates) => {
-    return resolvePath(__dirname, '../../src/templates', filename + '.tsx')
+    return resolvePath(__dirname, '../../src/templates', `${filename}.tsx`)
 }
 
 const createArticlePages = (opts: {
@@ -29,13 +29,13 @@ const createArticlePages = (opts: {
     basePath: string
     pageLength: number
 }) => {
-    log('Creating', 'articles page')
+    log('Creating', 'home page')
     createPaginatedPages({
         edges: opts.articles,
         pathPrefix: opts.basePath,
         createPage: opts.createPage,
         pageLength: opts.pageLength,
-        pageTemplate: resolveTemplate('article'),
+        pageTemplate: resolveTemplate('home'),
         buildPath: buildPaginatedPath,
         context: {
             authors: opts.authors,
@@ -162,8 +162,6 @@ const createAuthorPages = (opts: {
             article.author.toLowerCase().includes(author.name.toLowerCase()),
         )
 
-        const path = slugifyWithBase(author.name, '/tags')
-
         createPaginatedPages({
             edges: articlesTheAuthorHasWritten,
             pathPrefix: author.permaLink,
@@ -173,7 +171,7 @@ const createAuthorPages = (opts: {
             buildPath: buildPaginatedPath,
             context: {
                 author,
-                originalPath: path,
+                originalPath: '/about',
                 skip: opts.pageLength,
                 limit: opts.pageLength,
             },

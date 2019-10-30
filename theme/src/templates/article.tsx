@@ -47,7 +47,7 @@ const siteQuery = graphql`
     }
 `
 
-export const Article = ({ pageContext, location }: TemplateProps) => {
+const Article = ({ pageContext, location }: TemplateProps) => {
     const contentSectionRef = useRef<HTMLElement>(null)
 
     const [hasCalculated, setHasCalculated] = useState<boolean>(false)
@@ -122,3 +122,5 @@ export const Article = ({ pageContext, location }: TemplateProps) => {
         </Layout>
     )
 }
+
+export default Article

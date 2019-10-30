@@ -8,7 +8,7 @@ import { ArticlesHero } from '../sections/home/articles-hero'
 import { HomeList } from '../sections/home/home-list'
 import { ArticlesGradient } from './styles'
 
-export const ArticlesPage = ({ location, pageContext }) => {
+const ArticlesPage = ({ location, pageContext }) => {
     const authors = pageContext.additionalContext.authors
 
     return (
@@ -22,3 +22,5 @@ export const ArticlesPage = ({ location, pageContext }) => {
         </Layout>
     )
 }
+
+export default ArticlesPage
