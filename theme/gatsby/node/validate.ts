@@ -12,7 +12,8 @@ export const validate = ({
     const fileNode = getNode(mdxNode.parent) as IFileNode
 
     const imageTags = Array.from(
-        matchAll(mdxNode.rawBody, /!\[(.*?)\]\((.+?)\)/g),
+        // regex captures images with format ![alt text](path/to/image "title text")
+        matchAll(mdxNode.rawBody, /!\[(.*?)\]\((.+?)( \".+?\")?\)/g),
     )
 
     const localImages = imageTags
@@ -28,7 +29,9 @@ export const validate = ({
         const imagePath = join(fileNode.absolutePath, '..', filename)
 
         if (!pathExistsSync(imagePath)) {
-            reporter.error(`Missing referenced image ${imagePath}`)
+            reporter.error(
+                `Missing referenced image in ${fileNode.absolutePath} called '${filename}'`,
+            )
         }
 
         if (isBlank(alt)) {
