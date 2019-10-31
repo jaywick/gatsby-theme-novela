@@ -18,6 +18,7 @@ import { Zoom } from '@components/image'
 import { Note } from '@components/note'
 import { YouTube } from '@components/youtube'
 import { Vimeo } from '@components/vimeo'
+import { ImageCredit } from '@components/image-credit'
 import { MDXBody } from './styles'
 
 const components = {
@@ -40,9 +41,10 @@ const components = {
     thead: Head,
     th: HeadCell,
     td: Cell,
+    ImageCredit,
     Note,
-    YouTube,
     Vimeo,
+    YouTube,
 }
 
 export const MDX = ({ content, children, ...props }) => {
