@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { NodePluginArgs } from 'gatsby'
 import { Node } from 'gatsby'
-import { IColors } from '@gatsby-plugin-theme-ui'
+import { IColors } from '../gatsby-plugin-theme-ui'
 
 export interface IPaginator {
     pageCount: number
