@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { SEO } from '@components/seo'
-import { Layout } from '@components/layout'
+import { SEO } from '~components/seo'
+import { Layout } from '~components/layout'
 
 import { AuthorHero } from '../sections/filtered/author-hero'
 import { FilteredArticles } from '../sections/filtered/articles'
-import { Section } from '@components/section'
-import { Paginator } from '@components/navigation/paginator'
+import { Section } from '~components/section'
+import { Paginator } from '~components/navigation/paginator'
 import { AuthorPaginator, AuthorsGradient } from './styles'
 
 const ArticlesPage = ({ location, pageContext }) => {

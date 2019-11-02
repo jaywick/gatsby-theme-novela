@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Section } from '@components/section'
-import { Layout } from '@components/layout'
-import { Paginator } from '@components/navigation/paginator'
+import { Section } from '~components/section'
+import { Layout } from '~components/layout'
+import { Paginator } from '~components/navigation/paginator'
 
 import { TagHero } from '../sections/filtered/tag-hero'
 import { FilteredArticles } from '../sections/filtered/articles'

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { IWithTheme } from '@types'
+import { IWithTheme } from '~types'
 
 export const Note = styled.p<IWithTheme>`
     line-height: 1.756;

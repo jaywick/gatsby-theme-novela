@@ -1,5 +1,5 @@
 import * as crypto from 'crypto'
-import { IPluginApi, IConfig, IMdxNode } from '@types'
+import { IPluginApi, IConfig, IMdxNode } from '~types'
 import { slugify, generateSlug } from './utils'
 import { validate } from './validate'
 import { Node } from 'gatsby'

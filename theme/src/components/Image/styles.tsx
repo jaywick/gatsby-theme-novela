@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import GatsbyImg from 'gatsby-image'
-import { mediaqueries } from '@styles/media'
+import { mediaqueries } from '~styles/media'
 
 export const Container = styled.div`
     display: flex;

@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { h1 } from '@components/headings'
-import { Image, Placeholder } from '@components/image'
+import { h1 } from '~components/headings'
+import { Image, Placeholder } from '~components/image'
 
-import { mediaqueries } from '@styles/media'
-import { IArticle, IAuthor, IWithTheme } from '@types'
+import { mediaqueries } from '~styles/media'
+import { IArticle, IAuthor, IWithTheme } from '~types'
 
 import { ArticleAuthors } from './authors'
 

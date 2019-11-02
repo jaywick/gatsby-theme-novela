@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
-import { IWithTheme } from '@types'
-import { mediaqueries } from '@styles'
-import { Section } from '@components/section'
+import { IWithTheme } from '~types'
+import { mediaqueries } from '~styles'
+import { Section } from '~components/section'
 
 export const AuthorsGradient = styled.div<IWithTheme>`
     position: absolute;

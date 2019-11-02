@@ -1,8 +1,8 @@
 import { ArticlesList } from './articles-list'
-import { Paginator } from '@components/navigation/paginator'
+import { Paginator } from '~components/navigation/paginator'
 import React, { useContext } from 'react'
 import { TagsList } from './tags-list'
-import { IArticle, ITag, IPaginator } from '@types'
+import { IArticle, ITag, IPaginator } from '~types'
 import { ViewTabContext } from './view-tab-context'
 import styled from '@emotion/styled'
 

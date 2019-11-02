@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { IWithTheme } from '@types'
+import { IWithTheme } from '~types'
 
 export const BioContainer = styled.div`
     display: flex;

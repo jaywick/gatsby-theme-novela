@@ -3,12 +3,12 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 
-import { h3 } from '@components/headings'
-import { Image } from '@components/image'
+import { h3 } from '~components/headings'
+import { Image } from '~components/image'
 
-import { mediaqueries } from '@styles/media'
+import { mediaqueries } from '~styles/media'
 
-import { IArticle, IWithTheme } from '@types'
+import { IArticle, IWithTheme } from '~types'
 
 /**
  * Sits at the bottom of our Article page. Shows the next 2 on desktop and the

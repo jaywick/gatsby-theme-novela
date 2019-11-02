@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import { mediaqueries } from '@styles/media'
-import { IWithTheme } from '@types'
+import { mediaqueries } from '~styles/media'
+import { IWithTheme } from '~types'
 
 export const SocialIconContainer = styled.a<IWithTheme>`
     position: relative;

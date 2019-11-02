@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { IWithTheme } from '@types'
+import { IWithTheme } from '~types'
 
 export const Head = styled.thead<IWithTheme>`
     text-align: left;

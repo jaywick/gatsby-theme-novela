@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icons } from '@icons'
+import { Icons } from '~icons'
 import { SocialIconContainer, Hidden } from './styles'
 
 interface SocialLinksProps {

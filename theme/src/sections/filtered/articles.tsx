@@ -1,5 +1,5 @@
 import React from 'react'
-import { IArticle } from '@types'
+import { IArticle } from '~types'
 import { ArticlesList } from '../home/articles-list'
 import { FilteredArticlesContainer } from './styles'
 

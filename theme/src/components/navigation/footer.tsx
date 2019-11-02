@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { Section } from '@components/section'
-import { SocialLinks } from '@components/social-links'
+import { Section } from '~components/section'
+import { SocialLinks } from '~components/social-links'
 import {
     FooterGradient,
     HoritzontalRule,

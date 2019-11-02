@@ -2,10 +2,10 @@ import React, { useRef, useState, useEffect } from 'react'
 import { throttle } from 'lodash'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import { Layout } from '@components/layout'
-import { MDX } from '@components/mdx'
-import { Progress } from '@components/progress'
-import { debounce } from '@utils'
+import { Layout } from '~components/layout'
+import { MDX } from '~components/mdx'
+import { Progress } from '~components/progress'
+import { debounce } from '~utils'
 
 import { ArticleAside } from '../sections/article/aside'
 import { ArticleHero } from '../sections/article/hero'
@@ -13,8 +13,8 @@ import { ArticleControls } from '../sections/article/controls'
 import { ArticlesNext } from '../sections/article/next'
 import { ArticleSEO } from '../sections/article/seo'
 import { ArticleShare } from '../sections/article/share'
-import { IArticle, IAuthor, ITag } from '@types'
-import { Tags } from '@components/tags'
+import { IArticle, IAuthor, ITag } from '~types'
+import { Tags } from '~components/tags'
 import {
     MobileControls,
     ArticleBody,

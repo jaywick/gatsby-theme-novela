@@ -1,8 +1,8 @@
-import { mediaqueries } from '@styles/media'
+import { mediaqueries } from '~styles/media'
 import styled from '@emotion/styled'
-import { IWithTheme } from '@types'
+import { IWithTheme } from '~types'
 import { Link } from 'gatsby'
-import { h2 } from '@components/headings'
+import { h2 } from '~components/headings'
 import { css } from '@emotion/core'
 
 export const SubheadingContainer = styled.div`

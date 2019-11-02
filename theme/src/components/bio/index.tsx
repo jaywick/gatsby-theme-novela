@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import { Image } from '@components/image/image'
-import { IAuthor } from '@types'
+import { Image } from '~components/image'
+import { IAuthor } from '~types'
 import {
     BioContainer,
     BioAvatar,

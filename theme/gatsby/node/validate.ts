@@ -1,7 +1,7 @@
 import matchAll from 'string.prototype.matchall'
 import { pathExistsSync, readdirSync } from 'fs-extra'
 import { join } from 'path'
-import { IPluginApi, IMdxNode, IFileNode } from '@types'
+import { IPluginApi, IMdxNode, IFileNode } from '~types'
 import { difference } from 'lodash'
 
 export const validate = ({

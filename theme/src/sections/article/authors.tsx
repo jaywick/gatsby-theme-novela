@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import OutsideClickHandler from 'react-outside-click-handler'
 import { useColorMode } from 'theme-ui'
 import { Link } from 'gatsby'
-import { Image } from '@components/image'
-import { Icons } from '@icons'
-import { IAuthor } from '@types'
+import { Image } from '~components/image'
+import { Icons } from '~icons'
+import { IAuthor } from '~types'
 import {
     AuthorLink,
     AuthorAvatar,

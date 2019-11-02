@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 
-import { mediaqueries } from '@styles/media'
-import { IWithTheme } from '@types'
+import { mediaqueries } from '~styles/media'
+import { IWithTheme } from '~types'
 
 /**
  * Example:

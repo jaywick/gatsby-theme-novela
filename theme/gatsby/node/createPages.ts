@@ -7,7 +7,7 @@ import {
 import { queryArticles, queryTags, queryAuthors } from '../data/query'
 import { resolve as resolvePath } from 'path'
 import { buildPaginatedPath, byDateSorter, slugifyWithBase } from './utils'
-import { IAuthor, IArticle, IConfig, IPluginApi, ITag } from '@types'
+import { IAuthor, IArticle, IConfig, IPluginApi, ITag } from '~types'
 import { log, tuple } from './utils'
 import { uniqBy } from 'lodash'
 import createPaginatedPages from 'gatsby-paginate'

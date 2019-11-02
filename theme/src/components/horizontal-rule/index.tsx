@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import { mediaqueries } from '@styles/media'
-import { IWithTheme } from '@types'
+import { mediaqueries } from '~styles/media'
+import { IWithTheme } from '~types'
 import { darkHr, lightHr } from './svg'
 
 export const HorizontalRule = styled.hr<IWithTheme>`

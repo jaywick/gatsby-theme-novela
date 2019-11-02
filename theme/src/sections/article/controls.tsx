@@ -1,6 +1,6 @@
 import React, { useState, SyntheticEvent } from 'react'
 import { useColorMode } from 'theme-ui'
-import { copyToClipboard } from '@utils'
+import { copyToClipboard } from '~utils'
 import {
     NavControls,
     IconWrapper,

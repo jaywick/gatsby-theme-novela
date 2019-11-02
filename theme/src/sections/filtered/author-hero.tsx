@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { Image } from '@components/image'
+import { Image } from '~components/image'
 
-import { mediaqueries } from '@styles/media'
-import { IAuthor, IWithTheme } from '@types'
+import { mediaqueries } from '~styles/media'
+import { IAuthor, IWithTheme } from '~types'
 
-import { SocialLinks } from '@components/social-links'
+import { SocialLinks } from '~components/social-links'
 import { Hero, HeroImage, Subheading, Social } from './styles'
-import { Heading } from '@components/tags/styles'
+import { Heading } from '~components/tags/styles'
 
 interface AuthorHeroProps {
     author: IAuthor

@@ -1,7 +1,7 @@
 import { memo } from 'react'
-import { mediaqueries } from '@styles/media'
+import { mediaqueries } from '~styles/media'
 import styled from '@emotion/styled'
-import { IWithTheme } from '@types'
+import { IWithTheme } from '~types'
 import { keyframes } from '@emotion/core'
 
 /**

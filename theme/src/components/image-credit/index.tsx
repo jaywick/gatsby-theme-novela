@@ -1,6 +1,6 @@
 import React from 'react'
 import { ImageCreditWrapper } from './styles'
-import { Anchor } from '@components/anchor'
+import { Anchor } from '~components/anchor'
 
 interface Props {
     name: string

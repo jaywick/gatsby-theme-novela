@@ -11,7 +11,16 @@
         "esModuleInterop": true,
         "baseUrl": "./",
         "paths": {
-            "@*": ["theme/src/*"]
+            "~components/*": ["theme/src/components/*"],
+            "~icons/*": ["theme/src/icons/*"],
+            "~styles/*": ["theme/src/styles/*"],
+            "~utils/*": ["theme/src/utils/*"],
+            "~types/*": ["theme/src/types/*"],
+            "~components": ["theme/src/components"],
+            "~icons": ["theme/src/icons"],
+            "~styles": ["theme/src/styles"],
+            "~utils": ["theme/src/utils"],
+            "~types": ["theme/src/types"]
         }
     }
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { throttle } from 'lodash'
-import { clamp } from '@utils'
+import { clamp } from '~utils'
 import { ProgressContainer, Trackline, ProgressLine } from './styles'
 
 export interface Props {

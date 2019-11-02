@@ -1,7 +1,7 @@
 import React from 'react'
-import { ITag } from '@types'
+import { ITag } from '~types'
 import { Hero, Subheading } from './styles'
-import { Heading } from '@components/tags/styles'
+import { Heading } from '~components/tags/styles'
 
 interface TagHeroProps {
     tag: ITag

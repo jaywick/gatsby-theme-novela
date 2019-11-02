@@ -3,11 +3,11 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 
-import { h2 } from '@components/headings'
-import { Image, Placeholder } from '@components/image'
+import { h2 } from '~components/headings'
+import { Image, Placeholder } from '~components/image'
 
-import { mediaqueries } from '@styles/media'
-import { ITag, IWithTheme } from '@types'
+import { mediaqueries } from '~styles/media'
+import { ITag, IWithTheme } from '~types'
 
 interface TagsListProps {
     tags: ITag[]

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { Section } from '@components/section'
-import { Bio } from '@components/bio'
-import { IAuthor } from '@types'
+import { Section } from '~components/section'
+import { Bio } from '~components/bio'
+import { IAuthor } from '~types'
 import { ViewTabContext } from './view-tab-context'
 import {
     HeadingContainer,

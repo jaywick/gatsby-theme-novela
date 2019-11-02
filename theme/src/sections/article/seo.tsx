@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { SEO } from '@components/seo'
+import { SEO } from '~components/seo'
 
-import { IArticle, IAuthor } from '@types'
+import { IArticle, IAuthor } from '~types'
 import { graphql, useStaticQuery } from 'gatsby'
 
 const siteQuery = graphql`

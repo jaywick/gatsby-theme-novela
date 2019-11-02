@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, ReactNode } from 'react'
 import { throttle } from 'lodash'
 import { HandleOverlap } from './handle-overlap'
-import { clamp } from '@utils'
+import { clamp } from '~utils'
 import { AsideContainer, Align } from './styles'
 
 interface AsideProps {

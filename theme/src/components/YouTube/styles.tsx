@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import { IWithTheme } from '@types'
-import { mediaqueries } from '@styles/media'
+import { IWithTheme } from '~types'
+import { mediaqueries } from '~styles/media'
 
 export const Wrapper = styled.p<IWithTheme>`
     line-height: 1.756;

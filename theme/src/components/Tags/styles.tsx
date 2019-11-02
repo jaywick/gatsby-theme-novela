@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
-import { mediaqueries } from '@styles/media'
-import { IWithTheme } from '@types'
-import { h3 } from '@components/headings'
+import { mediaqueries } from '~styles/media'
+import { IWithTheme } from '~types'
+import { h3 } from '~components/headings'
 
 export const SubscriptionContainer = styled.div<{ theme?: any }>`
     position: relative;

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Image, Placeholder } from '@components/image'
-import { IArticle } from '@types'
+import { Image, Placeholder } from '~components/image'
+import { IArticle } from '~types'
 import {
     ArticlesListContainer,
     List,

@@ -1,5 +1,5 @@
-import { mediaqueries } from '@styles/media'
-import { IWithTheme } from '@types'
+import { mediaqueries } from '~styles/media'
+import { IWithTheme } from '~types'
 import styled from '@emotion/styled'
 
 export const Wrapper = styled.p<IWithTheme>`

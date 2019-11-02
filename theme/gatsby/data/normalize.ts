@@ -1,4 +1,4 @@
-import { IArticle, IAuthor } from '@types'
+import { IArticle, IAuthor } from '~types'
 
 const normalizeHero = (article: IArticle) => {
     let hero = { full: {}, regular: {}, narrow: {}, seo: {} }

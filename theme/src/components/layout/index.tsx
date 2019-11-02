@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import { Global } from '@emotion/core'
 import { useColorMode } from 'theme-ui'
 
-import { Footer } from '@components/navigation/footer'
-import { NavigationHeader } from '@components/navigation/header'
+import { Footer } from '~components/navigation/footer'
+import { NavigationHeader } from '~components/navigation/header'
 import { ViewTabProvider } from '../../sections/home/view-tab-context'
 
-import { globalStyles } from '@styles'
+import { globalStyles } from '~styles'
 import { Container } from './styles'
 
 interface LayoutProps {

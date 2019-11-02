@@ -1,7 +1,7 @@
 import React from 'react'
 import GatsbyImg from 'gatsby-image'
 import { StyledGatsbyImag } from './styles'
-import { IGatsbyImageFixed, IGatsbyImageFluid } from '@types'
+import { IGatsbyImageFixed, IGatsbyImageFluid } from '~types'
 
 type IGatsbyImage = IGatsbyImageFixed | IGatsbyImageFluid
 

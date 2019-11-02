@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { keyframes } from '@emotion/core'
-import { IWithTheme } from '@types'
+import { IWithTheme } from '~types'
 
 export const fadein = keyframes`
     from { opacity: 0; }

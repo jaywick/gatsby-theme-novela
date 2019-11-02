@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useColorMode } from 'theme-ui'
 
-import { Icons } from '@icons'
+import { Icons } from '~icons'
 
 import {
     getHighlightedTextPositioning,
@@ -9,7 +9,7 @@ import {
     getSelectionText,
     getWindowDimensions,
     getBreakpointFromTheme,
-} from '@utils'
+} from '~utils'
 import {
     MenuFloat,
     MenuText,

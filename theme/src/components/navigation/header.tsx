@@ -3,13 +3,13 @@ import styled from '@emotion/styled'
 import { Link, navigate } from 'gatsby'
 import { useColorMode } from 'theme-ui'
 
-import { Section } from '@components/section'
-import { Logo } from '@components/logo'
+import { Section } from '~components/section'
+import { Logo } from '~components/logo'
 
-import { Icons } from '@icons'
-import { mediaqueries } from '@styles/media'
-import { getWindowDimensions, getBreakpointFromTheme } from '@utils'
-import { IWithTheme } from '@types'
+import { Icons } from '~icons'
+import { mediaqueries } from '~styles/media'
+import { getWindowDimensions, getBreakpointFromTheme } from '~utils'
+import { IWithTheme } from '~types'
 
 export const NavigationHeader = () => {
     const [showBackArrow, setShowBackArrow] = useState<boolean>(false)

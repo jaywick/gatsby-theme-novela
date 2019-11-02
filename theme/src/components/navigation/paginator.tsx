@@ -4,10 +4,10 @@ import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import { mediaqueries } from '@styles/media'
-import { range } from '@utils'
+import { mediaqueries } from '~styles/media'
+import { range } from '~utils'
 
-import { IPaginator } from '@types'
+import { IPaginator } from '~types'
 
 /**
  * <Paginator />
