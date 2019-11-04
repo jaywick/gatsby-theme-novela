@@ -2,7 +2,7 @@ import { mediaqueries } from '~styles/media'
 import styled from '@emotion/styled'
 
 export const LogoContainer = styled.div`
-    .Logo__Mobile {
+    .Logo__Phablet {
         display: none;
     }
 
@@ -11,7 +11,7 @@ export const LogoContainer = styled.div`
             display: none;
         }
 
-        .Logo__Mobile{
+        .Logo__Phablet {
             display: block;
         }
     `}
