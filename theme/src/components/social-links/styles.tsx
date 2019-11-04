@@ -38,10 +38,6 @@ export const SocialIconContainer = styled.a<IWithTheme>`
         background: rgba(255, 255, 255, 0.01);
         border-radius: 5px;
     }
-
-    ${mediaqueries.tablet`
-margin: 0 2.2rem;
-`};
 `
 
 export const Hidden = styled.span`

@@ -14,7 +14,6 @@ export const SubscriptionContainer = styled.div<{ theme?: any }>`
     z-index: 1;
 
     ${mediaqueries.tablet`
-        padding: 50px 0 0;
         text-align: center;
     `}
 

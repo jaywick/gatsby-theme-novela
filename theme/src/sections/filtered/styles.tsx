@@ -53,7 +53,7 @@ export const Subheading = styled.p<IWithTheme>`
     text-align: center;
 
     ${mediaqueries.phablet`
-        font-size: 14px;
+        font-size: 16px;
     `}
 `
 
@@ -63,7 +63,7 @@ export const Social = styled.div`
     margin-top: 35px;
 
     ${mediaqueries.phablet`
-        font-size: 14px;
+        font-size: 16px;
     `}
 `
 
