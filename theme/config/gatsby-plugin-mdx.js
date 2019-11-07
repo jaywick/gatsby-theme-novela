@@ -1,8 +1,10 @@
-module.exports.default = {
-    extensions: [`.mdx`, `.md`],
+const remarkSlug = require('remark-slug')
+
+module.exports.mdxOptions = {
+    extensions: ['.mdx', '.md'],
     gatsbyRemarkPlugins: [
         {
-            resolve: `gatsby-remark-images`,
+            resolve: 'gatsby-remark-images',
             options: {
                 maxWidth: 10000,
                 linkImagesToOriginal: false,
@@ -10,9 +12,9 @@ module.exports.default = {
                 withWebp: true,
             },
         },
-        { resolve: `gatsby-remark-copy-linked-files` },
-        { resolve: `gatsby-remark-numbered-footnotes` },
-        { resolve: `gatsby-remark-smartypants` },
+        { resolve: 'gatsby-remark-copy-linked-files' },
+        { resolve: 'gatsby-remark-numbered-footnotes' },
+        { resolve: 'gatsby-remark-smartypants' },
         {
             resolve: 'gatsby-remark-external-links',
             options: {
@@ -21,5 +23,5 @@ module.exports.default = {
             },
         },
     ],
-    remarkPlugins: [require(`remark-slug`)], // eslint-disable-line global-require
+    remarkPlugins: [remarkSlug],
 }

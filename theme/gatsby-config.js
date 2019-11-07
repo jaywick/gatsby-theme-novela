@@ -1,6 +1,6 @@
 /* eslint-disable */
 // const feedOptions = require('./config/gatsby-plugin-feed')
-const mdxOptions = require('./config/gatsby-plugin-mdx')
+const { mdxOptions } = require('./config/gatsby-plugin-mdx')
 const { get, isNil } = require('lodash')
 
 const sourcePostsPlugin = remotePostOptions => {
