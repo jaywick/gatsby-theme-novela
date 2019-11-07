@@ -19,6 +19,7 @@ import { Note } from '~components/note'
 import { YouTube } from '~components/youtube'
 import { Vimeo } from '~components/vimeo'
 import { ImageCredit } from '~components/image-credit'
+import { Cite } from '~components/cite'
 import { MDXBody } from './styles'
 
 const components = {
@@ -41,6 +42,7 @@ const components = {
     thead: Head,
     th: HeadCell,
     td: Cell,
+    cite: Cite,
     ImageCredit,
     Note,
     Vimeo,
