@@ -12,7 +12,9 @@ const {
 const branding = {
     name: 'Jay Wick',
     url: 'https://jaywick.xyz',
-    description: 'A journey of design, engineering, and unstructured rambling.',
+    intro: 'Jay Wick',
+    description:
+        'UX developer, amateur designer, and technology apologist. This is my blog and portfolio.',
     socialLinks: [
         'https://dev.to/jay_wick',
         'https://twitter.com/jay_wick',
@@ -43,7 +45,8 @@ module.exports = {
         siteUrl: branding.url,
         description: branding.description,
         hero: {
-            heading: branding.description,
+            heading: branding.intro,
+            subheading: branding.description,
             maxWidth: 652,
         },
         social: branding.socialLinks.map(url => ({ url })),

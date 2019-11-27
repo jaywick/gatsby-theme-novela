@@ -11,6 +11,10 @@ export const SubheadingContainer = styled.div`
     justify-content: space-between;
     margin-bottom: 100px;
 
+    ${mediaqueries.tablet`
+        /* flex-direction: column; */
+    `};
+
     ${mediaqueries.desktop`
         margin-bottom: 80px;
     `};
@@ -18,19 +22,11 @@ export const SubheadingContainer = styled.div`
     ${mediaqueries.tablet`
         margin-bottom: 60px;
     `};
-
-    ${mediaqueries.phablet`
-        display: none;
-    `};
 `
 
 export const ViewTabContainer = styled.div`
     display: flex;
     align-items: center;
-
-    ${mediaqueries.tablet`
-        display: none;
-    `};
 `
 
 export const HeadingContainer = styled.div`
@@ -46,9 +42,9 @@ export const HeadingContainer = styled.div`
 `
 
 export const HeroHeading = styled.h1<IWithTheme>`
+    font-weight: bold;
+    font-size: 6rem;
     font-style: normal;
-    font-weight: 600;
-    font-size: 52px;
     line-height: 1.15;
     color: ${p => p.theme.colors.primary};
 
@@ -57,12 +53,34 @@ export const HeroHeading = styled.h1<IWithTheme>`
     }
 
     ${mediaqueries.desktop`
-    font-size: 38px
-`}
+        font-size: 38px
+    `}
 
     ${mediaqueries.phablet`
-    font-size: 32px;
-`}
+        font-size: 32px;
+    `}
+`
+
+export const HeroSubheading = styled.h2<IWithTheme>`
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 250;
+    line-height: 1.15;
+    margin-top: 1rem;
+    opacity: 0.5;
+    color: ${p => p.theme.colors.primary};
+
+    a {
+        color: ${p => p.theme.colors.accent};
+    }
+
+    ${mediaqueries.desktop`
+        font-size: 38px
+    `}
+
+    ${mediaqueries.phablet`
+        font-size: 32px;
+    `}
 `
 
 export const GridButton = styled.button<{ active: boolean } & IWithTheme>`

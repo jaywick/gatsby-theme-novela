@@ -7,10 +7,5 @@ interface Props {
 }
 
 export const Logo = ({ fill = '#fff' }: Props) => {
-    return (
-        <LogoContainer>
-            <SvgDesktop fill={fill} />
-            <SvgPhablet fill={fill} />
-        </LogoContainer>
-    )
+    return <SvgPhablet fill={fill} />
 }

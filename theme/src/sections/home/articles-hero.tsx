@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { Section } from '~components/section'
-import { Bio } from '~components/bio'
 import { IAuthor } from '~types'
 import { ViewTabContext } from './view-tab-context'
 import {
     HeadingContainer,
     HeroHeading,
+    HeroSubheading,
     SubheadingContainer,
     ViewTabContainer,
     ViewTab,
@@ -20,6 +20,7 @@ const authorQuery = graphql`
                     siteMetadata {
                         hero {
                             heading
+                            subheading
                             maxWidth
                         }
                     }
@@ -54,9 +55,11 @@ export const ArticlesHero = ({ authors }: Props) => {
                 <HeroHeading
                     dangerouslySetInnerHTML={{ __html: hero.heading }}
                 />
+                <HeroSubheading
+                    dangerouslySetInnerHTML={{ __html: hero.subheading }}
+                />
             </HeadingContainer>
             <SubheadingContainer>
-                <Bio author={featuredAuthor} />
                 <ViewTabContainer>
                     <ViewTab
                         onClick={() => setViewTab('articles')}
