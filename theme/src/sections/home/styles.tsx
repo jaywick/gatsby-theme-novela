@@ -121,7 +121,8 @@ export const ViewTab = styled.button<{ active: boolean } & IWithTheme>`
         margin-right: 30px;
     }
 
-    background-image: linear-gradient(120deg, white 0%, white 100%);
+    background-image: ${p =>
+        `linear-gradient(120deg, ${p.theme.colors.primary} 0%, ${p.theme.colors.primary} 100%)`};
     background-repeat: no-repeat;
     background-size: ${p => (p.active ? '75%' : '0')} 0.2em;
     background-position: 50% 100%;
