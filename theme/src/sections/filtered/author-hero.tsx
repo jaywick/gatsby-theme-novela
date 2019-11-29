@@ -1,10 +1,7 @@
 import React from 'react'
-import styled from '@emotion/styled'
-
 import { Image } from '~components/image'
 
-import { mediaqueries } from '~styles/media'
-import { IAuthor, IWithTheme } from '~types'
+import { IAuthor } from '~types'
 
 import { SocialLinks } from '~components/social-links'
 import { Hero, HeroImage, Subheading, Social } from './styles'
