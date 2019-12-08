@@ -18,6 +18,7 @@ export const queryArticles = `
                 date(formatString: "MMMM Do, YYYY")
                 dateForSEO: date
                 timeToRead
+                secret
                 excerpt
                 body
                 tag

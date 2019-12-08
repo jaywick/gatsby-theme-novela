@@ -31,7 +31,7 @@ const createArticlePages = (opts: {
 }) => {
     log('Creating', 'home page')
     createPaginatedPages({
-        edges: opts.articles,
+        edges: opts.articles.filter(x => !x.secret),
         pathPrefix: opts.basePath,
         createPage: opts.createPage,
         pageLength: opts.pageLength,
