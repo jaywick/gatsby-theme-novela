@@ -7,6 +7,7 @@ const {
     GATSBY_GITHUB_TOKEN,
     GATSBY_GITHUB_REPO,
     GATSBY_BYPASS_GIT_WITH_LOCAL_TEST_FOLDER,
+    GATSBY_GOOGLE_ANALYTICS_TOKEN,
 } = process.env
 
 const branding = {
@@ -25,7 +26,7 @@ const branding = {
         'https://www.youtube.com/user/jaywickvideos',
     ],
     theme: `#111216`,
-    googleAnalyticsTrackingId: undefined,
+    googleAnalyticsTrackingId: GATSBY_GOOGLE_ANALYTICS_TOKEN,
 }
 
 const progressiveWebAppOptions = {
