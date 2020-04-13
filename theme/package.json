@@ -85,7 +85,7 @@
         "string.prototype.matchall": "^4.0.0",
         "theme-ui": "^0.2.40",
         "ts-node": "^8.4.1",
-        "typeface-merriweather": "^0.0.72",
+        "typeface-roboto-slab": "^1.1.4",
         "typescript": "^3.6.4"
     }
 }
